@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/enterName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Enter Name Here"
+        android:inputType="textPersonName"
+        android:maxLength="20" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        />
+
+    <TextView
+        android:id="@+id/heightFt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
+        android:text="Height"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/editHeightFt"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:hint="Ft"
+        android:maxLength="1"/>
+
+    <EditText
+        android:id="@+id/editHeightIn"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:hint="in"
+        android:maxLength="1"/>
+
+    <TextView
+        android:id="@+id/userWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="140dp"
+        android:text="Weight"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/editWeight"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="130dp"
+        android:ems="10"
+        android:hint="lb"
+        android:maxLength="3" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textSize="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="200dp" />
+
+    <ImageButton
+        android:id="@+id/maleImageButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="180dp"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/maleicon" />
+
+    <ImageButton
+        android:id="@+id/femaleIconButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="180dp"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/femaleicon" />
+
+</RelativeLayout>
