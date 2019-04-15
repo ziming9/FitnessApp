@@ -7,11 +7,38 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class ProfileFragment extends Fragment {
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
     }
+
+    private ProgressBar progressBar;
+    private EditText userWeight;
+    private EditText userGoalWeight;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    /*public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        userGoalWeight = (EditText) view.findViewById(R.id.userGoalWeight);
+        int goalWeight = userGoalWeight.getText();
+
+        progressBar.setMax(this.userGoalWeight.getText());
+    }
+*/
+
+
+
+
 
     @Nullable
     @Override
