@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FitnessApp</string>
     <string name="cardio">Cardio</string>
+    <string name="shoulder">Shoulder</string>
+    <string name="biceps">Biceps</string>
+    <string name="back">Back</string>
+    <string name="legs">Legs</string>
+    <string name="abs">Abs</string>
 </resources>
