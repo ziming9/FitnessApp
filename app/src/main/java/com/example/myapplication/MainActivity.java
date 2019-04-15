@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -9,20 +8,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
-import android.view.View;
-import android.widget.GridLayout;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;
     private ViewPager viewPager;
     private MenuItem prevMenuItem;
-    GridLayout mainGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         toolBar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolBar);
-        mainGrid = findViewById(R.id.mainGrid);
-        //setSingleEvent(mainGrid);
+
         bottomNav.setSelectedItemId(R.id.navigation_home);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -123,24 +116,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*
-    private void setSingleEvent(GridLayout mainGrid) {
-        //Log.d("GRID LAYOUT", "value " + mainGrid.getChildCount());
-        for (int i = 0; i < mainGrid.getChildCount(); i++) {
-            CardView cardView = (CardView)mainGrid.getChildAt(i);
-            final int selected = i;
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (selected == 0) {
-                        Intent intent = new Intent(MainActivity.this, ShoulderFragment.class);
-                        startActivity(intent);
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Select 1", Toast.LENGTH_LONG);
-                    }
-                }
-            });
-        }
-    }*/
 }

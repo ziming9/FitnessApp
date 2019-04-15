@@ -210,7 +210,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cardio"
+                        android:text="@string/cardio"
                         android:textColor="@color/colorBlack"
                         android:layout_marginTop="12dp"/>
 
