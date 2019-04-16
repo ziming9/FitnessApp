@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 public class ActivityFragment extends Fragment {
     GridLayout mainGrid;
     FloatingActionButton fab;
+    Toolbar toolBar;
 
     public static ActivityFragment newInstance() {
         return new ActivityFragment();
@@ -34,7 +36,6 @@ public class ActivityFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         // Main Grid
         mainGrid = view.findViewById(R.id.mainGrid);
 
@@ -52,13 +53,7 @@ public class ActivityFragment extends Fragment {
     }
 
     private void setSingleEvent(GridLayout mainGrid) {
-        //Log.d("GRID LAYOUT", "value " + mainGrid.getChildCount());
         for (int i = 0; i < mainGrid.getChildCount(); i++) {
-            /*if (mainGrid.getChildAt(2) == null) {
-                Log.d("getChildAt: ", "returns null");
-            } else {
-                Log.d("getChildAt: ", "NOT null");
-            }*/
             CardView cardView = (CardView)mainGrid.getChildAt(i);
             final int selected = i;
             cardView.setOnClickListener(new View.OnClickListener() {
