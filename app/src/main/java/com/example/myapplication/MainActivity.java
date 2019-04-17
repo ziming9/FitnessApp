@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                /*
                 if (prevMenuItem != null) {
                     prevMenuItem.setChecked(false);
                 }
@@ -48,6 +50,23 @@ public class MainActivity extends AppCompatActivity {
                 }
                 bottomNav.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = bottomNav.getMenu().getItem(position);
+                */
+                switch(position) {
+                    case 0:
+                        getSupportActionBar().setTitle("Exercises");
+                        bottomNav.getMenu().getItem(position).setChecked(true);
+                        break;
+                    case 1:
+                        getSupportActionBar().setTitle("FitnessTracker");
+                        bottomNav.getMenu().getItem(position).setChecked(true);
+                        break;
+                    case 2:
+                        getSupportActionBar().setTitle("Profile");
+                        bottomNav.getMenu().getItem(position).setChecked(true);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             @Override
@@ -65,13 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
                     switch(menuItem.getItemId()) {
                         case R.id.navigation_activity:
+                            getSupportActionBar().setTitle("Exercises");
                             viewPager.setCurrentItem(0);
                             return true;
                         case R.id.navigation_home:
+                            getSupportActionBar().setTitle("FitnessTracker");
                             viewPager.setCurrentItem(1);
                             return true;
                         case R.id.navigation_profile:
                             viewPager.setCurrentItem(2);
+                            getSupportActionBar().setTitle("Profile");
                             return true;
                     }
 

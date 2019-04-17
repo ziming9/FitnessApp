@@ -6,4 +6,6 @@
     <string name="back">Back</string>
     <string name="legs">Legs</string>
     <string name="abs">Abs</string>
+    <string name="chest">Chest</string>
+    <string name="triceps">Triceps</string>
 </resources>

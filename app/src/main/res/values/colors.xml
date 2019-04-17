@@ -9,4 +9,5 @@
     <color name="colorPink">#ffe6ff</color>
     <color name="colorLightGreen">#ccffcc</color>
     <color name="colorLightPink">#ffeeff</color>
+    <drawable name="selectorGrey">#808080</drawable>
 </resources>

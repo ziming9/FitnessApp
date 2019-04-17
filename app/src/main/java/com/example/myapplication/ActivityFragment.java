@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 public class ActivityFragment extends Fragment {
     GridLayout mainGrid;
     FloatingActionButton fab;
-    Toolbar toolBar;
 
     public static ActivityFragment newInstance() {
         return new ActivityFragment();
@@ -38,7 +36,6 @@ public class ActivityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Main Grid
         mainGrid = view.findViewById(R.id.mainGrid);
-
         // Floating Action Button
         fab = view.findViewById(R.id.fab);
         setSingleEvent(mainGrid);
@@ -59,13 +56,25 @@ public class ActivityFragment extends Fragment {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), WorkoutListFragment.class);
                     if (selected == 0) {
-                        Intent intent = new Intent(getActivity(), WorkoutListFragment.class);
-                        startActivity(intent);
+                        intent.putExtra("variable",selected);
+                    } else if (selected == 1) {
+                        intent.putExtra("variable",selected);
+                    } else if (selected == 2) {
+                        intent.putExtra("variable",selected);
+                    } else if (selected == 3) {
+                        intent.putExtra("variable",selected);
+                    } else if (selected == 4) {
+                        intent.putExtra("variable",selected);
+                    } else if (selected == 5) {
+                        intent.putExtra("variable", selected);
+                    } else if (selected == 6) {
+                        intent.putExtra("variable", selected);
+                    } else {
+                        intent.putExtra("variable",selected);
                     }
-                    else {
-                        Toast.makeText(getActivity(), "Has not been implemented", Toast.LENGTH_LONG).show();
-                    }
+                    startActivity(intent);
                 }
             });
         }

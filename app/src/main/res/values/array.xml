@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="shoulderExcercises">
+        <item>Arnold Dumbbell Press</item>
+        <item>Behind the Neck Barbell Press</item>
+        <item>Front Dumbbell Raise</item>
+        <item>Overhead Press</item>
+        <item>Barbell Shoulder Press</item>
+        <item>Dumbbell Lateral Raises</item>
+        <item>Push Press</item>
+        <item>Cable Reverse Fly</item>
+        <item>Seated Dumbbell Press</item>
+    </string-array>
+
+    <string-array name="chestExercises">
+        <item>Cable Crossover</item>
+        <item>Decline Barbell Bench Press</item>
+        <item>Flat Barbell Bench Press</item>
+        <item>Flat Dumbbell Bench Press</item>
+        <item>Flat Dumbbell Fly</item>
+        <item>Incline Barbell Bench Press</item>
+        <item>Incline Dumbbell Bench Press</item>
+        <item>Incline Dumbbell Fly</item>
+    </string-array>
+
+
+    <array name="bicepExcercises">
+        <item>Barbell Curl</item>
+        <item>Cable Curl</item>
+        <item>Dumbbell Concentration Curl</item>
+        <item>Dumbbell Preacher Curl</item>
+        <item>Dumbbell Hammer Curl</item>
+        <item>Seated Machine Curl</item>
+        <item>Seated Incline Dumbbell Curl</item>
+    </array>
+
+    <array name="tricepExercises">
+        <item>Cable Overhead Triceps Extension</item>
+        <item>Close Grip Barbell Bench Press</item>
+        <item>Dumbbell Overhead Triceps Extension</item>
+        <item>EZ-Bar Skullcrusher</item>
+        <item>Lying Triceps Extension</item>
+        <item>Parallel Bar Triceps Dip</item>
+        <item>V-Bar Push Down</item>
+    </array>
+
+    <array name="backExercises">
+        <item>Barbell Row</item>
+        <item>Barbell Shrug</item>
+        <item>Chin Up</item>
+        <item>Deadlift</item>
+        <item>Dumbbell Row</item>
+        <item>Lat Pulldown</item>
+        <item>Pull Up</item>
+    </array>
+    
+    <array name="legExercises">
+        <item>Barbell Front Squat</item>
+        <item>Barbell Squat</item>
+        <item>Glute-Ham Raise</item>
+        <item>Leg Extension Machine</item>
+        <item>Leg Press</item>
+        <item>Lying Leg Curl Machine</item>
+        <item>Romanian Deadlift</item>
+        <item>Seated Calf Raise Machine</item>
+        <item>Seated Leg Curl Machine</item>
+        <item>Stiff-Legged Deadlift</item>
+        <item>Sumo Deadlift</item>
+
+    </array>
+
+    <array name="absExercises">
+        <item>Ab-Wheel Rollout</item>
+        <item>Cable Crunch</item>
+        <item>Crunch</item>
+        <item>Hanging Knee Raise</item>
+        <item>Hanging Leg Raise</item>
+        <item>Plank</item>
+        <item>Side Plank</item>
+    </array>
+
+    <array name="cardioExercises">
+        <item>Cycling</item>
+        <item>Running(Outdoor)</item>
+        <item>Running(Treadmill)</item>
+        <item>Stationary Bike</item>
+        <item>Swimming</item>
+        <item>Walking</item>
+    </array>
+</resources>

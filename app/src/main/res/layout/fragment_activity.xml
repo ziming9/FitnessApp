@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,7 +49,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/shoulder"
+                        android:src="@drawable/shoulder1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -79,9 +80,40 @@
                     android:padding="16dp">
 
                     <ImageView
+                        android:src="@drawable/chest"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/biceps"/>
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chest"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="12dp"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/biceps1"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -109,7 +141,38 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/back"
+                        android:src="@drawable/tricep1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/triceps"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="12dp"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:src="@drawable/back1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -140,7 +203,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/legs"
+                        android:src="@drawable/leg1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -171,7 +234,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/abs"
+                        android:src="@drawable/abs1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -202,7 +265,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/cardio"
+                        android:src="@drawable/cardio1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
