@@ -42,8 +42,8 @@ public class WorkoutListFragment extends AppCompatActivity {
         workoutsListView = findViewById(R.id.workout_list);
         toolBar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolBar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // this-The current activity context.
         // Second param is the resource Id for list layout row item
@@ -57,11 +57,11 @@ public class WorkoutListFragment extends AppCompatActivity {
         if (selected == 0) {
             exerciseAry = getResources().getStringArray(R.array.shoulderExcercises);
             workoutList = new ArrayList<>(Arrays.asList(exerciseAry));
-
             Arrays.sort(exerciseAry);
-            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseAry);
+            arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, exerciseAry);
         } else if (selected == 1) {
             exerciseAry = getResources().getStringArray(R.array.chestExercises);
+            workoutList = new ArrayList<>(Arrays.asList(exerciseAry));
             Arrays.sort(exerciseAry);
             arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseAry);
         } else if (selected == 2) {
@@ -86,21 +86,21 @@ public class WorkoutListFragment extends AppCompatActivity {
             arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseAry);
         }else {
             exerciseAry = getResources().getStringArray(R.array.cardioExercises);
+            workoutList = new ArrayList<>(Arrays.asList(exerciseAry));
             Arrays.sort(exerciseAry);
-            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseAry);
+            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_1, exerciseAry);
         }
 
         workoutsListView.setAdapter(arrayAdapter);
 
-        //adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, workoutList);
-        //workoutsListView.setAdapter(adapter);
+        adapter = new ArrayAdapter<>(this, R.layout.workoutlist_item, R.id.workout_item, workoutList);
+        workoutsListView.setAdapter(adapter);
 
-        //workoutsListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        workoutsListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
-        /*workoutsListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+        workoutsListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-
                 if (checked) {
                     count++;
                     workoutList_item.add(workoutList.get(position));
@@ -114,15 +114,15 @@ public class WorkoutListFragment extends AppCompatActivity {
 
                 } else {
                     mode.setTitle(count + " exercise selected");
-
                 }
+
             }
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 
                 getSupportActionBar().hide();
-                MenuInflater inflater = mode.getMenuInflater();
+                MenuInflater inflater = getMenuInflater();
                 inflater.inflate(R.menu.workoutlist_menu, menu);
                 return true;
             }
@@ -148,7 +148,6 @@ public class WorkoutListFragment extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), count + " exercise removed", Toast.LENGTH_SHORT).show();
                         }
                         count = 0;
-
                         return true;
                     default:
                         return false;
@@ -160,13 +159,15 @@ public class WorkoutListFragment extends AppCompatActivity {
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
-
+                Log.d("OnDestroy", "GetSupportBar");
+                getSupportActionBar().show();
             }
-        });*/
+        });
     }
 
     @Override
     public boolean onSupportNavigateUp() {
+        Log.d("OnSupportNav", "Back button pressed");
         onBackPressed();
         return true;
     }

@@ -15,16 +15,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/workoutlist_selector">
-
+            android:layout_height="wrap_content">
 
         <!-- ADD CODE HERE -->
-
         <ListView
             android:id="@+id/workout_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
         </ListView>
         </RelativeLayout>
 

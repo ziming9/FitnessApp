@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,22 +20,18 @@ public class ProfileFragment extends Fragment {
     }
 
     private ProgressBar progressBar;
-    int weight = 0;
-    int goal = 0;
-    int percentage = 0;
+    double weight;
+    double goal;
+    double percentage;
 
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
-
-
-    private int computeGoal(int weight, int goal) {
-        int percentage;
+    private double computeGoal(double weight, double goal) {
+        double percentage;
 
         if(weight == 0) {
             percentage = 0;
@@ -79,7 +76,7 @@ public class ProfileFragment extends Fragment {
                 weight = Integer.parseInt(userWeighttt);
 
                 percentage = computeGoal(weight, goal);
-                progressBar.setProgress(percentage);
+                progressBar.setProgress((int)percentage);
             }
         });
 
@@ -97,16 +94,18 @@ public class ProfileFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String userGoalWeighttt = userGoalWeightt.getText().toString();
-                goal = Integer.parseInt(userGoalWeighttt);
+                //String userGoalWeighttt = userGoalWeightt.getText().toString();
+                goal = Integer.parseInt(s.toString());
+
 
                 percentage = computeGoal(weight, goal);
-                progressBar.setProgress(percentage);
+                Log.d("Editable: ", "value is : " + percentage);
+                progressBar.setProgress((int)percentage);
             }
         });
 
-        percentage = computeGoal(weight, goal);
-        progressBar.setProgress(percentage);
+        //percentage = computeGoal(weight, goal);
+        //progressBar.setProgress(50);
 
 
     }
