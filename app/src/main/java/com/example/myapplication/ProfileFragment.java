@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private ProgressBar progressBar;
+    int weight = 0;
+    int goal = 0;
+    int percentage = 0;
 
 
 
@@ -39,32 +44,70 @@ public class ProfileFragment extends Fragment {
             percentage = goal/weight;
         } else  {
             percentage = weight/goal; //wants to gain weight
-        } return percentage;
+        }
+
+        return percentage * 100;
 
     }
 
 
 
 
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
        super.onViewCreated(view, savedInstanceState);
-        int weight = 0;
-        int goal = 0;
 
-        EditText userWeightt =  view.findViewById(R.id.editWeight);
-        userWeightt.setText("0");
 
-        String userWeighttt = userWeightt.getText().toString();
-        weight = Integer.parseInt(userWeighttt);
-        EditText userGoalWeightt =  view.findViewById(R.id.editGoalWeight);
-        userGoalWeightt.setText("0");
-        String userGoalWeighttt = userGoalWeightt.getText().toString();
-        goal = Integer.parseInt(userGoalWeighttt);
-
+        final EditText userWeightt =  view.findViewById(R.id.editWeight);
+        final EditText userGoalWeightt =  view.findViewById(R.id.editGoalWeight);
         progressBar =  view.findViewById(R.id.progressBar);
 
-        int percentage = computeGoal(weight, goal);
+        userWeightt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+               // userWeightt.setText("0");
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String userWeighttt = userWeightt.getText().toString();
+                weight = Integer.parseInt(userWeighttt);
+
+                percentage = computeGoal(weight, goal);
+                progressBar.setProgress(percentage);
+            }
+        });
+
+        userGoalWeightt.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+              //  userGoalWeightt.setText("0");
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                String userGoalWeighttt = userGoalWeightt.getText().toString();
+                goal = Integer.parseInt(userGoalWeighttt);
+
+                percentage = computeGoal(weight, goal);
+                progressBar.setProgress(percentage);
+            }
+        });
+
+        percentage = computeGoal(weight, goal);
         progressBar.setProgress(percentage);
+
 
     }
 
