@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         final BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                             viewPager.setCurrentItem(1);
                             return true;
                         case R.id.navigation_profile:
+
                             viewPager.setCurrentItem(2);
                             getSupportActionBar().setTitle("Profile");
                             return true;

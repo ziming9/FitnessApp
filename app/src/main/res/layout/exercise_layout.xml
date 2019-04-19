@@ -4,7 +4,6 @@
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite"
-    android:elevation="4dp"
-    app:popupTheme="@style/AppTheme.PopupOverlay">
+    android:elevation="4dp">
 
 </android.support.v7.widget.Toolbar>
