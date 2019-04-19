@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ActionMode;
@@ -39,7 +40,7 @@ public class WorkoutListFragment extends AppCompatActivity {
         setContentView(R.layout.fragment_workout_list);
 
         // ListView implementation
-        workoutsListView = findViewById(R.id.workout_list);
+        //workoutsListView = findViewById(R.id.recycler_view);
         toolBar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolBar);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -93,14 +94,23 @@ public class WorkoutListFragment extends AppCompatActivity {
 
         workoutsListView.setAdapter(arrayAdapter);
 
-        adapter = new ArrayAdapter<>(this, R.layout.workoutlist_item, R.id.workout_item, workoutList);
+        /*adapter = new ArrayAdapter<>(this, R.layout.workoutlist_item, R.id.workout_item, workoutList);
         workoutsListView.setAdapter(adapter);
 
         workoutsListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
+        workoutsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setSelected(true);
+            }
+        });
+
         workoutsListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+
                 if (checked) {
                     count++;
                     workoutList_item.add(workoutList.get(position));
@@ -151,9 +161,7 @@ public class WorkoutListFragment extends AppCompatActivity {
                         return true;
                     default:
                         return false;
-
                 }
-
 
             }
 
@@ -162,7 +170,7 @@ public class WorkoutListFragment extends AppCompatActivity {
                 Log.d("OnDestroy", "GetSupportBar");
                 getSupportActionBar().show();
             }
-        });
+        });*/
     }
 
     @Override
@@ -178,4 +186,5 @@ public class WorkoutListFragment extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.workoutlist_menu, menu);
         return true;
     }
+
 }

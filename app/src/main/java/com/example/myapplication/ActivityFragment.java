@@ -56,7 +56,7 @@ public class ActivityFragment extends Fragment {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), WorkoutListFragment.class);
+                    Intent intent = new Intent(getActivity(), WorkoutList_Fragment.class);
                     if (selected == 0) {
                         intent.putExtra("variable",selected);
                     } else if (selected == 1) {
