@@ -8,4 +8,6 @@
     <string name="abs">Abs</string>
     <string name="chest">Chest</string>
     <string name="triceps">Triceps</string>
+    <string name="weight">WEIGHT (lbs):</string>
+    <string name="reps">REPS:</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Model.WorkoutModel;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WorkoutList_Fragment extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener {
+    //private static int REQUEST_CODE = 0;
+
     ActionMode mActionMode;
     Menu context_menu;
     Toolbar toolBar;
@@ -60,10 +64,16 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
 
             @Override
             public void onItemClick(View view, int position) {
+                Intent intent = new Intent();
+                Intent setsReps = new Intent(WorkoutList_Fragment.this, SetsRepsActivity.class);
+                String exercise_name =
+                        ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.wl_exercise)).getText().toString();
                 if (isMultiSelect) {
                     multi_select(position);
                 }else
-                    Toast.makeText(getApplicationContext(), "OnClick: Need to Implement Next Feature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), exercise_name, Toast.LENGTH_SHORT).show();
+                    intent.putExtra("exercise_name",exercise_name);
+                    startActivity(setsReps);
             }
 
             @Override
