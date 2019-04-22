@@ -80,17 +80,35 @@
                     android:hint="Ft"
                     android:inputType="number"
                     android:maxLength="1" />
+                <TextView
+                    android:id="@+id/heightFtUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="240dp"
+                    android:text="''"
+                    android:textSize="20dp"/>
+
 
                 <EditText
                     android:id="@+id/editHeightIn"
-                    android:layout_width="25dp"
+                    android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="130dp"
+                    android:layout_marginLeft="140dp"
                     android:layout_marginTop="240dp"
                     android:ems="10"
                     android:hint="in"
                     android:inputType="number"
-                    android:maxLength="1" />
+                    android:maxLength="2" />
+
+                <TextView
+                    android:id="@+id/editInUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="165dp"
+                    android:layout_marginTop="240dp"
+                    android:text="'"
+                    android:textSize="20dp" />
 
 
                 <TextView
@@ -164,7 +182,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="180dp"
-                    android:layout_marginTop="5500dp"
+                    android:layout_marginTop="550dp"
                     android:background="@null"
                     android:maxLength="6"
                     android:text=""
@@ -219,6 +237,8 @@
                     android:hint="lb"
                     android:inputType="number"
                     android:maxLength="3" />
+
+
 
 
             </RelativeLayout>
