@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="56dp">
@@ -122,14 +121,35 @@
                     app:srcCompat="@drawable/femaleicon" />
 
                 <ProgressBar
+                    android:id="@+id/progressBarGray"
+                    style="?android:progressBarStyleHorizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="320dp"
+                    android:progress="100"
+                    android:progressDrawable="@drawable/circlegray" />
+
+                <ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:progressBarStyleHorizontal"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="100dp"
                     android:layout_marginTop="320dp"
-                    android:progressDrawable="@drawable/circle"
+                    android:progressDrawable="@drawable/circle" />
+
+                <EditText
+                    android:id="@+id/percentageText"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:text=""
+                    android:layout_marginLeft="175dp"
+                    android:layout_marginTop="380dp"
+                    android:background="@null"
+                    android:maxLength="6"
                     />
+
 
 
                 <TextView
@@ -180,6 +200,9 @@
                     android:ems="10"
                     android:hint="lb"
                     android:maxLength="3" />
+
+
+
 
             </RelativeLayout>
         </LinearLayout>

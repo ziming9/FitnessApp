@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import java.text.DecimalFormat;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProfileFragment extends Fragment {
@@ -57,6 +60,7 @@ public class ProfileFragment extends Fragment {
         final EditText userWeightt =  view.findViewById(R.id.editWeight);
         final EditText userGoalWeightt =  view.findViewById(R.id.editGoalWeight);
         progressBar =  view.findViewById(R.id.progressBar);
+        final EditText percentageText = view.findViewById(R.id.percentageText);
 
         userWeightt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,6 +81,10 @@ public class ProfileFragment extends Fragment {
 
                 percentage = computeGoal(weight, goal);
                 progressBar.setProgress((int)percentage);
+                percentageText.setText(new DecimalFormat("##.##").format(percentage) + "%");
+
+
+
             }
         });
 
@@ -101,6 +109,11 @@ public class ProfileFragment extends Fragment {
                 percentage = computeGoal(weight, goal);
                 Log.d("Editable: ", "value is : " + percentage);
                 progressBar.setProgress((int)percentage);
+                percentageText.setText(new DecimalFormat("##.##").format(percentage));
+
+                percentageText.setText(new DecimalFormat("##.##").format(percentage) + "%");
+
+
             }
         });
 
