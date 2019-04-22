@@ -13,7 +13,7 @@ import android.widget.Button;
  * Created by Jaison on 04/10/16.
  */
 
-public class AlertDialogHelper
+public class  AlertDialogHelper
 {
     Context context;
     AlertDialog alertDialog=null;

@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:paddingBottom="25dp"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,7 +51,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/shoulder1"
+                        android:src="@drawable/shoulders_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -80,7 +82,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/chest"
+                        android:src="@drawable/chest_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -113,7 +115,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/biceps1"/>
+                        android:src="@drawable/biceps_person"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -141,7 +143,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/tricep1"
+                        android:src="@drawable/triceps_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -172,7 +174,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/back1"
+                        android:src="@drawable/back_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -203,7 +205,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/leg1"
+                        android:src="@drawable/legs_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -234,7 +236,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/abs1"
+                        android:src="@drawable/abs_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
@@ -265,7 +267,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:src="@drawable/cardio1"
+                        android:src="@drawable/cardio_person"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         />
