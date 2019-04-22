@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
 
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-       super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
 
         ImageView imageViewProfile = view.findViewById(R.id.imageViewPicture);
         Button imageProfileButton = view.findViewById(R.id.imageButton);
@@ -86,7 +86,7 @@ public class ProfileFragment extends Fragment {
         userWeightt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-               // userWeightt.setText("0");
+                // userWeightt.setText("0");
 
             }
 
@@ -113,7 +113,7 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-              //  userGoalWeightt.setText("0");
+                //  userGoalWeightt.setText("0");
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -168,5 +168,5 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
-    
+
 }
