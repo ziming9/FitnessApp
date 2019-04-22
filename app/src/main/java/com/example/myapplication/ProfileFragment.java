@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import java.text.DecimalFormat;
+import android.widget.ImageView;
+import android.widget.Button;
+
+
 
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +31,8 @@ public class ProfileFragment extends Fragment {
     double goal;
     double percentage;
 
+    ImageView imageProfileView;
+    Button imageProfileButton;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-
+   // imageProfileView = (ImageView)findViewByID(R.id.imageView);
 
 
     public void onViewCreated(final View view, Bundle savedInstanceState) {
@@ -60,7 +66,7 @@ public class ProfileFragment extends Fragment {
         final EditText userWeightt =  view.findViewById(R.id.editWeight);
         final EditText userGoalWeightt =  view.findViewById(R.id.editGoalWeight);
         progressBar =  view.findViewById(R.id.progressBar);
-        final EditText percentageText = view.findViewById(R.id.percentageText);
+        final TextView percentageText = view.findViewById(R.id.percentageText);
 
         userWeightt.addTextChangedListener(new TextWatcher() {
             @Override
