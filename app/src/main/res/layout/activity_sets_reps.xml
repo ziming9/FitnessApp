@@ -21,19 +21,35 @@
         android:layout_height="1dp"
         android:background="@color/colorAccent" />
 
-    <Button
-        android:id="@+id/increase_button"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_add_black_24dp"
-        android:text="hi"
-        android:layout_weight="1"/>
+        android:gravity="center">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/ic_subtract_black_24dp"/>
+        <Button
+            android:id="@+id/increase_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/ic_add_black_24dp"
+            android:layout_toRightOf="@+id/weight_value"/>
+
+        <EditText
+            android:id="@+id/weight_value"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:maxLength="5"
+            android:layout_toRightOf="@+id/decrease_weight"/>
+
+        <Button
+            android:id="@+id/decrease_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/ic_subtract_black_24dp"
+            />
+    </RelativeLayout>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -41,5 +57,34 @@
         android:paddingTop="75dp"
         android:textColor="@color/colorBlack"
         android:text="@string/reps"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/increase_rep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/ic_add_black_24dp"
+            android:layout_toRightOf="@+id/rep_value"/>
+
+        <EditText
+            android:id="@+id/rep_value"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:maxLength="5"
+            android:layout_toRightOf="@+id/decrease_rep"/>
+
+        <Button
+            android:id="@+id/decrease_rep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/ic_subtract_black_24dp"
+            />
+    </RelativeLayout>
 
 </android.widget.LinearLayout>

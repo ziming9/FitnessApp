@@ -68,8 +68,8 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView imageViewProfile = view.findViewById(R.id.imageViewPicture);
-        Button imageProfileButton = view.findViewById(R.id.imageButton);
+        imageViewProfile = view.findViewById(R.id.imageViewPicture);
+        imageProfileButton = view.findViewById(R.id.imageButton);
 
         imageProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,9 +158,6 @@ public class ProfileFragment extends Fragment {
         }
 
     }
-
-
-
 
     @Nullable
     @Override
