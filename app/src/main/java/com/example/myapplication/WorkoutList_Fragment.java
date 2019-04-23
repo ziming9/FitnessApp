@@ -64,15 +64,14 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
 
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent();
                 Intent setsReps = new Intent(WorkoutList_Fragment.this, SetsRepsActivity.class);
-                String exercise_name =
+                String exerciseName =
                         ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.wl_exercise)).getText().toString();
                 if (isMultiSelect) {
                     multi_select(position);
                 }else
-                    Toast.makeText(getApplicationContext(), exercise_name, Toast.LENGTH_SHORT).show();
-                    intent.putExtra("exercise_name",exercise_name);
+                    Toast.makeText(getApplicationContext(), exerciseName, Toast.LENGTH_SHORT).show();
+                    setsReps.putExtra("exerciseName", exerciseName);
                     startActivity(setsReps);
             }
 

@@ -9,16 +9,22 @@
     android:paddingRight="16dp"
     tools:context=".SetsRepsActivity">
 
+    <include
+        android:id="@+id/setsreps_layout"
+        layout="@layout/setsreps_layout">
+    </include>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:text="@string/weight"
+        android:textStyle="bold"
         android:textColor="@color/colorBlack"/>
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="@color/colorAccent" />
 
     <RelativeLayout
@@ -26,27 +32,33 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <Button
+        <ImageButton
             android:id="@+id/increase_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_add_black_24dp"
-            android:layout_toRightOf="@+id/weight_value"/>
+            android:layout_toRightOf="@+id/weight_value"
+            android:src="@drawable/ic_add_black_35dp"
+            android:onClick="increaseWeight"/>
 
         <EditText
             android:id="@+id/weight_value"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:textSize="20dp"
+            android:focusable="false"
             android:maxLength="5"
+            android:cursorVisible="false"
+            android:textStyle="bold"
+            android:textColor="@color/colorGrey"
             android:layout_toRightOf="@+id/decrease_weight"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/decrease_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_subtract_black_24dp"
+            android:src="@drawable/ic_subtract_black_35dp"
+            android:onClick="decreaseWeight"
             />
     </RelativeLayout>
 
@@ -54,37 +66,49 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="75dp"
+        android:paddingTop="50dp"
         android:textColor="@color/colorBlack"
+        android:textStyle="bold"
         android:text="@string/reps"/>
+
+    <View
+        android:id="@+id/bar"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <Button
+        <ImageButton
             android:id="@+id/increase_rep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_add_black_24dp"
-            android:layout_toRightOf="@+id/rep_value"/>
+            android:layout_toRightOf="@+id/rep_value"
+            android:src="@drawable/ic_add_black_35dp"
+            android:onClick="increaseRep"/>
 
         <EditText
             android:id="@+id/rep_value"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:textSize="20dp"
             android:maxLength="5"
-            android:layout_toRightOf="@+id/decrease_rep"/>
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:layout_toRightOf="@+id/decrease_rep"
+            android:textStyle="bold"
+            android:textColor="@color/colorGrey"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/decrease_rep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_subtract_black_24dp"
-            />
+            android:src="@drawable/ic_subtract_black_35dp"
+            android:onClick="decreaseRep" />
     </RelativeLayout>
 
 </android.widget.LinearLayout>
