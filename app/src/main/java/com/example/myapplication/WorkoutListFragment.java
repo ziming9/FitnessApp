@@ -56,7 +56,7 @@ public class WorkoutListFragment extends AppCompatActivity {
         int selected = extras.getInt("variable");
 
         if (selected == 0) {
-            exerciseAry = getResources().getStringArray(R.array.shoulderExcercises);
+            exerciseAry = getResources().getStringArray(R.array.shoulderExercises);
             workoutList = new ArrayList<>(Arrays.asList(exerciseAry));
             Arrays.sort(exerciseAry);
             arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, exerciseAry);
@@ -66,7 +66,7 @@ public class WorkoutListFragment extends AppCompatActivity {
             Arrays.sort(exerciseAry);
             arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseAry);
         } else if (selected == 2) {
-            exerciseAry = getResources().getStringArray(R.array.bicepExcercises);
+            exerciseAry = getResources().getStringArray(R.array.bicepExercises);
             Arrays.sort(exerciseAry);
             arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, exerciseAry);
         } else if (selected == 3) {

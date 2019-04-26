@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +19,8 @@ public class SetsRepsActivity extends AppCompatActivity {
     int reps = 0;
     private Toolbar toolBar;
     EditText weightValue, repValue;
-
+    String value;
+    int finalValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +42,30 @@ public class SetsRepsActivity extends AppCompatActivity {
     }
 
     public void increaseWeight(View view) {
+        value = weightValue.getText().toString();
+
+        Log.d("Integer", "Value: " + value);
+        try {
+            finalValue = Integer.parseInt(value);
+            weight = finalValue;
+        } catch (NumberFormatException ex){
+            Log.d("TryCatch", "value is null");
+        }
+
         weight = weight + 5.0;
         weightValue.setText(Double.toString(weight));
     }
 
     public void decreaseWeight(View view) {
+        value = weightValue.getText().toString();
+
+        try {
+            finalValue = Integer.parseInt(value);
+            weight = finalValue;
+        } catch (NumberFormatException ex){
+            Log.d("TryCatch", "value is null");
+        }
+
         weight = weight - 5.0;
         if (weight < 0) {
             weight = 0.0;
@@ -53,11 +74,29 @@ public class SetsRepsActivity extends AppCompatActivity {
     }
 
     public void increaseRep(View view) {
+        value = repValue.getText().toString();
+
+        try {
+            finalValue = Integer.parseInt(value);
+            reps = finalValue;
+        } catch (NumberFormatException ex){
+            Log.d("TryCatch", "value is null");
+        }
+
         reps++;
         repValue.setText(Integer.toString(reps));
     }
 
     public void decreaseRep(View view) {
+        value = repValue.getText().toString();
+
+        try {
+            finalValue = Integer.parseInt(value);
+            reps = finalValue;
+        } catch (NumberFormatException ex){
+            Log.d("TryCatch", "value is null");
+        }
+
         reps--;
         if (reps < 0) {
             reps = 0;

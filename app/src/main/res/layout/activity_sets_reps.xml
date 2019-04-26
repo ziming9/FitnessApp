@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".SetsRepsActivity">
 
     <include
@@ -46,11 +48,13 @@
             android:layout_height="55dp"
             android:gravity="center_horizontal"
             android:textSize="20dp"
-            android:focusable="false"
+            android:focusable="true"
+            android:selectAllOnFocus="true"
             android:maxLength="5"
             android:cursorVisible="false"
             android:textStyle="bold"
             android:textColor="@color/colorGrey"
+            android:inputType="number"
             android:layout_toRightOf="@+id/decrease_weight"/>
 
         <ImageButton
@@ -97,10 +101,12 @@
             android:gravity="center_horizontal"
             android:textSize="20dp"
             android:maxLength="5"
-            android:focusable="false"
+            android:focusable="true"
+            android:selectAllOnFocus="true"
             android:cursorVisible="false"
             android:layout_toRightOf="@+id/decrease_rep"
             android:textStyle="bold"
+            android:inputType="number"
             android:textColor="@color/colorGrey"/>
 
         <ImageButton

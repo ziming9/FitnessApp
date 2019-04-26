@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="shoulderExcercises">
+    <string-array name="shoulderExercises">
         <item>Arnold Dumbbell Press</item>
         <item>Behind the Neck Barbell Press</item>
         <item>Front Dumbbell Raise</item>
@@ -25,7 +25,7 @@
     </string-array>
 
 
-    <array name="bicepExcercises">
+    <array name="bicepExercises">
         <item>Barbell Curl</item>
         <item>Cable Curl</item>
         <item>Dumbbell Concentration Curl</item>

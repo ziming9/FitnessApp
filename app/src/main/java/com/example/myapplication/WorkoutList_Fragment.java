@@ -1,7 +1,10 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,9 +23,17 @@ import android.widget.Toast;
 import com.example.myapplication.Model.WorkoutModel;
 import com.example.myapplication.Utilities.AlertDialogHelper;
 import com.example.myapplication.Utilities.RecyclerItemClickListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 public class WorkoutList_Fragment extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener {
     //private static int REQUEST_CODE = 0;
@@ -30,10 +41,10 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
     ActionMode mActionMode;
     Menu context_menu;
     Toolbar toolBar;
-
     FloatingActionButton fab;
     RecyclerView recyclerView;
     MultiSelectAdapter multiSelectAdapter;
+    SharedPreferences presetList;
     boolean isMultiSelect = false;
 
     private ArrayList<WorkoutModel> workoutList = new ArrayList<>();
@@ -46,11 +57,12 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_workout_list);
         Bundle extras = getIntent().getExtras();
-        int selected = extras.getInt("variable");
+        final int selected = extras.getInt("variable");
         toolBar = findViewById(R.id.exercise_layout);
         setSupportActionBar(toolBar);
         alertDialogHelper =new AlertDialogHelper(this);
         recyclerView = findViewById(R.id.recycler_view);
+        presetList = getSharedPreferences("workoutList", MODE_PRIVATE);
 
         data_load(selected);
 
@@ -69,18 +81,20 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
                         ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.wl_exercise)).getText().toString();
                 if (isMultiSelect) {
                     multi_select(position);
-                }else
-                    Toast.makeText(getApplicationContext(), exerciseName, Toast.LENGTH_SHORT).show();
-                    setsReps.putExtra("exerciseName", exerciseName);
-                    startActivity(setsReps);
+                } else
+                    if (multiselect_list.size() == 0) {
+                        setsReps.putExtra("exerciseName", exerciseName);
+                        startActivity(setsReps);
+                    }
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
                 if(!isMultiSelect) {
+                    Log.d("onItemLongClick", "isMultiSelect: " + isMultiSelect);
                     multiselect_list = new ArrayList<WorkoutModel>();
                     isMultiSelect = true;
-
+                    Log.d("onItemLongClick set", "isMultiSelect: " + isMultiSelect);
                     if (mActionMode == null) {
                         mActionMode = startActionMode(mActionModeCallback);
                     }
@@ -100,6 +114,12 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
         });
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -156,32 +176,222 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
     }
 
     public void data_load(int selected) {
+        int index = 0;
+        SharedPreferences.Editor fileEdit = presetList.edit();
         String exerciseAry[];
+        StringBuilder sb = new StringBuilder();
+        boolean checkEdit;
+
         if (selected == 0) {
-            exerciseAry = getResources().getStringArray(R.array.shoulderExcercises);
+            checkEdit = presetList.getBoolean("shoulderCheck", false);
+            fileEdit.putBoolean("shoulderCheck", checkEdit);
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.shoulderExercises);
+            } else {
+                exerciseAry = presetList.getString("shoulderExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+            fileEdit.putString("shoulderExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 1) {
-            exerciseAry = getResources().getStringArray(R.array.chestExercises);
+            checkEdit = presetList.getBoolean("chestCheck", false);
+            fileEdit.putBoolean("chestCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.chestExercises);
+            } else {
+                exerciseAry = presetList.getString("chestExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("bicepExercises", sb.toString());
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 2) {
-            exerciseAry = getResources().getStringArray(R.array.bicepExcercises);
+            checkEdit = presetList.getBoolean("bicepCheck", false);
+            fileEdit.putBoolean("bicepCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.bicepExercises);
+            } else {
+                exerciseAry = presetList.getString("bicepExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("bicepExercises", sb.toString());
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 3) {
-            exerciseAry = getResources().getStringArray(R.array.tricepExercises);
+            checkEdit = presetList.getBoolean("tricepCheck", false);
+            fileEdit.putBoolean("tricepCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.tricepExercises);
+            } else {
+                exerciseAry = presetList.getString("tricepExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("backExercises", sb.toString());
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 4) {
-            exerciseAry = getResources().getStringArray(R.array.backExercises);
+            checkEdit = presetList.getBoolean("backCheck", false);
+            fileEdit.putBoolean("backCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.backExercises);
+            } else {
+                exerciseAry = presetList.getString("backExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("backExercises", sb.toString());
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 5) {
-            exerciseAry = getResources().getStringArray(R.array.legExercises);
+            checkEdit = presetList.getBoolean("legCheck", false);
+            fileEdit.putBoolean("legCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.legExercises);
+            } else {
+                exerciseAry = presetList.getString("legExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("legExercises", sb.toString());
+            fileEdit.apply();
+            Arrays.sort(exerciseAry);
             Arrays.sort(exerciseAry);
         } else if (selected == 6){
-            exerciseAry = getResources().getStringArray(R.array.absExercises);
+            checkEdit = presetList.getBoolean("absCheck", false);
+            fileEdit.putBoolean("absCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.absExercises);
+            } else {
+                exerciseAry = presetList.getString("absExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("absExercises", sb.toString());
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else {
-            exerciseAry = getResources().getStringArray(R.array.cardioExercises);
+            checkEdit = presetList.getBoolean("cardioCheck", false);
+            fileEdit.putBoolean("cardioCheck", checkEdit);
+
+            if (checkEdit == false) {
+                exerciseAry = getResources().getStringArray(R.array.cardioExercises);
+            } else {
+                exerciseAry = presetList.getString("cardioExercises", "").split(",");
+            }
+
+            for (String s:exerciseAry) {
+                index++;
+                sb.append(s);
+                try {
+                    if (exerciseAry[index].length() != 0) {
+                        sb.append(",");
+                    }
+                } catch (Exception e) {
+                    Log.d("data_load", "Indexing array is 0.");
+                }
+
+            }
+
+            fileEdit.putString("cardioExercises", sb.toString());
+            fileEdit.apply();
             Arrays.sort(exerciseAry);
         }
+
         for (int i = 0; i < exerciseAry.length; i++) {
             WorkoutModel workout = new WorkoutModel(exerciseAry[i]);
             workoutList.add(workout);
@@ -235,8 +445,72 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         {
             if(multiselect_list.size()>0)
             {
-                for(int i=0;i<multiselect_list.size();i++)
+                SharedPreferences.Editor fileEdit = presetList.edit();
+                StringBuilder sb = new StringBuilder();
+                // set current list of exercises to the string builder.
+                int selected = presetList.getInt("exerciseSelected", -1);
+                if (selected == 0) {
+                    sb.append(presetList.getString("shoulderExercises", ""));
+                } else if (selected == 1) {
+                    sb.append(presetList.getString("chestExercises", ""));
+                } else if (selected == 2) {
+                    sb.append(presetList.getString("bicepExercises", ""));
+                } else if (selected == 3) {
+                    sb.append(presetList.getString("tricepExercises", ""));
+                } else if (selected == 4) {
+                    sb.append(presetList.getString("backExercises", ""));
+                } else if (selected == 5) {
+                    sb.append(presetList.getString("legExercises", ""));
+                } else if (selected == 6) {
+                    sb.append(presetList.getString("absExercises", ""));
+                } else if (selected == 7) {
+                    sb.append(presetList.getString("cardioExercises", ""));
+                }
+
+                for(int i=0;i<multiselect_list.size();i++) {
+                    try {
+                        String s = multiselect_list.get(i).getExercise();
+                        s = s.concat(",");
+                        int totalLength = multiselect_list.get(i).getExercise().length();
+                        int position = sb.indexOf(s);
+                        int endpos = position + totalLength + 1;
+                        sb.delete(position, endpos);
+                    } catch (Exception e) {
+                        String s = multiselect_list.get(i).getExercise();
+                        int totalLength = multiselect_list.get(i).getExercise().length();
+                        int position = sb.indexOf(s);
+                        int endpos = position + totalLength + 1;
+                        sb.delete(position, endpos);
+                    }
                     workoutList.remove(multiselect_list.get(i));
+                }
+                if (selected == 0) {
+                    fileEdit.putString("shoulderExercises", sb.toString());
+                    fileEdit.putBoolean("shoulderCheck", true);
+                } else if (selected == 1) {
+                    fileEdit.putString("chestExercises", sb.toString());
+                    fileEdit.putBoolean("chestCheck", true);
+                } else if (selected == 2) {
+                    fileEdit.putString("bicepExercises", sb.toString());
+                    fileEdit.putBoolean("bicepCheck", true);
+                } else if (selected == 3) {
+                    fileEdit.putString("tricepExercises", sb.toString());
+                    fileEdit.putBoolean("tricepCheck", true);
+                } else if (selected == 4) {
+                    fileEdit.putString("backExercises", sb.toString());
+                    fileEdit.putBoolean("backCheck", true);
+                } else if (selected == 5) {
+                    fileEdit.putString("legExercises", sb.toString());
+                    fileEdit.putBoolean("legCheck", true);
+                } else if (selected == 6) {
+                    fileEdit.putString("absExercises", sb.toString());
+                    fileEdit.putBoolean("absCheck", true);
+                } else if (selected == 7) {
+                    fileEdit.putString("cardioExercises", sb.toString());
+                    fileEdit.putBoolean("cardioCheck", true);
+                }
+
+                fileEdit.apply();
 
                 int size = multiselect_list.size();
 
@@ -256,8 +530,20 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             if (mActionMode != null) {
                 mActionMode.finish();
             }
-            Log.d("onPostiveClick", "Reached here");
+            SharedPreferences.Editor fileEdit = presetList.edit();
+            StringBuilder sb = new StringBuilder();
+            // set current list of exercises to the string builder.
+            sb.append(presetList.getString("shoulderExercises", ""));
+
+            // append the new exercise onto the string builder.
             WorkoutModel workout = new WorkoutModel("Exercise #"+workoutList.size());
+            sb.append(workout.getExercise()).append(",");
+
+            // update shared preferences.
+            fileEdit.putBoolean("shoulderCheck", true);
+            fileEdit.putString("shoulderExercises", sb.toString());
+            fileEdit.apply();
+
             workoutList.add(workout);
             multiSelectAdapter.notifyDataSetChanged();
 
