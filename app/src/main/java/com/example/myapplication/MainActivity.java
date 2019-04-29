@@ -1,18 +1,21 @@
 package com.example.myapplication;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.util.Log;
+
+import com.example.myapplication.View.ProfileActivity;
+import com.example.myapplication.View.ProgressFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;
@@ -23,9 +26,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // ViewPager
         viewPager = findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+
+        // Bottom Navigation
         final BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         toolBar = findViewById(R.id.toolbar_layout);
@@ -55,17 +62,14 @@ public class MainActivity extends AppCompatActivity {
                 switch(position) {
                     case 0:
                         getSupportActionBar().setTitle("Exercises");
-                        getSupportActionBar().show();
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     case 1:
                         getSupportActionBar().setTitle("FitnessTracker");
-                        getSupportActionBar().show();
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     case 2:
-                        getSupportActionBar().setTitle("Profile");
-                        getSupportActionBar().hide();
+                        getSupportActionBar().setTitle("Progress");
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     default:
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    // Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -95,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
                             getSupportActionBar().setTitle("FitnessTracker");
                             viewPager.setCurrentItem(1);
                             return true;
-                        case R.id.navigation_profile:
+                        case R.id.navigation_progress:
 
                             viewPager.setCurrentItem(2);
-                            getSupportActionBar().setTitle("Profile");
+                            getSupportActionBar().setTitle("Progress");
                             return true;
                     }
 
@@ -106,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+
+    // ViewPager
     public static class ViewPagerAdapter extends FragmentPagerAdapter {
 
 
@@ -124,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     return HomeFragment.newInstance();
                 case 2:
                     //Log.d("NAV BAR", "Profile");
-                    return ProfileFragment.newInstance();
+                    return ProgressFragment.newInstance();
             }
             return null;
         }
@@ -143,4 +149,15 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id) {
+            case R.id.toolbar_profile:
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
