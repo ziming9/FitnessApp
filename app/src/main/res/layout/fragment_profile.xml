@@ -8,35 +8,35 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="56dp">
+        android:paddingBottom="56dp"
+        android:background="@drawable/lightpinkbackground"
 
-        <LinearLayout
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="200dp"
+            android:background="@drawable/genericprofilebackground">
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="56dp">
+        <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageViewPicture"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="100dp"
+                android:src="@drawable/blankprofilepicture"
 
-                <ImageView
-                    android:id="@+id/imageViewPicture"
-                    android:layout_width="200dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="50dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    />
+                />
 
-                <Button
-                    android:id="@+id/imageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="150dp"
-                    android:layout_marginTop="200dp"
-                    android:text="Add Picture" />
+            <Button
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="300dp"
+                android:text="Add Picture" />
+
+
 
 
                 <EditText
@@ -44,48 +44,58 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
-                    android:layout_marginTop="250dp"
+                    android:layout_marginTop="340dp"
                     android:ems="10"
                     android:hint="Enter Name Here"
                     android:inputType="textPersonName"
-                    android:maxLength="20" />
+                    android:maxLength="20"
+                    android:textColor="#000000"
+                    />
 
                 <TextView
                     android:id="@+id/userName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginTop="260dp"
+                    android:layout_marginTop="350dp"
                     android:text="Name"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
                 <TextView
                     android:id="@+id/heightFt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginTop="300dp"
+                    android:layout_marginTop="390dp"
                     android:text="Height"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
                 <EditText
                     android:id="@+id/editHeightFt"
                     android:layout_width="25dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
-                    android:layout_marginTop="290dp"
+                    android:layout_marginTop="380dp"
                     android:ems="10"
                     android:hint="Ft"
                     android:inputType="number"
-                    android:maxLength="1" />
+                    android:maxLength="1"
+                    android:textColor="#000000"
+                    />
                 <TextView
                     android:id="@+id/heightFtUnit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="130dp"
-                    android:layout_marginTop="290dp"
+                    android:layout_marginTop="380dp"
                     android:text="''"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
 
                 <EditText
@@ -93,20 +103,24 @@
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="140dp"
-                    android:layout_marginTop="290dp"
+                    android:layout_marginTop="380dp"
                     android:ems="10"
                     android:hint="in"
                     android:inputType="number"
-                    android:maxLength="2" />
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    />
 
                 <TextView
                     android:id="@+id/editInUnit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="165dp"
-                    android:layout_marginTop="290dp"
+                    android:layout_marginTop="380dp"
                     android:text="'"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
 
                 <TextView
@@ -114,47 +128,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:layout_marginTop="340dp"
+                    android:layout_marginTop="430dp"
                     android:text="Age"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
                 <EditText
                     android:id="@+id/editAge"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
-                    android:layout_marginTop="330dp"
+                    android:layout_marginTop="420dp"
                     android:ems="10"
                     android:hint="age"
                     android:inputType="number"
-                    android:maxLength="3" />
+                    android:maxLength="3"
+                    android:textColor="#000000"
+                    />
 
-                <TextView
-                    android:id="@+id/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="400dp"
-                    android:text="Gender"
-                    android:textSize="20dp" />
-
-                <ImageButton
-                    android:id="@+id/maleImageButton"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="130dp"
-                    android:layout_marginTop="380dp"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/maleicon" />
-
-                <ImageButton
-                    android:id="@+id/femaleIconButton"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="220dp"
-                    android:layout_marginTop="380dp"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/femaleicon" />
 
                 <ProgressBar
                     android:id="@+id/progressBarGray"
@@ -162,7 +154,7 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginTop="520dp"
+                    android:layout_marginTop="600dp"
                     android:progress="100"
                     android:progressDrawable="@drawable/circlegray" />
 
@@ -173,7 +165,7 @@
                     android:layout_height="200dp"
                     android:layout_alignBottom="@+id/progressBarGray"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginTop="520dp"
+                    android:layout_marginTop="600dp"
                     android:progressDrawable="@drawable/circle" />
 
                 <TextView
@@ -181,11 +173,13 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="180dp"
-                    android:layout_marginTop="600dp"
+                    android:layout_marginTop="680dp"
                     android:background="@null"
                     android:maxLength="6"
                     android:text=""
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:textColor="#000000"
+                    />
 
 
                 <TextView
@@ -194,57 +188,60 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginTop="470dp"
+                    android:layout_marginTop="550dp"
                     android:text="Weight Progress"
-                    android:textSize="22dp" />
+                    android:textSize="22dp"
+                    android:textColor="#000000"
+                    />
 
                 <TextView
                     android:id="@+id/userWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginTop="740dp"
+                    android:layout_marginTop="820dp"
                     android:text="Weight"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
                 <EditText
                     android:id="@+id/editWeight"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:layout_marginTop="760dp"
+                    android:layout_marginTop="840dp"
                     android:ems="10"
                     android:hint="lb"
                     android:inputType="number"
-                    android:maxLength="3" />
+                    android:maxLength="3"
+                    android:textColor="#000000"
+                    />
 
                 <TextView
                     android:id="@+id/userGoalWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="230dp"
-                    android:layout_marginTop="740dp"
+                    android:layout_marginTop="820dp"
                     android:text="Goal Weight"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    />
 
                 <EditText
                     android:id="@+id/editGoalWeight"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
-                    android:layout_marginTop="760dp"
+                    android:layout_marginTop="840dp"
                     android:ems="10"
                     android:hint="lb"
                     android:inputType="number"
-                    android:maxLength="3" />
-
-
-
+                    android:maxLength="3"
+                    android:textColor="#000000"
+                    />
 
             </RelativeLayout>
-        </LinearLayout>
 
-
-
-    </RelativeLayout>
 </ScrollView>

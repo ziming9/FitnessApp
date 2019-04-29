@@ -55,14 +55,17 @@ public class MainActivity extends AppCompatActivity {
                 switch(position) {
                     case 0:
                         getSupportActionBar().setTitle("Exercises");
+                        getSupportActionBar().show();
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     case 1:
                         getSupportActionBar().setTitle("FitnessTracker");
+                        getSupportActionBar().show();
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     case 2:
                         getSupportActionBar().setTitle("Profile");
+                        getSupportActionBar().hide();
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     default:
