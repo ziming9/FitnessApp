@@ -64,8 +64,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         imageViewProfile = view.findViewById(R.id.imageViewPicture);
@@ -142,6 +141,11 @@ public class ProfileFragment extends Fragment {
         //progressBar.setProgress(50);
 
 
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     private void openGallery() {
