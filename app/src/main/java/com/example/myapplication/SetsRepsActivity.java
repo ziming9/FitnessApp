@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SetsRepsActivity extends AppCompatActivity {
     double weight = 0.0;
@@ -104,6 +105,20 @@ public class SetsRepsActivity extends AppCompatActivity {
         repValue.setText(Integer.toString(reps));
     }
 
+    public void clear(View view) {
+        weightValue.setText("");
+        repValue.setText("");
+        weight = 0;
+        reps = 0;
+    }
+
+    public void save(View view) {
+        if (weight == 0 || reps == 0) {
+            Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+    }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {

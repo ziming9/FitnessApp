@@ -1,10 +1,8 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -23,17 +21,9 @@ import android.widget.Toast;
 import com.example.myapplication.Model.WorkoutModel;
 import com.example.myapplication.Utilities.AlertDialogHelper;
 import com.example.myapplication.Utilities.RecyclerItemClickListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 public class WorkoutList_Fragment extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener {
     //private static int REQUEST_CODE = 0;
@@ -63,6 +53,11 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         alertDialogHelper =new AlertDialogHelper(this);
         recyclerView = findViewById(R.id.recycler_view);
         presetList = getSharedPreferences("workoutList", MODE_PRIVATE);
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         data_load(selected);
 
@@ -183,6 +178,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         boolean checkEdit;
 
         if (selected == 0) {
+            getSupportActionBar().setTitle(R.string.shoulder);
             checkEdit = presetList.getBoolean("shoulderCheck", false);
             fileEdit.putBoolean("shoulderCheck", checkEdit);
             if (checkEdit == false) {
@@ -208,6 +204,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 1) {
+            getSupportActionBar().setTitle(R.string.chest);
             checkEdit = presetList.getBoolean("chestCheck", false);
             fileEdit.putBoolean("chestCheck", checkEdit);
 
@@ -234,6 +231,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 2) {
+            getSupportActionBar().setTitle(R.string.biceps);
             checkEdit = presetList.getBoolean("bicepCheck", false);
             fileEdit.putBoolean("bicepCheck", checkEdit);
 
@@ -260,6 +258,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 3) {
+            getSupportActionBar().setTitle(R.string.triceps);
             checkEdit = presetList.getBoolean("tricepCheck", false);
             fileEdit.putBoolean("tricepCheck", checkEdit);
 
@@ -286,6 +285,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 4) {
+            getSupportActionBar().setTitle(R.string.back);
             checkEdit = presetList.getBoolean("backCheck", false);
             fileEdit.putBoolean("backCheck", checkEdit);
 
@@ -312,6 +312,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 5) {
+            getSupportActionBar().setTitle(R.string.legs);
             checkEdit = presetList.getBoolean("legCheck", false);
             fileEdit.putBoolean("legCheck", checkEdit);
 
@@ -339,6 +340,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             Arrays.sort(exerciseAry);
             Arrays.sort(exerciseAry);
         } else if (selected == 6){
+            getSupportActionBar().setTitle(R.string.abs);
             checkEdit = presetList.getBoolean("absCheck", false);
             fileEdit.putBoolean("absCheck", checkEdit);
 
@@ -365,6 +367,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else {
+            getSupportActionBar().setTitle(R.string.cardio);
             checkEdit = presetList.getBoolean("cardioCheck", false);
             fileEdit.putBoolean("cardioCheck", checkEdit);
 

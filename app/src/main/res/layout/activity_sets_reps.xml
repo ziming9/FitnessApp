@@ -117,4 +117,55 @@
             android:onClick="decreaseRep" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="175dp"
+            android:layout_height="45dp"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:background="@drawable/roundedcorner_green"
+            android:onClick="save"/>
+
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="175dp"
+            android:layout_height="45dp"
+            android:text="Clear"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:background="@drawable/roundedcorner_blue"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/save_button"
+            android:onClick="clear"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            
+            <ListView
+                android:id="@+id/exercise_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
 </android.widget.LinearLayout>
