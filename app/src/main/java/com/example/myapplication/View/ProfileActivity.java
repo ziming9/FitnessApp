@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,8 +60,14 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar =  findViewById(R.id.progressBar);
         final TextView percentageText = findViewById(R.id.percentageText);
 
-        // Swipe to exit code (in progress)
-        /*findViewById(R.id.profile_layout).setOnTouchListener(new OnSwipeTouchListener(ProfileActivity.this) {
+
+
+
+
+
+
+        /*// Swipe to exit code (in progress)
+        findViewById(R.id.profile_layout).setOnTouchListener(new OnSwipeTouchListener(ProfileActivity.this) {
             public void onSwipeTop() {
                 //Toast.makeText(ProfileActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
@@ -130,6 +137,7 @@ public class ProfileActivity extends AppCompatActivity {
                 progressBar.setProgress((int)percentage);
                 percentageText.setText(new DecimalFormat("##.##").format(percentage));
                 percentageText.setText(new DecimalFormat("##.##").format(percentage) + "%");
+                
             }
         });
     }
@@ -167,6 +175,7 @@ public class ProfileActivity extends AppCompatActivity {
         } else  {
             percentage = weight/goal; //wants to gain weight
         }
+
 
         return percentage * 100;
 
