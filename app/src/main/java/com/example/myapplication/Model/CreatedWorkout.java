@@ -8,7 +8,7 @@ public class CreatedWorkout {
     private String day_of_week;
     private ArrayList<Exercise> workouts;
 
-    CreatedWorkout (String name, String day) {
+    public CreatedWorkout (String name, String day) {
         this.name = name;
         this.day_of_week = day;
         this.workouts = new ArrayList<>();
