@@ -17,9 +17,11 @@ import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.myapplication.View.NewWorkoutActivity;
 import com.example.myapplication.View.ProfileActivity;
 
 public class HomeFragment extends Fragment {
+    public static int REQUEST_CODE = 1;
     GridLayout plansGrid;
     CardView planCards;
     Button profile;
@@ -57,9 +59,14 @@ public class HomeFragment extends Fragment {
         createPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), NewWorkoutActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

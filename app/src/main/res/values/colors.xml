@@ -11,4 +11,6 @@
     <color name="colorLightPink">#ffeeff</color>
     <drawable name="selectorGrey">#808080</drawable>
     <color name="colorSelected">#FFCACACA</color>
+    <color name="colorMetallic">#f2f2f2</color>
+    <color name="colorLightBlue">#66c2ff</color>
 </resources>
