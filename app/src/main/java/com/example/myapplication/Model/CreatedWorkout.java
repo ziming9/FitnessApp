@@ -3,6 +3,7 @@ package com.example.myapplication.Model;
 import java.util.ArrayList;
 
 public class CreatedWorkout {
+
     private String name;
     private String day_of_week;
     private ArrayList<Exercise> workouts;

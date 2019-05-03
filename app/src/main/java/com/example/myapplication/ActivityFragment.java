@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class ActivityFragment extends Fragment {
     GridLayout mainGrid;
-    FloatingActionButton fab;
+    //FloatingActionButton fab;
 
     public static ActivityFragment newInstance() {
         return new ActivityFragment();
@@ -37,16 +37,16 @@ public class ActivityFragment extends Fragment {
         // Main Grid
         mainGrid = view.findViewById(R.id.mainGrid);
         // Floating Action Button
-        fab = view.findViewById(R.id.fab);
+        //fab = view.findViewById(R.id.fab);
         setSingleEvent(mainGrid);
 
         // Floating Action Button
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Create new workout", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     private void setSingleEvent(GridLayout mainGrid) {
