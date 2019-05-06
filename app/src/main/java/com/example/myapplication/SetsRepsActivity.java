@@ -15,13 +15,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
+
 public class SetsRepsActivity extends AppCompatActivity {
     double weight = 0.0;
     int reps = 0;
+    int index = 1;
     private Toolbar toolBar;
     EditText weightValue, repValue;
     String value;
     int finalValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,7 @@ public class SetsRepsActivity extends AppCompatActivity {
 
         weight = weight + 5.0;
         weightValue.setText(Double.toString(weight));
+
     }
 
     public void decreaseWeight(View view) {
@@ -72,6 +79,7 @@ public class SetsRepsActivity extends AppCompatActivity {
             weight = 0.0;
         }
         weightValue.setText(Double.toString(weight));
+
     }
 
     public void increaseRep(View view) {
@@ -106,8 +114,8 @@ public class SetsRepsActivity extends AppCompatActivity {
     }
 
     public void clear(View view) {
-        weightValue.setText("");
-        repValue.setText("");
+        weightValue.setText("0.0");
+        repValue.setText("0.0");
         weight = 0;
         reps = 0;
     }
@@ -117,6 +125,15 @@ public class SetsRepsActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
             return;
         }
+        /*
+        TextView index = findViewById(R.id.index);
+        TextView weights = findViewById(R.id.weights);
+        TextView reps = findViewById(R.id.reps);
+
+        index.setText("" +index);
+        index.setText("" + weights);
+        index.setText("" + reps);
+        */
 
     }
 
