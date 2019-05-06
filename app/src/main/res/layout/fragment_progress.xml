@@ -2,13 +2,13 @@
 <ScrollView
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:fillViewport="true"
+
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp">
 
         <include
             android:id="@+id/toolbar_layout"
@@ -22,10 +22,18 @@
             android:layout_height="2dp"
             android:background="#000000" >
         </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textSize="20sp"
+            android:layout_marginBottom="15dp"
+            android:text="Specific Exercise Progress"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center_horizontal"/>
         <com.github.mikephil.charting.charts.LineChart
-            android:layout_marginTop="100dp"
             android:id="@+id/test_chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

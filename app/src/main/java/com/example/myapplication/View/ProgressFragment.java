@@ -15,6 +15,7 @@ import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.Model.Exercise;
 import com.example.myapplication.R;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -49,31 +50,37 @@ public class ProgressFragment extends Fragment {
         // Date one
         Calendar c_one = Calendar.getInstance();
         // Exercise one
-        Exercise ex_one = new Exercise("Barbell Bench",5,8,150,c_one);
+        Exercise ex_one = new Exercise("Barbell Bench",5,8,135,c_one);
 
         // Date two
         Calendar c_two = Calendar.getInstance();
         c_two.set(2019,5,5);
         // Exercise two
-        Exercise ex_two  = new Exercise("Barbell Bench",5,8,160,c_two);
+        Exercise ex_two  = new Exercise("Barbell Bench",5,8,145,c_two);
 
         // Date three
         Calendar c_three = Calendar.getInstance();
         c_three.set(2019,5,7);
         // Exercise three
-        Exercise ex_three = new Exercise("Barbell Bench",5,8,165,c_three);
+        Exercise ex_three = new Exercise("Barbell Bench",5,8,140,c_three);
 
         // Date four
         Calendar c_four = Calendar.getInstance();
-        c_three.set(2019,5,9);
+        c_four.set(2019,5,9);
         // Exercise four
-        Exercise ex_four = new Exercise("Barbell Bench",5,8,175,c_four);
+        Exercise ex_four = new Exercise("Barbell Bench",5,8,155,c_four);
 
         // Date five
         Calendar c_five = Calendar.getInstance();
-        c_three.set(2019,5,14);
+        c_five.set(2019,5,12);
         // Exercise five
-        Exercise ex_five = new Exercise("Barbell Bench",5,8,175,c_five);
+        Exercise ex_five = new Exercise("Barbell Bench",5,8,160,c_five);
+
+        // Date six
+        Calendar c_six = Calendar.getInstance();
+        c_six.set(2019,5,14);
+        // Exercise five
+        Exercise ex_six = new Exercise("Barbell Bench",5,8,170,c_six);
 
         ArrayList<Exercise> exercises = new ArrayList<>();
         exercises.add(ex_one);
@@ -81,6 +88,7 @@ public class ProgressFragment extends Fragment {
         exercises.add(ex_three);
         exercises.add(ex_four);
         exercises.add(ex_five);
+        exercises.add(ex_six);
 
 
         // Chart
@@ -94,14 +102,16 @@ public class ProgressFragment extends Fragment {
         }
 
         // add entries to dataset
-        LineDataSet dataSet = new LineDataSet(entries, "Label");
+        LineDataSet dataSet = new LineDataSet(entries, "Weight");
         dataSet.setColor(Color.parseColor("#e94984"));
         dataSet.setValueTextColor(Color.parseColor("#e94984"));
-
+        dataSet.setLineWidth(2);
 
         // Set on chart
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
+
+        chart.setMinimumHeight(1000);
         chart.invalidate();
     }
 
