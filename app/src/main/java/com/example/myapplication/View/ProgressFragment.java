@@ -3,6 +3,7 @@ package com.example.myapplication.View;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.icu.text.DecimalFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,11 +150,30 @@ public class ProgressFragment extends Fragment {
         YAxis rightYAxis = chart.getAxisRight();
         rightYAxis.setEnabled(false);
 
+        // Data Point formatting
+         class MyValueFormatter implements IValueFormatter {
+
+            private DecimalFormat mFormat;
+
+            public MyValueFormatter() {
+                mFormat = new DecimalFormat("###,###,###"); // use no decimals
+            }
+
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return mFormat.format(value); // in case you want to add percent
+            }
+        }
+
+        dataSet.setValueFormatter(new MyValueFormatter());
 
         // Line color format
         dataSet.setColor(Color.parseColor("#e94984"));
         dataSet.setValueTextColor(Color.parseColor("#e94984"));
         dataSet.setLineWidth(2);
+        dataSet.setValueTextSize(12);
+
+        dataSet.setCircleRadius(5);
 
         // Create lineData object based on dataset
         LineData lineData = new LineData(dataSet);

@@ -202,10 +202,7 @@ public class ProfileActivity extends AppCompatActivity {
         } else  {
             percentage = weight/goal; //wants to gain weight
         }
-
-
         return percentage * 100;
-
     }
 
     private void openGallery() {

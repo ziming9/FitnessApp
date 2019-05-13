@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#e94984</color>
-    <color name="calndarAccent">#F87951</color>
+    <color name="colorPrimary">#2e508c</color>
+    <color name="colorPrimaryDark">#00285e</color>
+    <color name="colorAccent">#617cbc</color>
+    <color name="calndarAccent">#884A4B</color>
+
+
+    <color name="icon_orange">#F5754E</color>
 
     <color name="colorWhite">#FFF</color>
     <color name="colorGrey">#808080</color>
@@ -13,6 +16,6 @@
     <color name="colorLightPink">#ffeeff</color>
     <drawable name="selectorGrey">#808080</drawable>
     <color name="colorSelected">#FFCACACA</color>
-    <color name="colorMetallic">#f2f2f2</color>
-    <color name="colorLightBlue">#66c2ff</color>
+    <color name="colorMetallic">#D3F2F2F2</color>
+    <color name="colorLightBlue">#7FE7F8</color>
 </resources>
