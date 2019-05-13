@@ -227,7 +227,8 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
 
             }
 
-            fileEdit.putString("bicepExercises", sb.toString());
+            fileEdit.putString("chestExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 2) {
@@ -255,6 +256,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
 
             fileEdit.putString("bicepExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 3) {
@@ -281,7 +283,8 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
 
             }
 
-            fileEdit.putString("backExercises", sb.toString());
+            fileEdit.putString("tricepExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 4) {
@@ -309,6 +312,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
 
             fileEdit.putString("backExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else if (selected == 5) {
@@ -336,6 +340,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
 
             fileEdit.putString("legExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
             Arrays.sort(exerciseAry);
@@ -364,6 +369,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
 
             fileEdit.putString("absExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         } else {
@@ -391,6 +397,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
 
             fileEdit.putString("cardioExercises", sb.toString());
+            fileEdit.putInt("exerciseSelected", selected);
             fileEdit.apply();
             Arrays.sort(exerciseAry);
         }
@@ -513,6 +520,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
                     fileEdit.putBoolean("cardioCheck", true);
                 }
 
+                Log.d("selected", "value: " + selected);
                 fileEdit.apply();
 
                 int size = multiselect_list.size();
@@ -540,11 +548,12 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
 
             // append the new exercise onto the string builder.
             WorkoutModel workout = new WorkoutModel("Exercise #"+workoutList.size());
-            sb.append(workout.getExercise()).append(",");
+            sb.append(",").append(workout.getExercise());
 
             // update shared preferences.
             fileEdit.putBoolean("shoulderCheck", true);
             fileEdit.putString("shoulderExercises", sb.toString());
+            Log.d("SB", sb.toString());
             fileEdit.apply();
 
             workoutList.add(workout);
