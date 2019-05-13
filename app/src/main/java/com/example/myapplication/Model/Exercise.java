@@ -1,7 +1,10 @@
 package com.example.myapplication.Model;
 
+import android.content.Context;
 import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -68,10 +71,10 @@ public class Exercise {
         return OneRepMax(reps,weight);
     }
 
-    // Returns date as String
-    public String getDate() {
-        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yy", Locale.US);
-        return dateformat.format(this.date);
+    // Returns date as String "dd/mm/yy"
+    public String getDate(Context context) {
+        DateFormat df = android.text.format.DateFormat.getDateFormat(context);
+        return df.format(this.date.getTime());
     }
 
     public void setDate(Calendar date) {

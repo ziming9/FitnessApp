@@ -17,11 +17,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.SharedPreferences;
+
 
 import com.example.myapplication.R;
 import com.example.myapplication.Utilities.OnSwipeTouchListener;
@@ -30,6 +31,7 @@ import java.text.DecimalFormat;
 
 public class ProfileActivity extends AppCompatActivity {
     private ProgressBar progressBar;
+    SharedPreferences sh;
     double weight;
     double goal;
     double percentage;
@@ -37,11 +39,22 @@ public class ProfileActivity extends AppCompatActivity {
     Uri imageURI;
     ImageView imageViewProfile;
     Button imageProfileButton;
+    EditText name, age, heightFT,heightIN;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // sh = getSharedPreferences("myPrefs", MODE_PRIVATE);
+        name = findViewById(R.id.enterName);
+        age = findViewById(R.id.editAge);
+        heightFT = findViewById(R.id.editHeightFt);
+        heightIN = findViewById(R.id.editHeightIn);
+
+
+
+
+
         setContentView(R.layout.fragment_profile);
         Toolbar toolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
@@ -105,11 +118,17 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String userWeighttt = userWeightt.getText().toString();
-                weight = Integer.parseInt(userWeighttt);
-
+                try {
+                    weight = Integer.parseInt(userWeighttt);
+                } catch (NumberFormatException e) {
+                    weight = 0;
+                }
                 percentage = computeGoal(weight, goal);
                 progressBar.setProgress((int)percentage);
                 percentageText.setText(new DecimalFormat("##.##").format(percentage) + "%");
+
+
+
 
             }
         });
@@ -119,9 +138,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //  userGoalWeightt.setText("0");
+
+
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
 
             }
 
@@ -129,15 +151,19 @@ public class ProfileActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 //String userGoalWeighttt = userGoalWeightt.getText().toString();
-                goal = Integer.parseInt(s.toString());
-
+                try {
+                    goal = Integer.parseInt(s.toString());
+                } catch (NumberFormatException e) {
+                    goal = 0;
+                }
 
                 percentage = computeGoal(weight, goal);
                 Log.d("Editable: ", "value is : " + percentage);
                 progressBar.setProgress((int)percentage);
                 percentageText.setText(new DecimalFormat("##.##").format(percentage));
                 percentageText.setText(new DecimalFormat("##.##").format(percentage) + "%");
-                
+
+
             }
         });
     }
@@ -154,6 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageURI = data.getData();
             imageViewProfile.setImageURI(imageURI);
+
         }
 
     }
