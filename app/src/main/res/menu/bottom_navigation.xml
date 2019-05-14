@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_activity"
-        android:icon="@drawable/ic_event_note_black_24dp"
+        android:icon="@drawable/ic_accessibility_black_24dp"
         android:title="Exercises"/>
 
     <item
