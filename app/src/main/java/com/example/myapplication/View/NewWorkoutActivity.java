@@ -2,6 +2,7 @@ package com.example.myapplication.View;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,7 +30,6 @@ public class NewWorkoutActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Create Workout Plan");
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         final Spinner daySpinner = findViewById(R.id.days_spinner);
@@ -80,4 +80,11 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }

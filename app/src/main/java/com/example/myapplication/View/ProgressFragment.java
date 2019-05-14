@@ -142,6 +142,8 @@ public class ProgressFragment extends Fragment {
         x_axis.setValueFormatter(new MyXAxisValueFormatter(dates));
         // Set x-axis to bottom
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        //chart.getXAxis().setCenterAxisLabels(true);
+        //x_axis.setCenterAxisLabels(true);
         // Remove gridlines
         //chart.getAxisLeft().setDrawGridLines(false);
         //chart.getXAxis().setDrawGridLines(false);
@@ -166,6 +168,7 @@ public class ProgressFragment extends Fragment {
         }
 
         dataSet.setValueFormatter(new MyValueFormatter());
+
 
         // Line color format
         dataSet.setColor(Color.parseColor("#e94984"));
