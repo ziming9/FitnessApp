@@ -12,7 +12,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/lightpinkbackground">
+        android:background="@color/colorAccent">
 
         <include
             android:id="@+id/toolbar_layout"
@@ -33,7 +33,7 @@
                 android:layout_marginLeft="110dp"
                 android:layout_marginTop="100dp"
                 android:src="@drawable/blankprofilepicture"
-
+                android:layout_centerHorizontal="true"
                 />
 
             <Button
@@ -42,9 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="300dp"
+                android:layout_centerHorizontal="true"
                 android:text="Add Picture" />
-
-
 
 
                 <EditText
@@ -70,7 +69,7 @@
                     android:layout_marginTop="350dp"
                     android:text="Name"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/profile_edit_text_color"
                     />
 
                 <TextView
@@ -81,7 +80,7 @@
                     android:layout_marginTop="390dp"
                     android:text="Height"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/profile_edit_text_color"
                     />
 
                 <EditText
@@ -145,7 +144,7 @@
                     android:layout_marginTop="430dp"
                     android:text="Age"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/profile_edit_text_color"
                     />
 
                 <EditText
@@ -207,7 +206,7 @@
                     android:layout_marginTop="550dp"
                     android:text="Weight Progress"
                     android:textSize="22dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/profile_edit_text_color"
                     />
 
                 <TextView
@@ -218,7 +217,7 @@
                     android:layout_marginTop="470dp"
                     android:text="Weight"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/profile_edit_text_color"
                     />
 
                 <EditText
@@ -245,7 +244,7 @@
                     android:layout_marginTop="470dp"
                     android:text="Goal Weight"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/profile_edit_text_color"
                     />
 
                 <EditText

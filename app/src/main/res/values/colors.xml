@@ -5,8 +5,10 @@
     <color name="colorAccent">#617cbc</color>
     <color name="calendarAccent">#FF9A9B</color>
 
-
     <color name="icon_orange">#F5754E</color>
+    <color name="profile_edit_text_color">#FFF</color>
+
+
 
     <color name="colorWhite">#FFF</color>
     <color name="colorGrey">#808080</color>
