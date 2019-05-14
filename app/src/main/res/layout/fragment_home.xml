@@ -149,7 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
                         android:padding="10dp"
-                        android:background="@color/colorPink">
+                        android:background="@color/colorLightGreen">
 
                         <TextView
                             android:id="@+id/plan_name1"
@@ -172,7 +172,7 @@
                             android:id="@+id/plan_day1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tuesday"
+                            android:text="Wednesday"
                             android:textColor="@color/colorBlack"
                             android:textSize="18dp" />
 
@@ -214,7 +214,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
-                        android:background="@color/colorLightGreen"
+                        android:background="@color/calendarAccent"
                         android:padding="10dp">
 
                         <TextView
@@ -238,7 +238,7 @@
                             android:id="@+id/plan_day2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Wednesday"
+                            android:text="Friday"
                             android:textColor="@color/colorBlack"
                             android:textSize="18dp" />
 
@@ -255,7 +255,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:text="6"
+                            android:text="7"
                             android:textSize="18dp"
                             android:layout_marginStart="5dp"
                             android:textStyle="bold"/>
