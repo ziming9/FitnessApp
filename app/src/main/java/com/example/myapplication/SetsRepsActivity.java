@@ -22,7 +22,6 @@ import java.text.DecimalFormat;
 public class SetsRepsActivity extends AppCompatActivity {
     double weight = 0.0;
     int reps = 0;
-    int index = 1;
     private Toolbar toolBar;
     EditText weightValue, repValue;
     String value;
@@ -125,6 +124,7 @@ public class SetsRepsActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
             return;
         }
+
         /*
         TextView index = findViewById(R.id.index);
         TextView weights = findViewById(R.id.weights);
