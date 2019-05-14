@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             viewPager.setCurrentItem(0);
                             return true;
                         case R.id.navigation_home:
-                            getSupportActionBar().setTitle("Workouts");
+                            getSupportActionBar().setTitle("FitnessTracker");
                             viewPager.setCurrentItem(1);
                             return true;
                         case R.id.navigation_progress:
