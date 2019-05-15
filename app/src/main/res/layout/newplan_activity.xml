@@ -16,6 +16,7 @@
         android:text="Plan Name: "/>
 
     <EditText
+        android:id="@+id/create_plan_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"

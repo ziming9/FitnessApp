@@ -211,7 +211,7 @@ public class ProgressFragment extends Fragment {
         // chart size
         chart.setMinimumHeight(1000);
         // Animate x-axis
-        chart.animateX(5000);
+        chart.animateX(3000);
 //        chart.getXAxis().setAxisMinimum(0);
 //        chart.getXAxis().setAxisMaximum((float) exercises.size());
                 // chart legend

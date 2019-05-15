@@ -1,5 +1,6 @@
 package com.example.myapplication.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -11,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -20,11 +23,15 @@ import java.util.ArrayList;
 
 public class NewWorkoutActivity extends AppCompatActivity {
 
+    Intent intent = new Intent();
+    EditText planName;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newplan_activity);
         Toolbar toolbar = findViewById(R.id.toolbar_layout);
+        planName = findViewById(R.id.create_plan_name);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("Create Workout Plan");
@@ -47,6 +54,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // TO-DO; Pass the value to the home fragment.
                 String selected = daySpinner.getSelectedItem().toString();
+                intent.putExtra("planDay", selected);
                 Log.d("Spinner Select", "Value is: " + selected);
             }
 
@@ -74,7 +82,14 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_save:
-                Toast.makeText(getApplicationContext(),"Thanks for trying out my feature.",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Thanks for trying out my feature.",Toast.LENGTH_SHORT).show();
+                if (planName == null) {
+                    Toast.makeText(getApplicationContext(),"Please enter a name for your plan",Toast.LENGTH_SHORT).show();
+                } else {
+                    intent.putExtra("planName", planName.getText().toString());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
                 return true;
         }
 

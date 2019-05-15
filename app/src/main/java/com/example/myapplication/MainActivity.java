@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     case 1:
-                        getSupportActionBar().setTitle("FitnessTracker");
+                        getSupportActionBar().setTitle("Workouts");
                         bottomNav.getMenu().getItem(position).setChecked(true);
                         break;
                     case 2:
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             viewPager.setCurrentItem(0);
                             return true;
                         case R.id.navigation_home:
-                            getSupportActionBar().setTitle("FitnessTracker");
+                            getSupportActionBar().setTitle("Workouts");
                             viewPager.setCurrentItem(1);
                             return true;
                         case R.id.navigation_progress:

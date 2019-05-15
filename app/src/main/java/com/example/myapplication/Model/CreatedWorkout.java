@@ -6,19 +6,28 @@ public class CreatedWorkout {
 
     private String name;
     private String day_of_week;
-    private ArrayList<Exercise> workouts;
+    //private ArrayList<Exercise> workouts;
+    private int total_workouts;
+
+    public CreatedWorkout (String name, String day, int total_workouts) {
+        this.name = name;
+        this.day_of_week = day;
+        //this.workouts = new ArrayList<>();
+        this.total_workouts = total_workouts;
+    }
 
     public CreatedWorkout (String name, String day) {
         this.name = name;
         this.day_of_week = day;
-        this.workouts = new ArrayList<>();
+        //this.workouts = new ArrayList<>();
+        this.total_workouts = 0;
     }
 
 
     // Add exercise
-    public void addExercise(Exercise e) {
-        this.workouts.add(e);
-    }
+//    public void addExercise(Exercise e) {
+//        this.workouts.add(e);
+//    }
 
     // Getters and setters
     public String getName() {
@@ -37,12 +46,20 @@ public class CreatedWorkout {
         this.day_of_week = day_of_week;
     }
 
-    public ArrayList<Exercise> getWorkouts() {
-        return workouts;
+    public int getTotal_workouts() {
+        return total_workouts;
     }
 
-    public void setWorkouts(ArrayList<Exercise> workouts) {
-        this.workouts = workouts;
+    public void setTotal_workouts() {
+        this.total_workouts = total_workouts;
     }
+
+//    public ArrayList<Exercise> getWorkouts() {
+//        return workouts;
+//    }
+
+//    public void setWorkouts(ArrayList<Exercise> workouts) {
+//        this.workouts = workouts;
+//    }
 
 }
