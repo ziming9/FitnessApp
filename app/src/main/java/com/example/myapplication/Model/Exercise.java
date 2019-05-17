@@ -3,6 +3,7 @@ package com.example.myapplication.Model;
 import android.content.Context;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
+import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -74,6 +75,7 @@ public class Exercise {
     // Returns date as String "dd/mm/yy"
     public String getDate(Context context) {
         DateFormat df = android.text.format.DateFormat.getDateFormat(context);
+        Log.d("DATE","date is:" + this.date.getTime().toString());
         return df.format(this.date.getTime());
     }
 

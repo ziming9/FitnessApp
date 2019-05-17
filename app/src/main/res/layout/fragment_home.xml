@@ -41,7 +41,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Create Plan"
                 android:layout_weight="1"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 android:textColor="@color/colorWhite"
                 android:background="@drawable/roundedcorner_orange"/>
 
@@ -54,7 +54,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 android:textColor="@color/colorWhite"
                 android:background="@drawable/roundedcorner_green"
                 android:text="Profile"/>
