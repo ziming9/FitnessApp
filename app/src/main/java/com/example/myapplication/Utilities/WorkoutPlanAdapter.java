@@ -1,22 +1,35 @@
 package com.example.myapplication.Utilities;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.WorkoutPlanViewHolder> {
     private ArrayList<CreatedWorkout> workoutPlan;
+    public Context mContext;
+    WorkoutPlanDatabase db;
 
-    public WorkoutPlanAdapter(ArrayList<CreatedWorkout> workoutPlan) {
+    public WorkoutPlanAdapter(ArrayList<CreatedWorkout> workoutPlan, Context mContext) {
         this.workoutPlan = workoutPlan;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -27,11 +40,48 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WorkoutPlanAdapter.WorkoutPlanViewHolder workoutPlanViewHolder, int i) {
-        CreatedWorkout cw = workoutPlan.get(i);
+    public void onBindViewHolder(@NonNull final WorkoutPlanAdapter.WorkoutPlanViewHolder workoutPlanViewHolder, final int i) {
+        final CreatedWorkout cw = workoutPlan.get(i);
+        int[] card_colors = workoutPlanViewHolder.itemView.getResources().getIntArray(R.array.card_colors);
+        int rand_card_colors = card_colors[new Random().nextInt(card_colors.length)];
+        //Random rnd = new Random();
+        //int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        workoutPlanViewHolder.planCard.setBackgroundColor(rand_card_colors);
         workoutPlanViewHolder.planName.setText(cw.getName());
         workoutPlanViewHolder.planDay.setText(cw.getDay_of_week());
         workoutPlanViewHolder.total_ex.setText(String.valueOf(cw.getTotal_workouts()));
+        workoutPlanViewHolder.planOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(mContext, workoutPlanViewHolder.planOption);
+                popupMenu.inflate(R.menu.card_menu);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch(item.getItemId()) {
+                            case R.id.card_delete:
+                                Toast.makeText(mContext, cw.getName() + " Deleted", Toast.LENGTH_SHORT).show();
+                                db = new WorkoutPlanDatabase(mContext, 1);
+                                workoutPlan.remove(i);
+                                db.deletePlan(cw.getID());
+                                notifyDataSetChanged();
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+        workoutPlanViewHolder.planCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override
@@ -44,12 +94,16 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
         protected TextView planName;
         protected TextView planDay;
         protected TextView total_ex;
+        protected TextView planOption;
+        protected CardView planCard;
 
         public WorkoutPlanViewHolder(@NonNull View itemView) {
             super(itemView);
             planName = itemView.findViewById(R.id.plan_name);
             planDay = itemView.findViewById(R.id.plan_day);
             total_ex = itemView.findViewById(R.id.total_ex);
+            planOption = itemView.findViewById(R.id.plan_options);
+            planCard = itemView.findViewById(R.id.plan_card);
         }
     }
 }

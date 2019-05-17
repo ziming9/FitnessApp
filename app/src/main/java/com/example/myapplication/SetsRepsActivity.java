@@ -36,6 +36,7 @@ public class SetsRepsActivity extends AppCompatActivity {
         weightValue = findViewById(R.id.weight_value);
         repValue = findViewById(R.id.rep_value);
         setSupportActionBar(toolBar);
+        toolBar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
 
         Bundle extras = getIntent().getExtras();
         String excerciseName = extras.getString("exerciseName");

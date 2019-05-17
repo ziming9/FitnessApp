@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Controller.WorkoutPlanDatabase;
+import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
     Intent intent = new Intent();
     EditText planName;
+    WorkoutPlanDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.newplan_activity);
         Toolbar toolbar = findViewById(R.id.toolbar_layout);
         planName = findViewById(R.id.create_plan_name);
+        db = new WorkoutPlanDatabase(this, 1);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("Create Workout Plan");
@@ -82,11 +86,16 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_save:
-                //Toast.makeText(getApplicationContext(),"Thanks for trying out my feature.",Toast.LENGTH_SHORT).show();
-                if (planName == null) {
+                if (planName.length() == 0) {
                     Toast.makeText(getApplicationContext(),"Please enter a name for your plan",Toast.LENGTH_SHORT).show();
                 } else {
-                    intent.putExtra("planName", planName.getText().toString());
+                    String day = intent.getStringExtra("planDay");
+                    CreatedWorkout cw = new CreatedWorkout();
+                    cw.setDay_of_week(day);
+                    cw.setName(planName.getText().toString());
+                    cw.setTotal_workouts(0);
+                    db.addPlan(cw);
+
                     setResult(RESULT_OK, intent);
                     finish();
                 }

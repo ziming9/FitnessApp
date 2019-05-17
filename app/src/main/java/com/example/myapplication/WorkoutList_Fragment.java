@@ -1,20 +1,27 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ActionMode;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +43,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
     MultiSelectAdapter multiSelectAdapter;
     SharedPreferences presetList;
     boolean isMultiSelect = false;
+    Context mContext;
 
     private ArrayList<WorkoutModel> workoutList = new ArrayList<>();
     private ArrayList<WorkoutModel> multiselect_list = new ArrayList<>();
@@ -86,10 +94,10 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             @Override
             public void onItemLongClick(View view, int position) {
                 if(!isMultiSelect) {
-                    Log.d("onItemLongClick", "isMultiSelect: " + isMultiSelect);
+                    //Log.d("onItemLongClick", "isMultiSelect: " + isMultiSelect);
                     multiselect_list = new ArrayList<WorkoutModel>();
                     isMultiSelect = true;
-                    Log.d("onItemLongClick set", "isMultiSelect: " + isMultiSelect);
+                    //og.d("onItemLongClick set", "isMultiSelect: " + isMultiSelect);
                     if (mActionMode == null) {
                         mActionMode = startActionMode(mActionModeCallback);
                     }
@@ -99,17 +107,96 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             }
         }));
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Click action
-                alertDialogHelper.showAlertDialog("","Do you want to add new exercises?",
-                        "ADD","LATER",2,false);
+                LayoutInflater inflater = LayoutInflater.from(view.getContext());
+                View alertLayout = inflater.inflate(R.layout.custom_dialog_layout, null);
+                final EditText newExercise = alertLayout.findViewById(R.id.new_ex_name);
+                final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                alert.setTitle("New Exercise");
+                alert.setView(alertLayout);
+                alert.setCancelable(false);
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String new_exercise = newExercise.getText().toString();
+                        if (new_exercise.length() == 0) {
+                            Toast.makeText(getApplicationContext(), "Please enter a name", Toast.LENGTH_SHORT).show();
+                        } else {
+                            addNewExercise(new_exercise);
+                        }
+                    }
+                });
+                alert.show();
             }
         });
     }
 
+    public void addNewExercise(String exercise) {
+        Bundle extras = getIntent().getExtras();
+        final int selected = extras.getInt("variable");
+        SharedPreferences.Editor fileEdit = presetList.edit();
+        StringBuilder sb = new StringBuilder();
+        String listName, listCheck = null;
+
+        if (selected == 0) {
+            // set current list of exercises to the string builder.
+            sb.append(presetList.getString("shoulderExercises", ""));
+            listName = "shoulderExercises";
+            listCheck = "shoulderCheck";
+        } else if (selected == 1) {
+            sb.append(presetList.getString("chestExercises", ""));
+            listName = "chestExercises";
+            listCheck = "chestCheck";
+        } else if (selected == 2) {
+            sb.append(presetList.getString("bicepExercises", ""));
+            listName = "bicepExercises";
+            listCheck = "bicepCheck";
+        } else if (selected == 3) {
+            sb.append(presetList.getString("tricepExercises", ""));
+            listName = "tricepExercises";
+            listCheck = "tricepCheck";
+        } else if (selected == 4) {
+            sb.append(presetList.getString("backExercises", ""));
+            listName = "backExercises";
+            listCheck = "backCheck";
+        } else if (selected == 5) {
+            sb.append(presetList.getString("legExercises", ""));
+            listName = "legExercises";
+            listCheck = "legCheck";
+        } else if (selected == 6) {
+            sb.append(presetList.getString("absExercises", ""));
+            listName = "absExercises";
+            listCheck = "absCheck";
+        } else {
+            sb.append(presetList.getString("cardioExercises", ""));
+            listName = "cardioExercises";
+            listCheck = "cardioCheck";
+        }
+
+        // append the new exercise onto the string builder.
+        WorkoutModel workout = new WorkoutModel(exercise);
+        sb.append(",").append(workout.getExercise());
+
+        // update shared preferences.
+        fileEdit.putBoolean(listCheck, true);
+        fileEdit.putString(listName, sb.toString());
+        Log.d("SB", sb.toString());
+        fileEdit.apply();
+
+        workoutList.add(workout);
+        multiSelectAdapter.notifyDataSetChanged();
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -133,9 +220,9 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.action_settings:
+            /*case R.id.action_settings:
                 Toast.makeText(getApplicationContext(),"Settings Click",Toast.LENGTH_SHORT).show();
-                return true;
+                return true;*/
             case R.id.action_exit:
                 onBackPressed();
                 return true;
@@ -176,6 +263,7 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         String exerciseAry[];
         StringBuilder sb = new StringBuilder();
         boolean checkEdit;
+        toolBar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
 
         if (selected == 0) {
             getSupportActionBar().setTitle(R.string.shoulder);
@@ -545,9 +633,10 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
             StringBuilder sb = new StringBuilder();
             // set current list of exercises to the string builder.
             sb.append(presetList.getString("shoulderExercises", ""));
-
+            String new_ex = getIntent().getStringExtra("newExercise");
+            Log.d("NEW_EX", new_ex);
             // append the new exercise onto the string builder.
-            WorkoutModel workout = new WorkoutModel("Exercise #"+workoutList.size());
+            WorkoutModel workout = new WorkoutModel(new_ex);
             sb.append(",").append(workout.getExercise());
 
             // update shared preferences.

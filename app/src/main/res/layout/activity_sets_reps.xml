@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".SetsRepsActivity">
+    tools:context=".SetsRepsActivity"
+    android:background="@color/colorAccent">
 
     <include
         android:id="@+id/setsreps_layout"
@@ -17,6 +16,8 @@
     </include>
 
     <TextView
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
@@ -27,7 +28,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorPrimary" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,6 +70,8 @@
 
 
     <TextView
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="50dp"
@@ -77,10 +80,12 @@
         android:text="@string/reps"/>
 
     <View
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:id="@+id/bar"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorPrimary" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -118,13 +123,14 @@
             android:onClick="decreaseRep" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/save_button"
@@ -134,7 +140,8 @@
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:background="@drawable/roundedcorner_green"
-            android:onClick="save"/>
+            android:onClick="save"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/clear_button"
@@ -146,8 +153,9 @@
             android:background="@drawable/roundedcorner_blue"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/save_button"
-            android:onClick="clear"/>
-    </RelativeLayout>
+            android:onClick="clear"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

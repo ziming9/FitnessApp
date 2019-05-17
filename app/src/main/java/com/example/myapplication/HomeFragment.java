@@ -2,23 +2,20 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.Utilities.WorkoutPlanAdapter;
 import com.example.myapplication.View.NewWorkoutActivity;
@@ -30,11 +27,10 @@ import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
     public static int REQUEST_CODE = 1;
-    GridLayout plansGrid;
-    CardView planCards;
     Button profile;
     Button createPlan;
     RecyclerView recList;
+    WorkoutPlanDatabase db;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -55,14 +51,12 @@ public class HomeFragment extends Fragment {
         profile = view.findViewById(R.id.profile_button);
         createPlan = view.findViewById(R.id.plan_button);
         recList = view.findViewById(R.id.planList);
+        db = new WorkoutPlanDatabase(getContext(), 1);
         recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
+        llm.scrollToPositionWithOffset(0,0);
         recList.setLayoutManager(llm);
-
-
-        /*plansGrid = view.findViewById(R.id.plan_grid);
-        planCards = view.findViewById(R.id.plan_card);*/
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +73,13 @@ public class HomeFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
+        if (db.showPlan() != null) {
+            ArrayList<CreatedWorkout> cwList = db.showPlan();
+            WorkoutPlanAdapter wp = new WorkoutPlanAdapter(cwList, getContext());
+            recList.setAdapter(wp);
+        }
+
     }
 
     @Override
@@ -87,22 +88,17 @@ public class HomeFragment extends Fragment {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                String namePlan = data.getStringExtra("planName");
-                String dayPlan = data.getStringExtra("planDay");
-                int total_workouts = 0;
+                if (db.showPlan() != null) {
+                    ArrayList<CreatedWorkout> cwList = db.showPlan();
+                    WorkoutPlanAdapter wp = new WorkoutPlanAdapter(cwList, getContext());
+                    recList.setAdapter(wp);
 
-                WorkoutPlanAdapter wp = new WorkoutPlanAdapter(createWorkouts(namePlan, dayPlan, total_workouts));
-                recList.setAdapter(wp);
+                    for (CreatedWorkout cw: cwList) {
+                        String log = "ID: " + cw.getID() + " Name: " + cw.getName();
+                        Log.d("Plan: ", log);
+                    }
+                }
             }
         }
-    }
-
-    private ArrayList<CreatedWorkout> createWorkouts(String name, String day, int total_workouts) {
-        ArrayList<CreatedWorkout> plans = new ArrayList<>();
-
-        CreatedWorkout cw = new CreatedWorkout(name, day, total_workouts);
-        plans.add(cw);
-
-        return plans;
     }
 }
