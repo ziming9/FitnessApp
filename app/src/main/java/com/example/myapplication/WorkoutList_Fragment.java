@@ -216,16 +216,12 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch (id) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (id == android.R.id.home ) {
+            onBackPressed();
+            return true;
             /*case R.id.action_settings:
                 Toast.makeText(getApplicationContext(),"Settings Click",Toast.LENGTH_SHORT).show();
                 return true;*/
-            case R.id.action_exit:
-                onBackPressed();
-                return true;
         }
 
         return super.onOptionsItemSelected(item);
