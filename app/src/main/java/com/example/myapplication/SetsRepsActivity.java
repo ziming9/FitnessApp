@@ -32,9 +32,18 @@ public class SetsRepsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sets_reps);
 
-        toolBar = findViewById(R.id.setsreps_layout);
+        toolBar = findViewById(R.id.setsreps_toolbar);
         weightValue = findViewById(R.id.weight_value);
+
+
         repValue = findViewById(R.id.rep_value);
+
+        // Set color and default values
+        weightValue.setTextColor(getResources().getColor(R.color.colorWhite));
+        weightValue.setText("0.0");
+        repValue.setTextColor(getResources().getColor(R.color.colorWhite));
+        repValue.setText("0");
+
         setSupportActionBar(toolBar);
         toolBar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
 
@@ -115,7 +124,7 @@ public class SetsRepsActivity extends AppCompatActivity {
 
     public void clear(View view) {
         weightValue.setText("0.0");
-        repValue.setText("0.0");
+        repValue.setText("0");
         weight = 0;
         reps = 0;
     }

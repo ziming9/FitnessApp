@@ -11,8 +11,8 @@
     android:background="@color/colorAccent">
 
     <include
-        android:id="@+id/setsreps_layout"
-        layout="@layout/setsreps_layout">
+        android:id="@+id/setsreps_toolbar"
+        layout="@layout/toolbar_layout">
     </include>
 
     <TextView
@@ -139,7 +139,7 @@
             android:text="Save"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:background="@drawable/roundedcorner_green"
+            android:background="@drawable/roundedcorner_orange"
             android:onClick="save"
             android:layout_weight="1"/>
 
@@ -150,7 +150,7 @@
             android:text="Clear"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:background="@drawable/roundedcorner_blue"
+            android:background="@drawable/roundedcorner_green"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/save_button"
             android:onClick="clear"
