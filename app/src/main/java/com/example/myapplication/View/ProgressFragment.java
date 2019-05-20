@@ -60,42 +60,43 @@ public class ProgressFragment extends Fragment {
 
         // Date one
         Calendar c_one = Calendar.getInstance();
+        c_one.set(2019,4,1);
         // Exercise one
         Exercise ex_one = new Exercise("Barbell Bench",5,8,140,c_one);
 
         // Date two
         Calendar c_two = Calendar.getInstance();
-        c_two.set(2019,5,6);
+        c_two.set(2019,4,6);
         // Exercise two
         Exercise ex_two  = new Exercise("Barbell Bench",5,8,150,c_two);
 
         // Date three
         Calendar c_three = Calendar.getInstance();
-        c_three.set(2019,5,13);
+        c_three.set(2019,4,13);
         // Exercise three
         Exercise ex_three = new Exercise("Barbell Bench",5,8,145,c_three);
 
         // Date four
         Calendar c_four = Calendar.getInstance();
-        c_four.set(2019,5,20);
+        c_four.set(2019,4,20);
         // Exercise four
         Exercise ex_four = new Exercise("Barbell Bench",5,8,155,c_four);
 
         // Date five
         Calendar c_five = Calendar.getInstance();
-        c_five.set(2019,5,27);
+        c_five.set(2019,4,27);
         // Exercise five
         Exercise ex_five = new Exercise("Barbell Bench",5,8,150,c_five);
 
         // Date six
         Calendar c_six = Calendar.getInstance();
-        c_six.set(2019,6,3);
+        c_six.set(2019,5,3);
         // Exercise five
         Exercise ex_six = new Exercise("Barbell Bench",5,8,160,c_six);
 
         // Date seven
         Calendar c_seven = Calendar.getInstance();
-        c_seven.set(2019,6,10);
+        c_seven.set(2019,5,10);
         // Exercise seven
         Exercise ex_seven = new Exercise("Barbell Bench",5,8,170,c_seven);
 
@@ -159,6 +160,7 @@ public class ProgressFragment extends Fragment {
         // Remove gridlines
         //chart.getAxisLeft().setDrawGridLines(false);
         //chart.getXAxis().setDrawGridLines(false);
+        chart.getXAxis().setSpaceMin(0.20f);
         chart.getRendererXAxis().getPaintAxisLabels().setTextAlign(Paint.Align.LEFT);
 
         // Set only one y-axis
@@ -191,7 +193,7 @@ public class ProgressFragment extends Fragment {
         // Line color format
         dataSet.setColor(Color.parseColor("#e94984"));
         dataSet.setCircleColor(Color.parseColor("#e94984"));
-        dataSet.setValueTextColor(Color.parseColor("#00285e"));
+        dataSet.setValueTextColor(Color.parseColor("#000000"));
         dataSet.setLineWidth(2);
         dataSet.setValueTextSize(12);
         dataSet.setDrawFilled(true);
