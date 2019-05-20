@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.View;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,8 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.myapplication.View.ProfileActivity;
-import com.example.myapplication.View.ProgressFragment;
+import com.example.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;

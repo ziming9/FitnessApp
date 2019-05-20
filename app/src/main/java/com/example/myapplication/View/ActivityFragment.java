@@ -1,17 +1,17 @@
-package com.example.myapplication;
+package com.example.myapplication.View;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
-import android.widget.Toast;
+
+import com.example.myapplication.R;
 
 public class ActivityFragment extends Fragment {
     GridLayout mainGrid;

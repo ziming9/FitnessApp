@@ -17,15 +17,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".View.PlanExercisesActivity"></activity>
         <activity android:name=".View.ProfileActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WorkoutList_Fragment" />
-        <activity android:name=".SetsRepsActivity" />
+        <activity android:name=".View.WorkoutList_Fragment" />
+        <activity android:name=".View.SetsRepsActivity" />
         <activity android:name=".View.NewWorkoutActivity" />
     </application>
 
