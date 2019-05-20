@@ -7,10 +7,44 @@
     tools:context=".View.PlanExercisesActivity"
     android:orientation="vertical">
 
-    <ListView
+    <FrameLayout
+        android:id="@+id/add_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    </FrameLayout>
 
-    </ListView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/planList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/addex_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Exercise"
+            android:textColor="@color/colorWhite"
+            android:background="@color/orange"
+            android:layout_marginBottom="5dp"
+            android:onClick="add_Exercise"/>
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/colorWhite"
+            android:background="@color/blue"
+            android:onClick="goBack"
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>

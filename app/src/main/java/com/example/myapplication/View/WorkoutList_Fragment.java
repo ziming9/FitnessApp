@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WorkoutList_Fragment extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener {
-    //private static int REQUEST_CODE = 0;
 
     ActionMode mActionMode;
     Menu context_menu;
@@ -219,9 +218,6 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         if (id == android.R.id.home ) {
             onBackPressed();
             return true;
-            /*case R.id.action_settings:
-                Toast.makeText(getApplicationContext(),"Settings Click",Toast.LENGTH_SHORT).show();
-                return true;*/
         }
 
         return super.onOptionsItemSelected(item);

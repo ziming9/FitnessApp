@@ -15,7 +15,6 @@ import com.example.myapplication.R;
 
 public class ActivityFragment extends Fragment {
     GridLayout mainGrid;
-    //FloatingActionButton fab;
 
     public static ActivityFragment newInstance() {
         return new ActivityFragment();

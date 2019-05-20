@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/profile_layout"
+<ScrollView android:id="@+id/profile_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent">
@@ -54,11 +51,12 @@
                     android:layout_marginTop="340dp"
                     android:ems="10"
                     android:hint="Enter Name Here"
+                    android:textColorHint="#FFFFFF"
                     android:focusable="true"
                     android:cursorVisible="false"
                     android:inputType="textPersonName"
                     android:maxLength="20"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
                 <TextView
@@ -91,11 +89,12 @@
                     android:cursorVisible="false"
                     android:layout_marginLeft="110dp"
                     android:layout_marginTop="380dp"
+                    android:textColorHint="#FFFFFF"
                     android:ems="10"
                     android:hint="Ft"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
                 <TextView
                     android:id="@+id/heightFtUnit"
@@ -105,7 +104,7 @@
                     android:layout_marginTop="380dp"
                     android:text="''"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
 
@@ -118,10 +117,11 @@
                     android:layout_marginLeft="140dp"
                     android:layout_marginTop="380dp"
                     android:ems="10"
+                    android:textColorHint="#FFFFFF"
                     android:hint="in"
                     android:inputType="number"
                     android:maxLength="2"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
                 <TextView
@@ -132,7 +132,7 @@
                     android:layout_marginTop="380dp"
                     android:text="'"
                     android:textSize="20dp"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
 
@@ -157,9 +157,10 @@
                     android:layout_marginTop="420dp"
                     android:ems="10"
                     android:hint="age"
+                    android:textColorHint="#FFFFFF"
                     android:inputType="number"
                     android:maxLength="3"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
 
@@ -193,7 +194,7 @@
                     android:maxLength="6"
                     android:text=""
                     android:textSize="18dp"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
 
@@ -230,10 +231,11 @@
                     android:layout_marginTop="500dp"
                     android:ems="10"
                     android:gravity="center"
+                    android:textColorHint="#FFFFFF"
                     android:hint="lb"
                     android:inputType="number"
                     android:maxLength="3"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
                 <TextView
@@ -257,10 +259,11 @@
                     android:layout_marginTop="500dp"
                     android:ems="10"
                     android:hint="lb"
+                    android:textColorHint="#FFFFFF"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="3"
-                    android:textColor="#000000"
+                    android:textColor="#FFFFFF"
                     />
 
             </RelativeLayout>
