@@ -13,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,19 +20,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Model.WorkoutModel;
 import com.example.myapplication.Utilities.AlertDialogHelper;
+import com.example.myapplication.Utilities.MultiSelectAdapter;
 import com.example.myapplication.Utilities.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WorkoutList_Fragment extends AppCompatActivity implements AlertDialogHelper.AlertDialogListener {
-    //private static int REQUEST_CODE = 0;
 
     ActionMode mActionMode;
     Menu context_menu;
@@ -219,9 +217,6 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         if (id == android.R.id.home ) {
             onBackPressed();
             return true;
-            /*case R.id.action_settings:
-                Toast.makeText(getApplicationContext(),"Settings Click",Toast.LENGTH_SHORT).show();
-                return true;*/
         }
 
         return super.onOptionsItemSelected(item);

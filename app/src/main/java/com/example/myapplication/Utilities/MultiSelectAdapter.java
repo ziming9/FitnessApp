@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Utilities;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.Model.WorkoutModel;
+import com.example.myapplication.R;
 
 import java.util.ArrayList;
 

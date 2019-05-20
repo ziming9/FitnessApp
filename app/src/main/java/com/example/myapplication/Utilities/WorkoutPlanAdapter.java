@@ -1,9 +1,12 @@
 package com.example.myapplication.Utilities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.R;
+import com.example.myapplication.View.PlanExercisesActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -44,8 +48,7 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
         final CreatedWorkout cw = workoutPlan.get(i);
         int[] card_colors = workoutPlanViewHolder.itemView.getResources().getIntArray(R.array.card_colors);
         int rand_card_colors = card_colors[new Random().nextInt(card_colors.length)];
-        //Random rnd = new Random();
-        //int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
         workoutPlanViewHolder.planCard.setBackgroundColor(rand_card_colors);
         workoutPlanViewHolder.planName.setText(cw.getName());
         workoutPlanViewHolder.planDay.setText(cw.getDay_of_week());
@@ -78,7 +81,12 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
         workoutPlanViewHolder.planCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Opens up list of exercises
+                Toast.makeText(mContext, "Opening " + cw.getName() + " ....", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, PlanExercisesActivity.class);
+                intent.putExtra("plan", String.valueOf(cw.getID()));
+                intent.putExtra("plan_selected", true);
+                mContext.startActivity(intent);
             }
         });
 

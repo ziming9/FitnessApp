@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Controller.WorkoutPlanDatabase;
+
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
@@ -26,6 +29,8 @@ public class SetsRepsActivity extends AppCompatActivity {
     EditText weightValue, repValue;
     String value;
     int finalValue;
+    SharedPreferences sh;
+    WorkoutPlanDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +51,15 @@ public class SetsRepsActivity extends AppCompatActivity {
 
         setSupportActionBar(toolBar);
         toolBar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+        sh = getSharedPreferences("workoutList", MODE_PRIVATE);
+        db = new WorkoutPlanDatabase(this, 1);
 
         Bundle extras = getIntent().getExtras();
-        String excerciseName = extras.getString("exerciseName");
+        String exerciseName = extras.getString("exerciseName");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            getSupportActionBar().setTitle(excerciseName);
+            getSupportActionBar().setTitle(exerciseName);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -130,10 +137,21 @@ public class SetsRepsActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
+        SharedPreferences.Editor edit = sh.edit();
+        Bundle extras = getIntent().getExtras();
+        String exerciseName = extras.getString("exerciseName");
+        edit.putString("savedExercise", exerciseName);
+        edit.apply();
+        String plan = sh.getString("plan_selected", null);
+
+        db.addExercise(Integer.parseInt(plan), exerciseName);
+
         if (weight == 0 || reps == 0) {
             Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
             return;
         }
+
+
 
         /*
         TextView index = findViewById(R.id.index);

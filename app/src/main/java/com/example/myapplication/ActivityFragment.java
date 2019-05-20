@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 public class ActivityFragment extends Fragment {
     GridLayout mainGrid;
-    //FloatingActionButton fab;
 
     public static ActivityFragment newInstance() {
         return new ActivityFragment();
