@@ -77,6 +77,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //ArrayList<CreatedWorkout> cwList = db.showPlan();
         if (db.showPlan() != null) {
             ArrayList<CreatedWorkout> cwList = db.showPlan();
             WorkoutPlanAdapter wp = new WorkoutPlanAdapter(cwList, getContext());

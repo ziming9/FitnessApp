@@ -3,6 +3,7 @@ package com.example.myapplication.Controller;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -106,24 +107,28 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     public ArrayList<CreatedWorkout> showPlan() {
         ArrayList<CreatedWorkout> cwList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_TABLE + " ORDER BY CASE "
-                + "WHEN COL_DAY = 'Sunday' THEN 1 "
-                + "WHEN COL_DAY = 'Monday' THEN 2 "
-                + "WHEN COL_DAY = 'Tuesday' THEN 3 "
-                + "WHEN COL_DAY = 'Wednesday' THEN 4 "
-                + "WHEN COL_DAY = 'Thursday' THEN 5 "
-                + "WHEN COL_DAY = 'Friday' THEN 6 "
-                + "WHEN COL_DAY = 'Saturday' THEN 7 "
-                + "END ASC", null );
-        if (cursor.moveToFirst()) {
-            do {
-                CreatedWorkout cw = new CreatedWorkout();
-                cw.setID(Integer.parseInt(cursor.getString(0)));
-                cw.setDay_of_week(cursor.getString(1));
-                cw.setName(cursor.getString(2));
-                cw.setTotal_workouts(Integer.parseInt(cursor.getString(3)));
-                cwList.add(cw);
-            } while (cursor.moveToNext());
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_TABLE + " ORDER BY CASE "
+                    + "WHEN COL_DAY = 'Sunday' THEN 1 "
+                    + "WHEN COL_DAY = 'Monday' THEN 2 "
+                    + "WHEN COL_DAY = 'Tuesday' THEN 3 "
+                    + "WHEN COL_DAY = 'Wednesday' THEN 4 "
+                    + "WHEN COL_DAY = 'Thursday' THEN 5 "
+                    + "WHEN COL_DAY = 'Friday' THEN 6 "
+                    + "WHEN COL_DAY = 'Saturday' THEN 7 "
+                    + "END ASC", null );
+            if (cursor.moveToFirst()) {
+                do {
+                    CreatedWorkout cw = new CreatedWorkout();
+                    cw.setID(Integer.parseInt(cursor.getString(0)));
+                    cw.setDay_of_week(cursor.getString(1));
+                    cw.setName(cursor.getString(2));
+                    cw.setTotal_workouts(Integer.parseInt(cursor.getString(3)));
+                    cwList.add(cw);
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLException e) {
+            cwList = null;
         }
 
         db.close();

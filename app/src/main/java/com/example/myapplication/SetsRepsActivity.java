@@ -144,7 +144,7 @@ public class SetsRepsActivity extends AppCompatActivity {
         edit.apply();
         String plan = sh.getString("plan_selected", null);
 
-        db.addExercise(Integer.parseInt(plan), exerciseName);
+        //db.addExercise(Integer.parseInt(plan), exerciseName);
 
         if (weight == 0 || reps == 0) {
             Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
