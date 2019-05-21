@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.View;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +22,8 @@ import android.widget.Button;
 
 
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.myapplication.R;
 
 import static android.app.Activity.RESULT_OK;
 

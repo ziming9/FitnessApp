@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.View;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Model.WorkoutModel;
+import com.example.myapplication.R;
 import com.example.myapplication.Utilities.AlertDialogHelper;
 import com.example.myapplication.Utilities.MultiSelectAdapter;
 import com.example.myapplication.Utilities.RecyclerItemClickListener;

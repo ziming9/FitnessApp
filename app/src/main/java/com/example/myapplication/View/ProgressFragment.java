@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,11 +96,6 @@ public class ProgressFragment extends Fragment {
         // Exercise five
         Exercise ex_six = new Exercise("Barbell Bench",5,8,160,c_six);
 
-        // Date seven
-        Calendar c_seven = Calendar.getInstance();
-        c_seven.set(2019,5,10);
-        // Exercise seven
-        Exercise ex_seven = new Exercise("Barbell Bench",5,8,170,c_seven);
 
         // Create list of exercise objects for Entry List input
         ArrayList<Exercise> exercises = new ArrayList<>();
@@ -108,7 +105,6 @@ public class ProgressFragment extends Fragment {
         exercises.add(ex_four);
         exercises.add(ex_five);
         exercises.add(ex_six);
-     //   exercises.add(ex_seven);
 
 
         // Entry lists created from exercise list
@@ -122,48 +118,56 @@ public class ProgressFragment extends Fragment {
         }
 
         // Add entries to a dataset
-        LineDataSet dataSet = new LineDataSet(entries, "Weight");
+        LineDataSet dataSet = new LineDataSet(entries, "Weight (lbs)");
 
         // Create Strings array to format x-axis with date values
 
-        String [] dates = new String[exercises.size()];
+        ArrayList<String> dates= new ArrayList<String>();
         for(int i = 0; i < exercises.size(); i++) {
-            dates[i] = exercises.get(i).getDate(getContext());
+            dates.add(i,exercises.get(i).getDate(getContext()));
         }
 
         // X-axis formatter class
         class MyXAxisValueFormatter implements IAxisValueFormatter {
 
-            private String[] mValues;
+            private ArrayList<String> mValues;
 
-            public MyXAxisValueFormatter(String[] values) {
+            public MyXAxisValueFormatter(ArrayList<String> values) {
                 this.mValues = values;
             }
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 // "value" represents the position of the label on the axis (x or y)
-                return mValues[(int) value];
+                String stringValue;
+                if ( value >= 0 && value <= mValues.size()) {
+                    Log.d("X_AXIS","VALUE: " + value + "Index value: "+ mValues.get((int)value -1));
+                    stringValue = mValues.get((int) value - 1);
+
+                }else {
+                    stringValue = "";
+                }
+                return stringValue;
             }
         }
 
         // Axis formatting
-        // Set dates string to x-axis of chart
+        // X-axis
         XAxis x_axis = chart.getXAxis();
         x_axis.setValueFormatter(new MyXAxisValueFormatter(dates));
-        x_axis.setTextSize(11);
-       // x_axis.setLabelRotationAngle(-60f);
+        x_axis.setTextSize(12);
+        x_axis.setGranularity(1f);
+
         // Set x-axis to bottom
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         //chart.getXAxis().setCenterAxisLabels(true);
         //x_axis.setCenterAxisLabels(true);
-        // Remove gridlines
-        //chart.getAxisLeft().setDrawGridLines(false);
-        //chart.getXAxis().setDrawGridLines(false);
-        chart.getXAxis().setSpaceMin(0.20f);
-        chart.getRendererXAxis().getPaintAxisLabels().setTextAlign(Paint.Align.LEFT);
+        chart.getXAxis().setSpaceMin(0.15f);
+        chart.getXAxis().setAvoidFirstLastClipping(true);
 
-        // Set only one y-axis
+        //chart.getRendererXAxis().getPaintAxisLabels().setTextAlign(Paint.Align.LEFT);
+
+        // Y-axis
         YAxis rightYAxis = chart.getAxisRight();
         YAxis leftYAxis = chart.getAxisLeft();
         leftYAxis.setTextSize(13);
@@ -171,6 +175,7 @@ public class ProgressFragment extends Fragment {
         rightYAxis.setEnabled(false);
         leftYAxis.setSpaceTop(10);
         leftYAxis.setSpaceBottom(5);
+
 
         // Data Point formatting
          class MyValueFormatter implements IValueFormatter {
@@ -198,7 +203,6 @@ public class ProgressFragment extends Fragment {
         dataSet.setValueTextSize(12);
         dataSet.setDrawFilled(true);
 
-
         dataSet.setCircleRadius(5);
         Drawable fill_color = ContextCompat.getDrawable(getContext(), R.drawable.chart_fill);
         dataSet.setFillDrawable(fill_color);
@@ -213,17 +217,15 @@ public class ProgressFragment extends Fragment {
         // chart size
         chart.setMinimumHeight(1000);
         // Animate x-axis
-        chart.animateX(3000);
+        chart.animateX(2500);
 //        chart.getXAxis().setAxisMinimum(0);
 //        chart.getXAxis().setAxisMaximum((float) exercises.size());
-                // chart legend
+        // chart legend
         Legend l = chart.getLegend();
         l.setFormSize(10f); // set the size of the legend forms/shapes
         l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         l.setTextSize(13f);
-        l.setXEntrySpace(25f); // set the space between the legend entries on the x-axis
-        l.setYEntrySpace(15f);
         chart.invalidate();
     }
 
