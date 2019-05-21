@@ -178,6 +178,7 @@ public class ProfileActivity extends AppCompatActivity {
             imageURI = data.getData();
             imageViewProfile.setImageURI(imageURI);
         }
+
     }
 
     @Override
