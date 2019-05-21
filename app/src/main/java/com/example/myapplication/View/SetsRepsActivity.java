@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.View;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
+import com.example.myapplication.Model.CreatedWorkout;
+import com.example.myapplication.Model.Exercise;
+import com.example.myapplication.R;
 
 import org.w3c.dom.Text;
 
@@ -137,38 +140,39 @@ public class SetsRepsActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
+        boolean addProcess;
         SharedPreferences.Editor edit = sh.edit();
         Bundle extras = getIntent().getExtras();
         String exerciseName = extras.getString("exerciseName");
         edit.putString("savedExercise", exerciseName);
         edit.apply();
-        String plan = sh.getString("plan_selected", null);
-
-        //db.addExercise(Integer.parseInt(plan), exerciseName);
+        String plan = sh.getString("plan", null);
+        float repMax = (float) (weight * (1 + reps / 30));
+        Exercise newExercise = new Exercise(exerciseName, reps, weight, repMax);
+        addProcess = db.addExercise(Integer.parseInt(plan), exerciseName, newExercise);
 
         if (weight == 0 || reps == 0) {
             Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
-
-        /*
-        TextView index = findViewById(R.id.index);
-        TextView weights = findViewById(R.id.weights);
-        TextView reps = findViewById(R.id.reps);
-
-        index.setText("" +index);
-        index.setText("" + weights);
-        index.setText("" + reps);
-        */
+        if (addProcess != false) {
+            Intent intent = new Intent(this, PlanExercisesActivity.class);
+            startActivity(intent);
+        }
 
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                String plan = sh.getString("plan", null);
+                if (plan != null) {
+                    Intent intent = new Intent(this, PlanExercisesActivity.class);
+                    startActivity(intent);
+                } else {
+                    finish();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

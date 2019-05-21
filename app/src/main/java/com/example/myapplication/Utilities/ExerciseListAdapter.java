@@ -1,0 +1,59 @@
+package com.example.myapplication.Utilities;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.myapplication.Model.CreatedWorkout;
+import com.example.myapplication.Model.Exercise;
+import com.example.myapplication.Model.WorkoutModel;
+import com.example.myapplication.R;
+
+import java.util.ArrayList;
+
+public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.MyViewHolder> {
+    Context mContext;
+    private ArrayList<Exercise> exerciseList;
+    private ArrayList<Exercise> selectedList;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public LinearLayout ll_listitem;
+        public TextView exercise;
+
+        public MyViewHolder(View view) {
+            super(view);
+            exercise = view.findViewById(R.id.wl_exercise);
+            ll_listitem = view.findViewById(R.id.ll_listitem);
+
+        }
+    }
+
+    public ExerciseListAdapter(Context context, ArrayList<Exercise> exerciseList, ArrayList<Exercise> selectedList) {
+        this.mContext=context;
+        this.exerciseList = exerciseList;
+        this.selectedList = selectedList;
+    }
+
+    @NonNull
+    @Override
+    public ExerciseListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.workoutlist_item, viewGroup, false);
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ExerciseListAdapter.MyViewHolder myViewHolder, int i) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+}

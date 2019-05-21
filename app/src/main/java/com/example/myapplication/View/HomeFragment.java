@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.View;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.widget.Button;
 
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
+import com.example.myapplication.R;
 import com.example.myapplication.Utilities.WorkoutPlanAdapter;
 import com.example.myapplication.View.NewWorkoutActivity;
 import com.example.myapplication.View.ProfileActivity;
@@ -77,7 +78,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //ArrayList<CreatedWorkout> cwList = db.showPlan();
         if (db.showPlan() != null) {
             ArrayList<CreatedWorkout> cwList = db.showPlan();
             WorkoutPlanAdapter wp = new WorkoutPlanAdapter(cwList, getContext());

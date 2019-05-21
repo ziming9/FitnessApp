@@ -14,15 +14,15 @@ public class Exercise {
     private String ex_name;
     // Muscle group
     private String type;
-    private Integer sets;
-    private Integer reps;
-    private Integer weight;
-    private Integer max;
+    private int sets;
+    private int reps;
+    private double weight;
+    private float max;
     // Date completed
     private Calendar date;
 
     // Constructor
-    public Exercise(String name, int sets, int reps, int weight,Calendar date) {
+    public Exercise(String name, int sets, int reps, int weight, Calendar date) {
         this.ex_name = name;
         this.sets = sets;
         this.reps = reps;
@@ -30,9 +30,20 @@ public class Exercise {
         this.date = date;
     }
 
+    public Exercise(String name, int reps, double weight, float repmax) {
+        this.ex_name = name;
+        this.reps = reps;
+        this.weight = weight;
+        this.max = repmax;
+    }
+
+    public Exercise() {
+
+    }
+
     // One Rep Max
-    public int OneRepMax(int reps, int weight){
-        return  weight * (1 + reps / 30);
+    public float OneRepMax(int reps, double weight){
+        return  (float) weight * (1 + reps / 30);
     }
 
     // Getter and setter methods
@@ -60,7 +71,7 @@ public class Exercise {
         this.reps = reps;
     }
 
-    public Integer getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -68,7 +79,7 @@ public class Exercise {
         this.weight = weight;
     }
 
-    public Integer getMax() {
+    public Float getMax() {
         return OneRepMax(reps,weight);
     }
 

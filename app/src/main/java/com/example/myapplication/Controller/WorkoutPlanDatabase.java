@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.myapplication.Model.CreatedWorkout;
+import com.example.myapplication.Model.Exercise;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,8 +70,8 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
 
         String CREATE_EXERCISE_LOG_TABLE = "CREATE TABLE " + EXERCISE_LOG_TABLE + " ("
                 + COL_EX_ID + " INTEGER PRIMARY KEY,"
-                + COL_WEIGHT + " FLOAT,"
                 + COL_REPS + " INTEGER,"
+                + COL_WEIGHT + " FLOAT,"
                 + COL_REPMAX + " FLOAT,"
                 + COL_DATE + " DATETIME )";
 
@@ -99,7 +100,6 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         values.put(COL_NAME, createdWorkout.getName());
         values.put(COL_TOTAL_EX, createdWorkout.getTotal_workouts());
 
-        Log.d("ID", ""+createdWorkout.getID());
         db.insert(DATABASE_TABLE, null, values);
         db.close();
     }
@@ -107,66 +107,62 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     public ArrayList<CreatedWorkout> showPlan() {
         ArrayList<CreatedWorkout> cwList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        try {
-            Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_TABLE + " ORDER BY CASE "
-                    + "WHEN COL_DAY = 'Sunday' THEN 1 "
-                    + "WHEN COL_DAY = 'Monday' THEN 2 "
-                    + "WHEN COL_DAY = 'Tuesday' THEN 3 "
-                    + "WHEN COL_DAY = 'Wednesday' THEN 4 "
-                    + "WHEN COL_DAY = 'Thursday' THEN 5 "
-                    + "WHEN COL_DAY = 'Friday' THEN 6 "
-                    + "WHEN COL_DAY = 'Saturday' THEN 7 "
-                    + "END ASC", null );
-            if (cursor.moveToFirst()) {
-                do {
-                    CreatedWorkout cw = new CreatedWorkout();
-                    cw.setID(Integer.parseInt(cursor.getString(0)));
-                    cw.setDay_of_week(cursor.getString(1));
-                    cw.setName(cursor.getString(2));
-                    cw.setTotal_workouts(Integer.parseInt(cursor.getString(3)));
-                    cwList.add(cw);
-                } while (cursor.moveToNext());
-            }
-        } catch (SQLException e) {
-            cwList = null;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_TABLE + " ORDER BY CASE "
+                + "WHEN " + COL_DAY + " = 'Sunday' THEN 1 "
+                + "WHEN " + COL_DAY + " = 'Monday' THEN 2 "
+                + "WHEN " + COL_DAY + " = 'Tuesday' THEN 3 "
+                + "WHEN " + COL_DAY + " = 'Wednesday' THEN 4 "
+                + "WHEN " + COL_DAY + " = 'Thursday' THEN 5 "
+                + "WHEN " + COL_DAY + " = 'Friday' THEN 6 "
+                + "WHEN " + COL_DAY + " = 'Saturday' THEN 7 "
+                + "END ASC", null );
+        if (cursor.moveToFirst()) {
+            do {
+                CreatedWorkout cw = new CreatedWorkout();
+                cw.setID(Integer.parseInt(cursor.getString(0)));
+                cw.setDay_of_week(cursor.getString(1));
+                cw.setName(cursor.getString(2));
+                cw.setTotal_workouts(Integer.parseInt(cursor.getString(3)));
+                cwList.add(cw);
+            } while (cursor.moveToNext());
         }
-
         db.close();
         return cwList;
     }
 
     public void deletePlan(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DATABASE_TABLE, "COL_ID =" + id, null);
+        db.delete(DATABASE_TABLE, COL_ID + " = " + id, null);
         db.close();
     }
 
-    /*public void createExerciseTable() {
-        ArrayList<CreatedWorkout> cwList = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor =  db.rawQuery("SELECT * FROM " + DATABASE_TABLE, null);
-        if (cursor.moveToFirst()) {
-            do {
-                CreatedWorkout cw = new CreatedWorkout();
-                cw.setID(Integer.parseInt(cursor.getString(0)));
-                cwList.add(cw);
-            } while (cursor.moveToNext());
-        }
-
-        *//*for(CreatedWorkout cw:cwList) {
-            String TABLE_NAME = String.valueOf(cw.getID());
-            String CREATE_INNER_PLAN = "CREATE TABLE " + TABLE_NAME + " ("
-                    + COL_EX_NAME + " STRING )";
-            db.execSQL(CREATE_INNER_PLAN);
-        }*//*
-    }*/
-
-    public void addExercise(int id, String exercise) {
+    public boolean addExercise(int id, String exercise, Exercise ex) {
+        boolean addProcess = false;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_ID, id);
         values.put(COL_EX_NAME, exercise);
-        db.insert(EXERCISE_TABLE, null, values);
+        try {
+            long ex_id = db.insert(EXERCISE_TABLE, null, values);
+            addExerciseLog(ex, ex_id);
+            addProcess = true;
+        } catch (SQLException e) {
+            //do nothing
+        }
+        db.close();
+        return addProcess;
+    }
+
+    public void addExerciseLog(Exercise exercise, long ex_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_EX_ID, ex_id);
+        values.put(COL_REPS, exercise.getReps());
+        values.put(COL_WEIGHT, exercise.getWeight());
+        values.put(COL_REPMAX, exercise.getMax());
+        values.put(COL_DATE, getDateTime());
+
+        db.insert(EXERCISE_LOG_TABLE, null, values);
         db.close();
     }
 
@@ -175,5 +171,13 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    public ArrayList<Exercise> showExercises() {
+        ArrayList<Exercise> exList = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return exList;
+
     }
 }
