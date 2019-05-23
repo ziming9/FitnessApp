@@ -83,6 +83,9 @@ public class Exercise {
         return OneRepMax(reps,weight);
     }
 
+    public void setMax(Float max) {
+        this.max = max;
+    }
     // Returns date as String "dd/mm/yy"
     public String getDate(Context context) {
         DateFormat df = android.text.format.DateFormat.getDateFormat(context);

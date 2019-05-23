@@ -9,14 +9,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.Exercise;
-import com.example.myapplication.Model.WorkoutModel;
 import com.example.myapplication.R;
 import com.example.myapplication.Utilities.ExerciseListAdapter;
-import com.example.myapplication.Utilities.MultiSelectAdapter;
+import com.example.myapplication.Utilities.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -43,12 +46,30 @@ public class PlanExercisesActivity extends FragmentActivity {
         edit.putString("plan", plan);
         edit.apply();
 
-        exerciseListAdapter = new ExerciseListAdapter(this, exereciseList, multiselect_list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(exerciseListAdapter);
+        if(plan != null) {
+            exereciseList = db.showExercises(Integer.valueOf(plan));
+            exerciseListAdapter = new ExerciseListAdapter(this, exereciseList, multiselect_list);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(exerciseListAdapter);
 
+            recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView,new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    String exerciseName =
+                            ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.wl_exercise)).getText().toString();
+                    Log.d("exerciseName", exerciseName);
+                    // inflate exerciseinfolist_item xml
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position) {
+
+                }
+            }));
+        }
 
     }
 

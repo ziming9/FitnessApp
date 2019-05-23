@@ -149,7 +149,7 @@ public class SetsRepsActivity extends AppCompatActivity {
         String plan = sh.getString("plan", null);
         float repMax = (float) (weight * (1 + reps / 30));
         Exercise newExercise = new Exercise(exerciseName, reps, weight, repMax);
-        addProcess = db.addExercise(Integer.parseInt(plan), exerciseName, newExercise);
+        addProcess = db.addExercise(Integer.valueOf(plan), exerciseName, newExercise);
 
         if (weight == 0 || reps == 0) {
             Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
@@ -157,8 +157,9 @@ public class SetsRepsActivity extends AppCompatActivity {
         }
 
         if (addProcess != false) {
-            Intent intent = new Intent(this, PlanExercisesActivity.class);
-            startActivity(intent);
+            finish();
+            /*Intent intent = new Intent(this, PlanExercisesActivity.class);
+            startActivity(intent);*/
         }
 
     }
@@ -169,6 +170,7 @@ public class SetsRepsActivity extends AppCompatActivity {
                 String plan = sh.getString("plan", null);
                 if (plan != null) {
                     Intent intent = new Intent(this, PlanExercisesActivity.class);
+                    intent.putExtra("plan", plan);
                     startActivity(intent);
                 } else {
                     finish();

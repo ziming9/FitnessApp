@@ -173,11 +173,48 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         return dateFormat.format(date);
     }
 
-    public ArrayList<Exercise> showExercises() {
+    public ArrayList<Exercise> showExercises(int plan) {
         ArrayList<Exercise> exList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        return exList;
+        Cursor cursor = db.rawQuery("SELECT et. " + COL_EX_NAME + " FROM " + DATABASE_TABLE + " wt, "
+                + EXERCISE_TABLE + " et "
+                + "WHERE wt." + COL_ID + " = et." + COL_ID
+                + " AND wt." + COL_ID + " = " + plan, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Exercise ex = new Exercise();
+                ex.setEx_name(cursor.getString(0));
+                exList.add(ex);
+            } while (cursor.moveToNext());
+        }
 
+        db.close();
+        return exList;
+    }
+
+    public ArrayList<Exercise> showExerciseLog(int plan, String exercise) {
+        ArrayList<Exercise> exLogList = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + " elt." + COL_REPS + " elt." + COL_REPMAX
+                + " FROM " + DATABASE_TABLE + " wt, "
+                + EXERCISE_TABLE + " et, " + EXERCISE_LOG_TABLE + " elt "
+                + "WHERE wt." + COL_ID + " = et." + COL_ID
+                + " AND et." + COL_EX_ID + " = elt." + COL_EX_ID
+                + " AND wt." + COL_ID + " = " + plan
+                + " AND et." + COL_EX_NAME + " LIKE '" + exercise + "'", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Exercise ex = new Exercise();
+                ex.setWeight((int) cursor.getFloat(0));
+                ex.setReps(cursor.getInt(1));
+                ex.setMax(cursor.getFloat(2));
+                exLogList.add(ex);
+            } while (cursor.moveToNext());
+        }
+
+        return exLogList;
     }
 }
