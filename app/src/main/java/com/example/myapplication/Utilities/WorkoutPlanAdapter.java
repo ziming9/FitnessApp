@@ -82,7 +82,7 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
             @Override
             public void onClick(View v) {
                 //Opens up list of exercises
-                Toast.makeText(mContext, "Opening " + cw.getName() + " ....", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "Opening " + cw.getName() + " ....", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, PlanExercisesActivity.class);
                 intent.putExtra("plan", String.valueOf(cw.getID()));
                 intent.putExtra("plan_selected", true);
