@@ -158,8 +158,8 @@ public class SetsRepsActivity extends AppCompatActivity {
 
         if (addProcess != false) {
             finish();
-            /*Intent intent = new Intent(this, PlanExercisesActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(this, PlanExercisesActivity.class);
+            startActivity(intent);
         }
 
     }

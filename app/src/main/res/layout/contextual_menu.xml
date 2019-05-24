@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/exercise_layout"
-        layout="@layout/exercise_layout">
+        layout="@layout/exercise_toolbar_layout">
     </include>
 
     <android.support.v7.widget.RecyclerView

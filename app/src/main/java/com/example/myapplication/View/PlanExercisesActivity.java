@@ -40,9 +40,9 @@ public class PlanExercisesActivity extends FragmentActivity {
         recyclerView = findViewById(R.id.planList);
         db = new WorkoutPlanDatabase(this, 1);
         presetPlan = getSharedPreferences("workoutList", MODE_PRIVATE);
-        SharedPreferences.Editor edit = presetPlan.edit();
+        final SharedPreferences.Editor edit = presetPlan.edit();
 
-        String plan = getIntent().getStringExtra("plan");
+        final String plan = getIntent().getStringExtra("plan");
         edit.putString("plan", plan);
         edit.apply();
 
@@ -60,8 +60,16 @@ public class PlanExercisesActivity extends FragmentActivity {
                 public void onItemClick(View view, int position) {
                     String exerciseName =
                             ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.wl_exercise)).getText().toString();
+                    Intent intent = new Intent(getApplicationContext(), ExerciseLogActivity.class);
+                    intent.putExtra("exerciseName", exerciseName);
+                    intent.putExtra("plan", plan);
                     Log.d("exerciseName", exerciseName);
                     // inflate exerciseinfolist_item xml
+                    ArrayList<Exercise> exList = db.showExerciseLog(Integer.valueOf(plan), exerciseName);
+                    for(Exercise s: exList) {
+                        Log.d("Exercise: ", exerciseName + " Weight: " + s.getWeight() + " Reps: " + s.getReps() + " RepMax: " + s.getMax());
+                    }
+                    startActivity(intent);
                 }
 
                 @Override

@@ -53,7 +53,7 @@ public class CreatedWorkout {
     }
 
     public void setTotal_workouts(int total) {
-        this.total_workouts = total_workouts;
+        this.total_workouts = total;
     }
 
 }

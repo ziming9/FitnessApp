@@ -15,7 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_barbell"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.PlanExercisesActivity"></activity>
+        <activity
+            android:name=".View.ExerciseLogActivity"
+            android:label="@string/title_activity_exercise_log"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".View.PlanExercisesActivity" />
         <activity android:name=".View.ProfileActivity" />
         <activity android:name=".View.MainActivity">
             <intent-filter>

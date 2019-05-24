@@ -35,6 +35,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     static String COL_EX_ID = "exercise_id";
     static String COL_EX_NAME = "exercise_name";
 
+    static String COL_EX_LOG_ID = "exercise_log_id";
     static String COL_WEIGHT = "weight";
     static String COL_REPS = "reps";
     static String COL_REPMAX = "onerep_max";
@@ -69,7 +70,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 + COL_EX_NAME + " STRING )";
 
         String CREATE_EXERCISE_LOG_TABLE = "CREATE TABLE " + EXERCISE_LOG_TABLE + " ("
-                + COL_EX_ID + " INTEGER PRIMARY KEY,"
+                + COL_EX_ID + " INTEGER,"
                 + COL_REPS + " INTEGER,"
                 + COL_WEIGHT + " FLOAT,"
                 + COL_REPMAX + " FLOAT,"
@@ -122,10 +123,21 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 cw.setID(Integer.parseInt(cursor.getString(0)));
                 cw.setDay_of_week(cursor.getString(1));
                 cw.setName(cursor.getString(2));
-                cw.setTotal_workouts(Integer.parseInt(cursor.getString(3)));
+                cw.setTotal_workouts(getExerciseCount(Integer.parseInt(cursor.getString(0))));
+                Log.d("total workout", "" + cw.getTotal_workouts());
+                int count = getExerciseCount(Integer.parseInt(cursor.getString(0)));
+                int id = Integer.parseInt(cursor.getString(0));
+                Log.d("count", "" + count);
+                /*if (count != 0) {
+                    db.execSQL("UPDATE " + DATABASE_TABLE + " SET " + COL_TOTAL_EX + " = " + count
+                            + " WHERE " + COL_ID + " = " + id);
+                }*/
+                /*db.execSQL("UPDATE " + DATABASE_TABLE + " SET " + COL_TOTAL_EX + " = " + count
+                        + " WHERE " + COL_ID + " = " + id);*/
                 cwList.add(cw);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         db.close();
         return cwList;
     }
@@ -188,7 +200,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 exList.add(ex);
             } while (cursor.moveToNext());
         }
-
+        cursor.close();
         db.close();
         return exList;
     }
@@ -197,7 +209,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         ArrayList<Exercise> exLogList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + " elt." + COL_REPS + " elt." + COL_REPMAX
+        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + ", elt." + COL_REPS + ", elt." + COL_REPMAX
                 + " FROM " + DATABASE_TABLE + " wt, "
                 + EXERCISE_TABLE + " et, " + EXERCISE_LOG_TABLE + " elt "
                 + "WHERE wt." + COL_ID + " = et." + COL_ID
@@ -214,7 +226,46 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 exLogList.add(ex);
             } while (cursor.moveToNext());
         }
-
+        cursor.close();
+        db.close();
         return exLogList;
+    }
+
+    public int getExerciseCount(int plan) {
+        int count = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT COUNT (et." + COL_EX_NAME + ")" + "FROM " +
+                DATABASE_TABLE + " wt, " + EXERCISE_TABLE + " et " +
+                "WHERE wt." + COL_ID + " = " + "et." + COL_ID, null);
+
+        cursor.moveToFirst();
+        count = cursor.getInt(0);
+        Log.d("Count", "" + count);
+        cursor.close();
+        db.close();
+
+        return count;
+    }
+
+    public long getExID(int plan, String exercise) {
+        long ex_id = 0;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT elt." + COL_EX_ID + " FROM " +
+                DATABASE_TABLE + " wt, " + EXERCISE_TABLE + " et, " + EXERCISE_LOG_TABLE + " elt " +
+                "WHERE wt." + COL_ID + " = " + "et." + COL_ID
+                + " AND et." + COL_EX_ID + " = elt." + COL_EX_ID
+                + " AND et." + COL_ID + " = " + plan
+                + " AND et." + COL_EX_NAME
+                + " LIKE '" + exercise + "'", null);
+        cursor.moveToFirst();
+        ex_id = cursor.getInt(0);
+        Log.d("ex_id", ""+ex_id);
+        cursor.close();
+        db.close();
+
+        return ex_id;
     }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ex_list"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/exlog_toolbar"
+        layout="@layout/exercise_toolbar_layout"/>
+
+    <RelativeLayout
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Set"
+            android:textSize="25dp"
+            android:layout_toLeftOf="@id/weight"
+            android:layout_marginRight="25dp"/>
+
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Weight"
+            android:textSize="25dp"
+            android:layout_toLeftOf="@id/reps"
+            android:layout_marginRight="30dp"/>
+
+        <TextView
+            android:id="@+id/reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/repmax"
+            android:layout_marginRight="20dp"
+            android:text="Reps"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:id="@+id/repmax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="RepMax"
+            android:textSize="25dp"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/exercise_log_list"
+        android:layout_width="match_parent"
+        android:layout_height="316dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:gravity="bottom">
+
+        <NumberPicker
+            android:id="@+id/weight_np"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="125dp"
+            />
+
+        <NumberPicker
+            android:id="@+id/rep_np"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/weight_np"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/rep_np"
+            android:layout_marginLeft="15dp"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/roundedcorner_green"
+            android:layout_marginTop="60dp"
+            android:onClick="addToLog"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/roundedcorner_orange"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="15dp"
+            android:onClick="goBack"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

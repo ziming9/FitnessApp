@@ -1,51 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ex_list"
-    android:orientation="horizontal"
+    android:id="@+id/ex_log"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="wrap_content">
 
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textSize="50dp"
-        />
-    <TextView
-        android:id="@+id/number"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:textSize="36dp"
-        />
-    <TextView
-        android:id="@+id/weightsNum"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="150"
-        android:textSize="36dp"
-        />
-    <TextView
-        android:id="@+id/x"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:text= "x"
-        android:textSize="36dp"/>
-    <TextView
-        android:id="@+id/repsNum"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="10"
-        android:textSize="36dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="50dp"
+            />
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="1"
+            android:textSize="36dp"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_toRightOf="@id/radioButton"
+            />
+        <TextView
+            android:id="@+id/weightsNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="150"
+            android:textSize="36dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/number"
+            />
+        <TextView
+            android:id="@+id/x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text= "x"
+            android:textSize="36dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/weightsNum"/>
+        <TextView
+            android:id="@+id/repsNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="10"
+            android:textSize="36dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/x" />
 
-    <TextView
-        android:id="@+id/oneRepMax"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="200"
-        android:textSize="36dp"
-        />
-    />
+        <TextView
+            android:id="@+id/oneRepMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="200"
+            android:textSize="36dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/repsNum"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:src="@drawable/dotted"
+        android:layerType="software" />
 
 </LinearLayout>
