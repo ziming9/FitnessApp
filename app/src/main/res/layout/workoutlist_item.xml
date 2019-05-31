@@ -24,9 +24,4 @@
         android:layout_height="0.5px"
         android:background="@color/colorGrey"
         android:layout_alignParentBottom="true" />
-
-
-
-
-
 </LinearLayout>

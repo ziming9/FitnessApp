@@ -211,7 +211,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         ArrayList<Exercise> exLogList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + ", elt." + COL_REPS + ", elt." + COL_REPMAX
+        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + ", elt." + COL_REPS + ", elt." + COL_REPMAX + ", elt." + COL_DATE
                 + " FROM " + DATABASE_TABLE + " wt, "
                 + EXERCISE_TABLE + " et, " + EXERCISE_LOG_TABLE + " elt "
                 + "WHERE wt." + COL_ID + " = et." + COL_ID
@@ -225,6 +225,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 ex.setWeight((int) cursor.getFloat(0));
                 ex.setReps(cursor.getInt(1));
                 ex.setMax(cursor.getFloat(2));
+                ex.setDate(cursor.getString(3));
                 exLogList.add(ex);
             } while (cursor.moveToNext());
         }
@@ -269,5 +270,10 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         db.close();
 
         return ex_id;
+    }
+
+    public void deleteExerciseLog(String date) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(EXERCISE_LOG_TABLE, COL_DATE + " = '" + date + "'", null);
     }
 }

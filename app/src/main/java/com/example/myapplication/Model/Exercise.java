@@ -7,11 +7,13 @@ import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Exercise {
 
     private String ex_name;
+    private boolean isFinished;
     // Muscle group
     private String type;
     private int sets;
@@ -20,6 +22,7 @@ public class Exercise {
     private float max;
     // Date completed
     private Calendar date;
+    private String date_string;
 
     // Constructor
     public Exercise(String name, int sets, int reps, int weight, Calendar date) {
@@ -93,9 +96,20 @@ public class Exercise {
         return df.format(this.date.getTime());
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public String getDate() {
+        return this.date_string;
     }
 
+    public void setDate(String date_string) {
+        this.date_string = date_string;
+    }
+
+    public void setFinished(boolean finished) {
+        this.isFinished = finished;
+    }
+
+    public boolean getFinished() {
+        return isFinished;
+    }
 
 }

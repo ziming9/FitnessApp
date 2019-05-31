@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.MyViewHolder> {
     Context mContext;
-    private ArrayList<Exercise> exerciseList;
-    private ArrayList<Exercise> selectedList;
+    public ArrayList<Exercise> exerciseList;
+    public ArrayList<Exercise> selectedList;
 
     public ExerciseLogAdapter(Context context, ArrayList<Exercise> exerciseList, ArrayList<Exercise> selectedList) {
         this.mContext=context;
@@ -37,7 +37,7 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final ExerciseLogAdapter.MyViewHolder myViewHolder, int i) {
-        Exercise exercise = exerciseList.get(i);
+        final Exercise exercise = exerciseList.get(i);
         String weight = Double.valueOf(exercise.getWeight()).toString();
         myViewHolder.offset.setText(String.valueOf(i+1));  // offset
         myViewHolder.weight.setText(weight);          // weight
@@ -49,9 +49,11 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
                 if (!myViewHolder.rb.isSelected()) {
                     myViewHolder.rb.setChecked(true);
                     myViewHolder.rb.setSelected(true);
+                    exercise.setFinished(true);
                 } else {
                     myViewHolder.rb.setChecked(false);
                     myViewHolder.rb.setSelected(false);
+                    exercise.setFinished(false);
                 }
             }
         });
@@ -85,4 +87,6 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
 
         }
     }
+
+
 }

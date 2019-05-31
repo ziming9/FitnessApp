@@ -7,6 +7,10 @@
     tools:context=".View.PlanExercisesActivity"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar_layout" />
+
     <FrameLayout
         android:id="@+id/add_fragment_container"
         android:layout_width="match_parent"
@@ -32,7 +36,7 @@
             android:text="Add Exercise"
             android:textColor="@color/colorWhite"
             android:background="@color/orange"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:onClick="add_Exercise"
             android:layout_above="@+id/back_button"
             />
@@ -46,6 +50,5 @@
             android:background="@color/blue"
             android:onClick="goBack"/>
     </LinearLayout>
-
 
 </LinearLayout>
