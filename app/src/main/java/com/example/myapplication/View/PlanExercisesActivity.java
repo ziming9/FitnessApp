@@ -77,10 +77,10 @@ public class PlanExercisesActivity extends FragmentActivity {
         }
 
     }
-    //Need to implement to refresh the exercise list when added in the create plan instead of going back to show it
+    // Need to implement to refresh the exercise list when added in the
+    // create plan instead of going back to show it
     @Override
     protected void onResume() {
-
         super.onResume();
     }
 
