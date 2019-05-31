@@ -23,16 +23,10 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout ll_listitem;
-        //public TextView offset, weight, rep, repMax;
         public TextView exercise;
 
         public MyViewHolder(View view) {
             super(view);
-            // Set weight, rep and 1RM attributes
-            /*offset = view.findViewById(R.id.number);
-            weight = view.findViewById(R.id.weightsNum);
-            rep = view.findViewById(R.id.repsNum);
-            repMax = view.findViewById(R.id.oneRepMax);*/
             exercise = view.findViewById(R.id.wl_exercise);
             ll_listitem = view.findViewById(R.id.ll_listitem);
 
@@ -55,12 +49,6 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     @Override
     public void onBindViewHolder(@NonNull ExerciseListAdapter.MyViewHolder myViewHolder, int i) {
         Exercise exercise = exerciseList.get(i);
-        /*String weight = Double.valueOf(exercise.getWeight()).toString();
-        String repMax = Float.valueOf(exercise.getMax()).toString();
-        myViewHolder.offset.setText(getItemCount());  // number
-        myViewHolder.weight.setText(weight);          // weight
-        myViewHolder.rep.setText(exercise.getReps());  // reps
-        myViewHolder.repMax.setText(repMax);          // 1RM*/
         myViewHolder.exercise.setText(exercise.getEx_name());
 
         if(selectedList.contains(exerciseList.get(i)))

@@ -145,6 +145,8 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     public void deletePlan(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DATABASE_TABLE, COL_ID + " = " + id, null);
+        db.delete(EXERCISE_TABLE, COL_ID + " = " + id, null);
+
         db.close();
     }
 
@@ -232,12 +234,12 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     }
 
     public int getExerciseCount(int plan) {
-        int count = 0;
+        int count;
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT COUNT (et." + COL_EX_NAME + ")" + "FROM " +
                 DATABASE_TABLE + " wt, " + EXERCISE_TABLE + " et " +
-                "WHERE wt." + COL_ID + " = " + "et." + COL_ID, null);
+                "WHERE wt." + COL_ID + " = " + "et." + COL_ID + " AND wt." + COL_ID + " = " + plan, null);
 
         cursor.moveToFirst();
         count = cursor.getInt(0);

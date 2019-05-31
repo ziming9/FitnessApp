@@ -39,7 +39,7 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
     public void onBindViewHolder(@NonNull final ExerciseLogAdapter.MyViewHolder myViewHolder, int i) {
         Exercise exercise = exerciseList.get(i);
         String weight = Double.valueOf(exercise.getWeight()).toString();
-        myViewHolder.offset.setText(String.valueOf(getItemCount()));  // number
+        myViewHolder.offset.setText(String.valueOf(i+1));  // offset
         myViewHolder.weight.setText(weight);          // weight
         myViewHolder.rep.setText(String.valueOf(exercise.getReps()));  // reps
         myViewHolder.repMax.setText(String.valueOf(exercise.getMax()));          // 1RM

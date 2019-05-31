@@ -105,25 +105,6 @@ public class ExerciseLogActivity extends AppCompatActivity {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(exerciseLogAdapter);
-
-            /*recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView,new RecyclerItemClickListener.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    String exerciseName =
-                            ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.wl_exercise)).getText().toString();
-                    Log.d("exerciseName", exerciseName);
-                    // inflate exerciseinfolist_item xml
-                    ArrayList<Exercise> exList = db.showExerciseLog(Integer.valueOf(plan), exerciseName);
-                    for(Exercise s: exList) {
-                        Log.d("Exercise: ", exerciseName + " Weight: " + s.getWeight() + " Reps: " + s.getReps() + " RepMax: " + s.getMax());
-                    }
-                }
-
-                @Override
-                public void onItemLongClick(View view, int position) {
-
-                }
-            }));*/
         }
     }
 
