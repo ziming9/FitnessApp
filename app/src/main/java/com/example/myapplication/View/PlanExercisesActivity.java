@@ -2,17 +2,14 @@ package com.example.myapplication.View;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
@@ -79,6 +76,12 @@ public class PlanExercisesActivity extends FragmentActivity {
             }));
         }
 
+    }
+    //Need to implement to refresh the exercise list when added in the create plan instead of going back to show it
+    @Override
+    protected void onResume() {
+
+        super.onResume();
     }
 
     public void goBack(View view) {

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="75dp">
+        android:paddingBottom="50dp"
+        android:background="@drawable/home_background">
 
         <include
             android:id="@+id/toolbar_layout"
@@ -23,6 +24,19 @@
             android:layout_marginTop="15dp">
 
             <Button
+                android:id="@+id/profile_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundedcorner_green"
+                android:gravity="center"
+                android:text="Profile"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+            <Button
                 android:id="@+id/plan_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -34,20 +48,6 @@
                 android:textSize="16sp"
                 android:textColor="@color/colorWhite"
                 android:background="@drawable/roundedcorner_orange"/>
-
-            <Button
-                android:id="@+id/profile_button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/roundedcorner_green"
-                android:text="Profile"/>
         </LinearLayout>
 
         <LinearLayout
@@ -59,11 +59,14 @@
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Workout Plans:"
-                android:paddingTop="10dp"
-                android:paddingLeft="10dp"
-                android:textSize="20dp"
-                android:textColor="@color/colorBlack"/>
+                android:text="Workout Plans"
+                android:textSize="28dp"
+                android:textColor="@color/colorWhite"
+                android:gravity="center_horizontal"
+                android:background="@color/colorGrey"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                />
 
         </LinearLayout>
 
@@ -71,7 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
-            android:background="@color/colorMetallic">
+            android:background="@android:color/transparent"
+            >
 
             <GridLayout
                 android:id="@+id/plan_grid"
@@ -81,7 +85,9 @@
                 android:columnCount="1"
                 android:columnOrderPreserved="false"
                 android:rowCount="1"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:background="@android:color/transparent"
+                >
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/planList"

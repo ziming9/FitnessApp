@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,9 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
+        android:textSize="16sp"
         android:text="@string/weight"
         android:textStyle="bold"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorWhite"/>
 
     <View
         android:layout_width="fill_parent"
@@ -74,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="50dp"
-        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:text="@string/reps"/>
 
@@ -131,16 +132,7 @@
         android:paddingBottom="16dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="175dp"
-            android:layout_height="45dp"
-            android:text="Save"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:background="@drawable/roundedcorner_orange"
-            android:onClick="save"
-            android:layout_weight="1"/>
+
 
         <Button
             android:id="@+id/clear_button"
@@ -151,8 +143,17 @@
             android:textStyle="bold"
             android:background="@drawable/roundedcorner_green"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/save_button"
             android:onClick="clear"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="175dp"
+            android:layout_height="45dp"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:background="@drawable/roundedcorner_orange"
+            android:onClick="save"
             android:layout_weight="1"/>
     </LinearLayout>
 
