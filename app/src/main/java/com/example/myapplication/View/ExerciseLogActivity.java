@@ -117,6 +117,19 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
             public void onItemClick(View view, int position) {
                 if (isMultiSelect) {
                     multi_select(position);
+                } else {
+                    /*radioButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!radioButton.isSelected()) {
+                                radioButton.setChecked(true);
+                                radioButton.setSelected(true);
+                            } else {
+                                radioButton.setChecked(false);
+                                radioButton.setSelected(false);
+                            }
+                        }
+                    });*/
                 }
             }
 
