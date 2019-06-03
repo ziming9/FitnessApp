@@ -1,9 +1,9 @@
 package com.example.myapplication.View;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,8 +21,6 @@ import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.R;
 
-import java.util.ArrayList;
-
 public class NewWorkoutActivity extends AppCompatActivity {
 
     Intent intent = new Intent();
@@ -37,6 +35,10 @@ public class NewWorkoutActivity extends AppCompatActivity {
         planName = findViewById(R.id.create_plan_name);
         db = new WorkoutPlanDatabase(this, 1);
         setSupportActionBar(toolbar);
+
+
+
+
 
         getSupportActionBar().setTitle("Create Workout Plan");
         if (getSupportActionBar() != null){
@@ -58,6 +60,8 @@ public class NewWorkoutActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // TO-DO; Pass the value to the home fragment.
                 String selected = daySpinner.getSelectedItem().toString();
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parent.getChildAt(0)).setTextSize(20);
                 intent.putExtra("planDay", selected);
                 Log.d("Spinner Select", "Value is: " + selected);
             }

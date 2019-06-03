@@ -6,6 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".View.PlanExercisesActivity"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/toolbarButton"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="25dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back_white_24dp"
+            android:onClick="goBack"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercises"
+            android:textSize="26dp"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical"
+            android:background="?android:attr/activatedBackgroundIndicator"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+
+    </RelativeLayout>
+
 
     <FrameLayout
         android:id="@+id/add_fragment_container"
