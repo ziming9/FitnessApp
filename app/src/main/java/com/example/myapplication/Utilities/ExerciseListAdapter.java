@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.MyViewHolder> {
     Context mContext;
-    private ArrayList<Exercise> exerciseList;
-    private ArrayList<Exercise> selectedList;
+    public ArrayList<Exercise> exerciseList;
+    public ArrayList<Exercise> selectedList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout ll_listitem;

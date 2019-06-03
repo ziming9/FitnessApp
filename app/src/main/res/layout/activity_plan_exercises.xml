@@ -7,10 +7,6 @@
     tools:context=".View.PlanExercisesActivity"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar_layout"
-        layout="@layout/toolbar_layout" />
-
     <FrameLayout
         android:id="@+id/add_fragment_container"
         android:layout_width="match_parent"
@@ -28,27 +24,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp">
-        
+
         <Button
             android:id="@+id/addex_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Exercise"
-            android:textColor="@color/colorWhite"
-            android:background="@color/orange"
-            android:layout_marginBottom="5dp"
-            android:onClick="add_Exercise"
             android:layout_above="@+id/back_button"
-            />
+            android:layout_gravity="end"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/roundedcorner_lightorange"
+            android:onClick="add_Exercise"
+            android:text="Add Exercise"
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/back_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/roundedcorner_lightblue"
+            android:onClick="goBack"
             android:text="Back"
-            android:textColor="@color/colorWhite"
-            android:background="@color/blue"
-            android:onClick="goBack"/>
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 
 </LinearLayout>

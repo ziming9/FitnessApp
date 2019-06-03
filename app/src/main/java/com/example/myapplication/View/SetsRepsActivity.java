@@ -157,8 +157,8 @@ public class SetsRepsActivity extends AppCompatActivity {
         }
 
         if (addProcess != false) {
-            finish();
             Intent intent = new Intent(this, PlanExercisesActivity.class);
+            intent.putExtra("plan", plan);
             startActivity(intent);
         }
 
@@ -169,6 +169,7 @@ public class SetsRepsActivity extends AppCompatActivity {
             case android.R.id.home:
                 String plan = sh.getString("plan", null);
                 if (plan != null) {
+                    finish();
                     Intent intent = new Intent(this, PlanExercisesActivity.class);
                     intent.putExtra("plan", plan);
                     startActivity(intent);

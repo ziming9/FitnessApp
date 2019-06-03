@@ -216,7 +216,15 @@ public class WorkoutList_Fragment extends AppCompatActivity implements AlertDial
         int id = item.getItemId();
 
         if (id == android.R.id.home ) {
-            onBackPressed();
+            String plan = presetList.getString("plan", null);
+            if (plan != null) {
+                finish();
+                Intent intent = new Intent(this, PlanExercisesActivity.class);
+                intent.putExtra("plan", plan);
+                startActivity(intent);
+            } else {
+                finish();
+            }
             return true;
         }
 

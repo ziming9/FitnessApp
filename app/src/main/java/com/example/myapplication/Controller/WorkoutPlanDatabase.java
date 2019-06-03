@@ -272,8 +272,16 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         return ex_id;
     }
 
-    public void deleteExerciseLog(String date) {
+    public void deleteExerciseLog(String exName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(EXERCISE_TABLE, COL_EX_NAME + " = '" + exName + "'", null);
+        db.close();
+    }
+
+    public void deleteExercise(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(EXERCISE_LOG_TABLE, COL_DATE + " = '" + date + "'", null);
+        deleteExerciseLog(date);
+        db.close();
     }
 }
