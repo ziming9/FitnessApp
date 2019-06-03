@@ -157,6 +157,8 @@ public class PlanExercisesActivity extends FragmentActivity implements AlertDial
         final SharedPreferences.Editor edit = presetPlan.edit();
         edit.putString("plan", null);
         edit.apply();
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
         finish();
     }
 
