@@ -17,17 +17,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="25dp"
             android:text="Set"
-            android:textSize="25dp"
-            android:layout_toLeftOf="@id/weight"
-            android:layout_marginRight="25dp"/>
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:text="Weight"
             android:textSize="25dp"
             android:layout_toLeftOf="@id/reps"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/repmax"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30dp"
             android:text="Reps"
             android:textSize="25dp"/>
 
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:text="RepMax"
             android:textSize="25dp"/>
 

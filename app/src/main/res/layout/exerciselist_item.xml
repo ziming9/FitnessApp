@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="50dp"
+            android:textSize="35dp"
             />
         <TextView
             android:id="@+id/number"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="1"
-            android:textSize="36dp"
+            android:textSize="26dp"
             android:padding="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="50dp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="150"
-            android:textSize="36dp"
+            android:textSize="26dp"
             android:padding="5dp"
             android:layout_toRightOf="@id/number"
             />
@@ -43,8 +43,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text= "x"
-            android:textSize="36dp"
+            android:textSize="26dp"
             android:padding="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/weightsNum"/>
         <TextView
             android:id="@+id/repsNum"
@@ -52,8 +53,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="10"
-            android:textSize="36dp"
+            android:textSize="26dp"
             android:padding="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/x" />
 
         <TextView
@@ -62,7 +64,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="200"
-            android:textSize="36dp"
+            android:textSize="26dp"
             android:padding="5dp"
             android:layout_toRightOf="@id/repsNum"
             android:layout_alignParentRight="true"

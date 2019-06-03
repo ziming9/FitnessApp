@@ -3,29 +3,25 @@ package com.example.myapplication.View;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.Exercise;
-import com.example.myapplication.Model.WorkoutModel;
 import com.example.myapplication.R;
 import com.example.myapplication.Utilities.AlertDialogHelper;
-import com.example.myapplication.Utilities.ExerciseListAdapter;
 import com.example.myapplication.Utilities.ExerciseLogAdapter;
 import com.example.myapplication.Utilities.RecyclerItemClickListener;
 
@@ -43,7 +39,7 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
     boolean isMultiSelect = false;
     private Toolbar toolBar;
     private TextView tv;
-
+    RadioButton radioButton;
     int weight, rep;
 
     private ArrayList<Exercise> exereciseLog = new ArrayList<>();
@@ -59,6 +55,7 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
         toolBar = findViewById(R.id.exlog_toolbar);
         tv = findViewById(R.id.exercise_name);
         alertDialogHelper = new AlertDialogHelper(this);
+        radioButton = findViewById(R.id.radioButton);
 
         weight_np = findViewById(R.id.weight_np);
         rep_np = findViewById(R.id.rep_np);
