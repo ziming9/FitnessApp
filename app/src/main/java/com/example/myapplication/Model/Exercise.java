@@ -2,12 +2,13 @@ package com.example.myapplication.Model;
 
 import android.content.Context;
 import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
 import android.util.Log;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 public class Exercise {
@@ -45,8 +46,12 @@ public class Exercise {
     }
 
     // One Rep Max
-    public float OneRepMax(int reps, double weight){
-        return  (float) weight * (1 + reps / 30);
+    public String OneRepMax(int reps, double weight){
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        float val = (float) weight * (1 + (float) reps / 30);
+
+        return df.format(val);
     }
 
     // Getter and setter methods
@@ -82,11 +87,11 @@ public class Exercise {
         this.weight = weight;
     }
 
-    public Float getMax() {
-        return OneRepMax(reps,weight);
+    public float getMax() {
+        return Float.parseFloat(OneRepMax(reps,weight));
     }
 
-    public void setMax(Float max) {
+    public void setMax(float max) {
         this.max = max;
     }
     // Returns date as String "dd/mm/yy"
@@ -100,8 +105,19 @@ public class Exercise {
         return this.date_string;
     }
 
-    public void setDate(String date_string) {
-        this.date_string = date_string;
+    public void setDate(String strDate) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+
+        try {
+            c.setTime(sdf.parse(strDate));
+            this.date = c;
+            this.date_string = strDate;
+            Log.d("Date","setTime() worked");
+        }
+        catch(Exception e) {
+            Log.d("Date","Date exception caught:" + e);
+        }
     }
 
     public void setFinished(boolean finished) {

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.R;
 import com.example.myapplication.View.PlanExercisesActivity;
+import com.example.myapplication.View.ProgressFragment;
 
 import java.util.ArrayList;
 import java.util.Random;

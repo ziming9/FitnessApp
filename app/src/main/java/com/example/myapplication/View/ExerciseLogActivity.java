@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +43,7 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
     RadioButton radioButton;
     int weight, rep;
 
-    private ArrayList<Exercise> exereciseLog = new ArrayList<>();
+    private ArrayList<Exercise> exerciseLog = new ArrayList<>();
     private ArrayList<Exercise> multiselect_list = new ArrayList<>();
 
     AlertDialogHelper alertDialogHelper;
@@ -71,6 +72,7 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
 
         tv.setText(exerciseName);
         setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         weight_np.setMinValue(0);
         weight_np.setMaxValue(995);
@@ -104,8 +106,8 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
             }
         });
 
-        exereciseLog = db.showExerciseLog(Integer.valueOf(plan), exerciseName);
-        exerciseLogAdapter = new ExerciseLogAdapter(this, exereciseLog, multiselect_list);
+        exerciseLog = db.showExerciseLog(Integer.valueOf(plan), exerciseName);
+        exerciseLogAdapter = new ExerciseLogAdapter(this, exerciseLog, multiselect_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -117,6 +119,20 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
             public void onItemClick(View view, int position) {
                 if (isMultiSelect) {
                     multi_select(position);
+
+                } else {
+                    /*radioButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!radioButton.isSelected()) {
+                                radioButton.setChecked(true);
+                                radioButton.setSelected(true);
+                            } else {
+                                radioButton.setChecked(false);
+                                radioButton.setSelected(false);
+                            }
+                        }
+                    });*/
                 }
             }
 
@@ -180,16 +196,16 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
     public void refreshAdapter()
     {
         exerciseLogAdapter.selectedList=multiselect_list;
-        exerciseLogAdapter.exerciseList = exereciseLog;
+        exerciseLogAdapter.exerciseList = exerciseLog;
         exerciseLogAdapter.notifyDataSetChanged();
     }
 
     public void multi_select(int position) {
         if (mActionMode != null) {
-            if (multiselect_list.contains(exereciseLog.get(position)))
-                multiselect_list.remove(exereciseLog.get(position));
+            if (multiselect_list.contains(exerciseLog.get(position)))
+                multiselect_list.remove(exerciseLog.get(position));
             else
-                multiselect_list.add(exereciseLog.get(position));
+                multiselect_list.add(exerciseLog.get(position));
 
             if (multiselect_list.size() == 1)
                 mActionMode.setTitle("" + multiselect_list.size() + " set selected");
@@ -229,7 +245,8 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
             return;
         }
 
-        float repMax = (float) (weight * (1 + rep / 30));
+        float repMax = ((float) weight * (1 + (float) rep / 30));
+        Log.d("repmax", "" + repMax);
         long ex_id = db.getExID(Integer.valueOf(plan), exerciseName);
         Exercise exLog = new Exercise();
         exLog.setWeight(weight);
@@ -261,7 +278,10 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
             exerciseLogAdapter.notifyDataSetChanged();
 
             for(int i=0;i<multiselect_list.size();i++) {
-                exereciseLog.remove(multiselect_list.get(i));
+                Log.d("LOG_TAG", "" + multiselect_list.get(i).getDate());
+                Log.d("LOG_TAG", "" + multiselect_list.get(i).getDate(this));
+                Log.d("LOG_TAG", "" + multiselect_list.get(i).getReps());
+                exerciseLog.remove(multiselect_list.get(i));
                 db.deleteExerciseLog(multiselect_list.get(i).getDate());
             }
 

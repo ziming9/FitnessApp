@@ -125,9 +125,9 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 cw.setName(cursor.getString(2));
                 cw.setTotal_workouts(getExerciseCount(Integer.parseInt(cursor.getString(0))));
                 Log.d("total workout", "" + cw.getTotal_workouts());
-                int count = getExerciseCount(Integer.parseInt(cursor.getString(0)));
+                /*int count = getExerciseCount(Integer.parseInt(cursor.getString(0)));
                 int id = Integer.parseInt(cursor.getString(0));
-                Log.d("count", "" + count);
+                Log.d("count", "" + count);*/
                 /*if (count != 0) {
                     db.execSQL("UPDATE " + DATABASE_TABLE + " SET " + COL_TOTAL_EX + " = " + count
                             + " WHERE " + COL_ID + " = " + id);
@@ -146,7 +146,6 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DATABASE_TABLE, COL_ID + " = " + id, null);
         db.delete(EXERCISE_TABLE, COL_ID + " = " + id, null);
-
         db.close();
     }
 
@@ -252,7 +251,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     }
 
     public long getExID(int plan, String exercise) {
-        long ex_id = 0;
+        long ex_id;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -267,21 +266,42 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         ex_id = cursor.getInt(0);
         Log.d("ex_id", ""+ex_id);
         cursor.close();
-        db.close();
 
         return ex_id;
     }
 
-    public void deleteExerciseLog(String exName) {
+    public void deleteExercise(int plan, String exName) {
         SQLiteDatabase db = this.getWritableDatabase();
+        long exID = getExID(plan, exName);
+        db.delete(EXERCISE_LOG_TABLE, COL_EX_ID + " = " + exID , null);
         db.delete(EXERCISE_TABLE, COL_EX_NAME + " = '" + exName + "'", null);
         db.close();
     }
 
-    public void deleteExercise(String date) {
+    public void deleteExerciseLog(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(EXERCISE_LOG_TABLE, COL_DATE + " = '" + date + "'", null);
-        deleteExerciseLog(date);
         db.close();
+    }
+
+    public ArrayList<CreatedWorkout> getPlans() {
+        ArrayList<CreatedWorkout> wList= new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CreatedWorkout cw = new CreatedWorkout();
+                String name =  cursor.getString(2);
+                int id = cursor.getInt(0);
+                cw.setID(id);
+                cw.setName(name);
+                wList.add(cw);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return wList;
     }
 }

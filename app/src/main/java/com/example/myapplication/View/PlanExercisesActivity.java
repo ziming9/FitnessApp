@@ -157,6 +157,8 @@ public class PlanExercisesActivity extends FragmentActivity implements AlertDial
         final SharedPreferences.Editor edit = presetPlan.edit();
         edit.putString("plan", null);
         edit.apply();
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
         finish();
     }
 
@@ -217,7 +219,8 @@ public class PlanExercisesActivity extends FragmentActivity implements AlertDial
 
             for(int i=0;i<multiselect_list.size();i++) {
                 exereciseList.remove(multiselect_list.get(i));
-                db.deleteExercise(multiselect_list.get(i).getEx_name());
+                final String plan = getIntent().getStringExtra("plan");
+                db.deleteExercise(Integer.valueOf(plan), multiselect_list.get(i).getEx_name());
             }
 
             if (mActionMode != null) {
