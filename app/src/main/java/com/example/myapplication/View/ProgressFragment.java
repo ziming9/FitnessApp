@@ -27,15 +27,24 @@ import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.Model.Exercise;
 import com.example.myapplication.R;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.lang.reflect.Array;
@@ -55,8 +64,9 @@ public class ProgressFragment extends Fragment {
     ArrayAdapter<String> plansArrayAdapter;
     ArrayList<CreatedWorkout> wList;
     ArrayList<String> planNames;
-
     XAxis x_axis;
+
+    PieChart pieChart;
 
     public static ProgressFragment newInstance() {
         return new ProgressFragment();
@@ -118,6 +128,7 @@ public class ProgressFragment extends Fragment {
 
         // Exercise Spinner
         final Spinner exSpinner = this.getView().findViewById(R.id.ex_spinner);
+        pieChart = (PieChart) this.getView().findViewById(R.id.idPieChart);
 
         // Set first value hint
         ArrayList<String> exList = new ArrayList<>();
@@ -277,11 +288,13 @@ public class ProgressFragment extends Fragment {
         // Initialize chart
         ArrayList<Exercise> exercises = setupChart();
         for(Exercise e : exercises) {
-            Log.d("Chart","SETUP: E_name:"+ e.getEx_name());
-            Log.d("Chart","SETUP: E_name:"+ e.getMax());
+            Log.d("Max","SETUP: E_name:"+ e.getEx_name());
+            Log.d("Max","SETUP: E_name:"+ e.getMax());
 
         }
        updateChartData(exercises);
+
+        setupPieChart();
     }
 
     @Override
@@ -330,9 +343,14 @@ public class ProgressFragment extends Fragment {
         int max_rm = 0;
         for(Exercise e : data) {
             maxList.add(Math.round(e.getMax()));
+            Log.d("MAX","E_name:" + e.getEx_name());
+            Log.d("MAX","Max value:" + e.getMax());
         }
         min_rm = Collections.min(maxList);
         max_rm = Collections.max(maxList);
+        Log.d("Max", "Min max:" + min_rm);
+        Log.d("Max", "Max max:" + max_rm);
+
 
         int count = 0;
         List<Entry> new_entries = new ArrayList<Entry>();
@@ -348,6 +366,8 @@ public class ProgressFragment extends Fragment {
         dataSet  = new LineDataSet(new_entries, "Weight (lbs)");
 
         // Create Strings array to format x-axis with date values
+
+
         ArrayList<String> newDates= new ArrayList<String>();
         for(int i = 0; i < data.size(); i++) {
             newDates.add(i,data.get(i).getDate(getContext()));
@@ -460,5 +480,132 @@ public class ProgressFragment extends Fragment {
         exercises.add(ex_six);
 
         return exercises;
+    }
+
+
+    public void setupPieChart(){
+        final float[] yData = {25f, 35f , 20f, 10f, 10f};
+        final String[] xData = {"Chest", "Back" , "Legs" , "Biceps", "Triceps", "Shoulders"};
+
+            Log.d("Pie Chart", "onCreate: starting to create chart");
+
+       // pieChart.getDescription().setText("Muscle Segment Graph");
+            //pieChart.setRotationEnabled(true);
+            //pieChart.setUsePercentValues(true);
+            //pieChart.setHoleColor(Color.BLUE);
+            //pieChart.setCenterTextColor(Color.BLACK);
+            pieChart.setHoleRadius(40f);
+            pieChart.setTransparentCircleAlpha(0);
+            pieChart.setCenterText("Muscle Targeting");
+            pieChart.setCenterTextSize(12);
+            pieChart.setMinimumHeight(1000);
+            pieChart.setTouchEnabled(false);
+            pieChart.getDescription().setEnabled(false);
+            //pieChart.setDrawEntryLabels(true);
+            //pieChart.setEntryLabelTextSize(20);
+            //More options just check out the documentation!
+
+            pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                @Override
+                public void onValueSelected(Entry e, Highlight h) {
+                    Log.d("Pie Chart", "onValueSelected: Value select from chart.");
+                    Log.d("Pie Chart", "onValueSelected: " + e.toString());
+                    Log.d("Pie Chart", "onValueSelected: " + h.toString());
+
+                    int pos1 = e.toString().indexOf("(sum): ");
+                    String sales = e.toString().substring(pos1 + 7);
+
+                    for(int i = 0; i < yData.length; i++){
+                        if(yData[i] == Float.parseFloat(sales)){
+                            pos1 = i;
+                            break;
+                        }
+                    }
+                    String employee = xData[pos1 + 1];
+                }
+
+                @Override
+                public void onNothingSelected() {
+
+                }
+            });
+
+            Log.d("Pie Chart", "addDataSet started");
+            ArrayList<PieEntry> yEntrys = new ArrayList<>();
+            ArrayList<String> xEntrys = new ArrayList<>();
+
+            for(int i = 0; i < yData.length; i++){
+                yEntrys.add(new PieEntry(yData[i] , i));
+            }
+
+            for(int i = 1; i < xData.length; i++){
+                xEntrys.add(xData[i]);
+            }
+
+            //create the data set
+            PieDataSet pieDataSet = new PieDataSet(yEntrys, "Muscle Groups");
+            pieDataSet.setSliceSpace(2);
+            pieDataSet.setValueTextSize(12);
+
+            //add colors to dataset
+            ArrayList<Integer> colors = new ArrayList<>();
+            colors.add(Color.parseColor("#808080"));
+            colors.add(Color.parseColor("#617cbc"));
+            colors.add(Color.parseColor("#FF9A9B"));
+            colors.add(Color.parseColor("#ccffcc"));
+            colors.add(Color.parseColor("#F5754E"));
+            //colors.add(Color.CYAN);
+
+            pieDataSet.setColors(colors);
+
+            //add legend to chart
+            Legend legend = pieChart.getLegend();
+            legend.setTextSize(15);
+            legend.setEnabled(true);
+            legend.setForm(Legend.LegendForm.CIRCLE);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+            legend.setYEntrySpace(5);
+            legend.setWordWrapEnabled(true);
+
+
+            /// Set legend
+//        List<LegendEntry> entries = new ArrayList<>();
+//        ArrayList<PieEntry> yValues = new ArrayList<>();
+//        yValues.add(new PieEntry(34f,"Chest"));
+//        yValues.add(new PieEntry(56f,"Back"));
+//        yValues.add(new PieEntry(66f,"Legs"));
+//        yValues.add(new PieEntry(45f,"Biceps"));
+//        yValues.add(new PieEntry(45f,"Triceps"));
+//        for (int i = 0; i < yValues.size(); i++) {
+//            LegendEntry entry = new LegendEntry("Chest",Legend.LegendForm.CIRCLE,10f,2f,null,colors.get(i));
+//            entry.formColor = ColorTemplate.VORDIPLOM_COLORS[i];
+//            entry.label = yValues.get(i).getLabel() ;
+//            entries.add(entry);
+
+
+        // Colors colors.add(Color.GRAY);
+        //            colors.add(Color.parseColor("#00285e"));
+        //            colors.add(Color.parseColor("#617cbc"));
+        //            colors.add(Color.parseColor("#FF9A9B"));
+        //            colors.add(Color.parseColor("#ccffcc"));
+        //            colors.add(Color.parseColor("#F5754E"));
+        //            colors
+        LegendEntry l1=new LegendEntry("Chest", Legend.LegendForm.CIRCLE,10f,2f,null, Color.parseColor("#808080"));
+        LegendEntry l2=new LegendEntry("Back", Legend.LegendForm.CIRCLE,10f,2f,null, Color.parseColor("#617cbc"));
+        LegendEntry l3=new LegendEntry("Legs", Legend.LegendForm.CIRCLE,10f,2f,null,Color.parseColor("#FF9A9B"));
+        LegendEntry l4=new LegendEntry("Shoulders", Legend.LegendForm.CIRCLE,10f,2f,null, Color.parseColor("#ccffcc"));
+        LegendEntry l5=new LegendEntry("Biceps", Legend.LegendForm.CIRCLE,10f,2f,null, Color.parseColor("#F5754E"));
+       // LegendEntry l6=new LegendEntry("Triceps", Legend.LegendForm.CIRCLE,10f,2f,null,Color.CYAN);
+
+        legend.setCustom(new LegendEntry[]{l1,l2,l3,l4,l5});
+        legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        //legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+
+            //create pie data object
+            PieData pieData = new PieData(pieDataSet);
+            pieChart.setData(pieData);
+            pieChart.invalidate();
     }
 }
