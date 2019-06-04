@@ -41,6 +41,7 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ProgressFragment extends Fragment {
@@ -324,6 +325,13 @@ public class ProgressFragment extends Fragment {
 
     // Update chart data
     public void updateChartData(ArrayList<Exercise> data) {
+        ArrayList<Integer> maxList = new ArrayList<>();
+        int min_rm = 0;
+        for(Exercise e : data) {
+            maxList.add(Math.round(e.getMax()));
+        }
+        min_rm = Collections.min(maxList);
+
         int count = 0;
         List<Entry> new_entries = new ArrayList<Entry>();
         for (Exercise ex : data) {
@@ -362,7 +370,7 @@ public class ProgressFragment extends Fragment {
         YAxis rightYAxis = chart.getAxisRight();
         YAxis leftYAxis = chart.getAxisLeft();
         leftYAxis.setTextSize(13);
-        leftYAxis.setAxisMinimum(135);
+        leftYAxis.setAxisMinimum(min_rm);
         rightYAxis.setEnabled(false);
         leftYAxis.setSpaceTop(10);
         leftYAxis.setSpaceBottom(5);
