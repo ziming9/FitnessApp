@@ -2,25 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/create_plan_picture"
+    android:scaleX="1.0"
+
+    >
 
     <include
         android:id="@+id/toolbar_layout"
-        layout="@layout/toolbar_layout" />
+        layout="@layout/toolbar_layout"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:textSize="18dp"
-        android:text="Plan Name: "/>
+        android:text="Plan Name "
+        android:textColor="#FFFFFF"
+        android:textSize="32dp"
+
+        />
 
     <EditText
         android:id="@+id/create_plan_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:hint="Example: Chest and Shoulder Workout"/>
+        android:textSize="20dp"
+        android:hint="Example: Chest and Shoulder Workout"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -28,7 +38,10 @@
         android:layout_marginTop="10dp"
         android:padding="5dp"
         android:text="Select Day: "
-        android:textSize="18dp" />
+
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        />
 
     <Spinner
         android:id="@+id/days_spinner"
@@ -36,7 +49,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-        android:spinnerMode="dropdown">
+        android:spinnerMode="dropdown"
+        android:textColor="#FFFFFF"
+        >
     </Spinner>
 
 </LinearLayout>

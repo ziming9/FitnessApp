@@ -85,6 +85,21 @@ public class ProgressFragment extends Fragment {
         }
     }
 
+    // Y-AxisData Point formatting
+    class MyValueFormatter implements IValueFormatter {
+
+        private DecimalFormat mFormat;
+
+        public MyValueFormatter() {
+            mFormat = new DecimalFormat("###,###,###"); // use no decimals
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return mFormat.format(value); // in case you want to add percent
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,7 +117,6 @@ public class ProgressFragment extends Fragment {
 
         // Exercise Spinner
         final Spinner exSpinner = this.getView().findViewById(R.id.ex_spinner);
-
 
         // Set first value hint
         ArrayList<String> exList = new ArrayList<>();
@@ -151,14 +165,14 @@ public class ProgressFragment extends Fragment {
                     if(position > 0){
 
                        if(chart != null && exSpinner.getSelectedItemPosition() != 0 && planSpinner.getSelectedItemPosition() != 0) {
-                           Log.d("Date","Ex_Spinner selection: " + exSpinner.getSelectedItem().toString());
-
                            ArrayList<Exercise> exercises = db.showExerciseLog(wList.get(planSpinner.getSelectedItemPosition()-1).getID() ,exSpinner.getSelectedItem().toString());
-                         for(Exercise e : exercises) {
-                             Log.d("Date","PF: Exercise max" + e.getMax());
-                             Log.d("Date","PF: Exercise date" + e.getDate(getContext()));
-                         }
                            if(exercises.get(0) != null) {
+                               for(Exercise e: exercises) {
+                                   Log.d("Chart","UPDATED E_name" + e.getEx_name());
+                                   Log.d("Chart","UPDATED E_date" + e.getDate(getContext()));
+                                   Log.d("Chart","UPDATED E_max" + e.getMax());
+
+                               }
                                updateChartData(exercises);
                                chart.notifyDataSetChanged();
                                chart.invalidate();
@@ -235,13 +249,13 @@ public class ProgressFragment extends Fragment {
 
                     // Update Exercise Spinner
                     ArrayList<Exercise> exObjList = db.showExercises(wList.get(planSpinner.getSelectedItemPosition()-1).getID());
-                    Log.d("CHARTTEST","ExOBJList is: " + Arrays.toString(exObjList.toArray()));
                     final ArrayList<String> exList = new ArrayList<>();
                     exList.add(0,"Exercises");
                     for (Exercise ex : exObjList) {
-                        Log.d("CHARTTEST","ex max in list is  " + ex.getMax());
+                        Log.d("CHART TEST","Ex  added to exSpinner" + ex.getEx_name());
                         exList.add(ex.getEx_name());
                     }
+
                     exArrayAdapter.clear();
                     exArrayAdapter.addAll(exList);
                     exArrayAdapter.notifyDataSetChanged();
@@ -256,9 +270,137 @@ public class ProgressFragment extends Fragment {
 
 
         ///////////////////////////////////////////////// CHART //////////////////////////////
-        // Test chart
+        // Chart
         chart = (LineChart) getView().findViewById(R.id.test_chart);
+
+        // Initialize chart
+        ArrayList<Exercise> exercises = setupChart();
+        for(Exercise e : exercises) {
+            Log.d("Chart","SETUP: E_name:"+ e.getEx_name());
+            Log.d("Chart","SETUP: E_name:"+ e.getMax());
+
+        }
+       updateChartData(exercises);
+    }
+
+    @Override
+    public void onResume() {
+        Log.d("Spinners","inside ONRESUME");
+        super.onResume();
+        // Updated database
+        db = new WorkoutPlanDatabase(getContext(), 1);
+
+        // Update plans spinner
+        wList = db.getPlans();
+        for(CreatedWorkout c : wList) {
+            Log.d("Spinners", "Updated wList Workouts are" + c.getName());
+        }
+       ArrayList<String> newPlans = new ArrayList<>();
+        for (CreatedWorkout c : wList) {
+            String name = c.getName();
+            newPlans.add(name);
+        }
+
+        // Set first value hint
+        newPlans.add(0,"Pick Plan:");
+        plansArrayAdapter.clear();
+        plansArrayAdapter.addAll(newPlans);
+        plansArrayAdapter.notifyDataSetChanged();
+
+        // Update Exercise Spinner with selected plan
+        if (planSpinner.getSelectedItemPosition() != 0 && planSpinner.getSelectedItemPosition() - 1 < wList.size() ) {
+            ArrayList<Exercise> exObjList = db.showExercises(wList.get(planSpinner.getSelectedItemPosition() - 1).getID());
+
+            final ArrayList<String> exList = new ArrayList<>();
+            exList.add(0,"Exercises");
+            for (Exercise ex : exObjList) {
+                exList.add(ex.getEx_name());
+            }
+            exArrayAdapter.clear();
+            exArrayAdapter.addAll(exList);
+            exArrayAdapter.notifyDataSetChanged();
+        }
+    }
+
+    // Update chart data
+    public void updateChartData(ArrayList<Exercise> data) {
+        int count = 0;
+        List<Entry> new_entries = new ArrayList<Entry>();
+        for (Exercise ex : data) {
+            count++;
+            // turn your data into Entry objects
+            new_entries.add(new Entry(count, ex.getMax()));
+        }
+
+
+        // Create Strings array to format x-axis with date values8
+        // Add entries to a dataset
+        dataSet  = new LineDataSet(new_entries, "Weight (lbs)");
+
+        // Create Strings array to format x-axis with date values
+        ArrayList<String> newDates= new ArrayList<String>();
+        for(int i = 0; i < data.size(); i++) {
+            newDates.add(i,data.get(i).getDate(getContext()));
+        }
+
+        /////////// Axis formatting
+        // X-axis
         x_axis = chart.getXAxis();
+        x_axis.setValueFormatter(new MyXAxisValueFormatter(newDates));
+        x_axis.setTextSize(12);
+        x_axis.setGranularity(1f);
+
+        // Set x-axis to bottom
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        //chart.getXAxis().setCenterAxisLabels(true);
+        //x_axis.setCenterAxisLabels(true);
+        chart.getXAxis().setSpaceMin(0.15f);
+        chart.getXAxis().setAvoidFirstLastClipping(true);
+
+
+        // Y-axis
+        YAxis rightYAxis = chart.getAxisRight();
+        YAxis leftYAxis = chart.getAxisLeft();
+        leftYAxis.setTextSize(13);
+        leftYAxis.setAxisMinimum(135);
+        rightYAxis.setEnabled(false);
+        leftYAxis.setSpaceTop(10);
+        leftYAxis.setSpaceBottom(5);
+
+
+        dataSet.setValueFormatter(new MyValueFormatter());
+        // Line color format
+        dataSet.setColor(Color.parseColor("#e94984"));
+        dataSet.setCircleColor(Color.parseColor("#e94984"));
+        dataSet.setValueTextColor(Color.parseColor("#000000"));
+        dataSet.setLineWidth(2);
+        dataSet.setValueTextSize(12);
+        dataSet.setDrawFilled(true);
+
+        dataSet.setCircleRadius(5);
+        Drawable fill_color = ContextCompat.getDrawable(getContext(), R.drawable.chart_fill);
+        dataSet.setFillDrawable(fill_color);
+
+        LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
+
+        //Remove description label
+        chart.getDescription().setEnabled(false);
+        // chart size
+        chart.setMinimumHeight(1000);
+        // Animate x-axis
+        chart.animateX(500);
+        // chart legend
+        Legend l = chart.getLegend();
+        l.setFormSize(10f); // set the size of the legend forms/shapes
+        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setTextSize(13f);
+        chart.invalidate();
+    }
+
+
+    public ArrayList<Exercise> setupChart(){
         // Create Workout to hold exercises
         CreatedWorkout workout = new CreatedWorkout("Chest","Monday");
         // Date one
@@ -297,7 +439,6 @@ public class ProgressFragment extends Fragment {
         // Exercise five
         Exercise ex_six = new Exercise("Barbell Bench",5,8,160,c_six);
 
-
         // Create list of exercise objects for Entry List input
         ArrayList<Exercise> exercises = new ArrayList<>();
         exercises.add(ex_one);
@@ -307,176 +448,6 @@ public class ProgressFragment extends Fragment {
         exercises.add(ex_five);
         exercises.add(ex_six);
 
-
-       updateChartData(exercises);
-
-        //Remove description label
-        chart.getDescription().setEnabled(false);
-        // chart size
-        chart.setMinimumHeight(1000);
-        // Animate x-axis
-        chart.animateX(2500);
-//        chart.getXAxis().setAxisMinimum(0);
-//        chart.getXAxis().setAxisMaximum((float) exercises.size());
-        // chart legend
-        Legend l = chart.getLegend();
-        l.setFormSize(10f); // set the size of the legend forms/shapes
-        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        l.setTextSize(13f);
-        chart.invalidate();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("Spinners","inside ONSTART");
-
-    }
-
-    @Override
-    public void onResume() {
-        Log.d("Spinners","inside ONRESUME");
-        super.onResume();
-        // Updated database
-        db = new WorkoutPlanDatabase(getContext(), 1);
-
-        // Update plans spinner
-        wList = db.getPlans();
-        for(CreatedWorkout c : wList) {
-            Log.d("Spinners", "Updated wList Workouts are" + c.getName());
-        }
-       ArrayList<String> newPlans = new ArrayList<>();
-        for (CreatedWorkout c : wList) {
-            String name = c.getName();
-            newPlans.add(name);
-        }
-
-        // Set first value hint
-        newPlans.add(0,"Pick Plan:");
-        plansArrayAdapter.clear();
-        plansArrayAdapter.addAll(newPlans);
-        plansArrayAdapter.notifyDataSetChanged();
-
-        // Update Exercise Spinner with selected plan
-        if (planSpinner.getSelectedItemPosition() != 0 && planSpinner.getSelectedItemPosition() - 1 < wList.size() ) {
-            ArrayList<Exercise> exObjList = db.showExercises(wList.get(planSpinner.getSelectedItemPosition() - 1).getID());
-            Log.d("CHARTTEST","onRESUME ExOBJList is: " + Arrays.toString(exObjList.toArray()));
-
-            final ArrayList<String> exList = new ArrayList<>();
-            exList.add(0,"Exercises");
-            for (Exercise ex : exObjList) {
-                Log.d("CHARTTEST","ex in list is  " + ex.getEx_name());
-                exList.add(ex.getEx_name());
-            }
-            exArrayAdapter.clear();
-            exArrayAdapter.addAll(exList);
-            exArrayAdapter.notifyDataSetChanged();
-        }
-    }
-
-    // Update chart data
-    public void updateChartData(ArrayList<Exercise> data) {
-        int count = 0;
-        List<Entry> new_entries = new ArrayList<Entry>();
-        for (Exercise ex : data) {
-            count++;
-            // turn your data into Entry objects
-            new_entries.add(new Entry(count, ex.getMax()));
-        }
-
-        // Add entries to a dataset
-        //dataSet  = new LineDataSet(new_entries, "Weight (lbs)");
-
-        // Create Strings array to format x-axis with date values
-
-        ArrayList<String> dates = new ArrayList<String>();
-        for(int i = 0; i < data.size(); i++) {
-            if (data.get(i) != null) {
-                Log.d("CHART", "data.get(i): " + data.get(i).getDate(getContext()));
-                dates.add(i,data.get(i).getDate(getContext()));
-            } else {
-                Toast.makeText(getContext(),"No workouts logged",Toast.LENGTH_LONG).show();
-            }
-        }
-
-        // Add entries to a dataset
-        dataSet  = new LineDataSet(new_entries, "Weight (lbs)");
-
-        // Create Strings array to format x-axis with date values
-        ArrayList<String> newDates= new ArrayList<String>();
-        for(int i = 0; i < data.size(); i++) {
-            newDates.add(i,data.get(i).getDate(getContext()));
-        }
-
-        /////////// Axis formatting
-        // X-axis
-        x_axis = chart.getXAxis();
-        x_axis.setValueFormatter(new MyXAxisValueFormatter(newDates));
-        x_axis.setTextSize(12);
-        x_axis.setGranularity(1f);
-
-        // Set x-axis to bottom
-        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        //chart.getXAxis().setCenterAxisLabels(true);
-        //x_axis.setCenterAxisLabels(true);
-        chart.getXAxis().setSpaceMin(0.15f);
-        chart.getXAxis().setAvoidFirstLastClipping(true);
-
-
-        // Y-axis
-        YAxis rightYAxis = chart.getAxisRight();
-        YAxis leftYAxis = chart.getAxisLeft();
-        leftYAxis.setTextSize(13);
-        leftYAxis.setAxisMinimum(135);
-        rightYAxis.setEnabled(false);
-        leftYAxis.setSpaceTop(10);
-        leftYAxis.setSpaceBottom(5);
-
-
-        // Data Point formatting
-        class MyValueFormatter implements IValueFormatter {
-
-            private DecimalFormat mFormat;
-
-            public MyValueFormatter() {
-                mFormat = new DecimalFormat("###,###,###"); // use no decimals
-            }
-
-            @Override
-            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                return mFormat.format(value); // in case you want to add percent
-            }
-        }
-
-        dataSet.setValueFormatter(new MyValueFormatter());
-        // Line color format
-        dataSet.setColor(Color.parseColor("#e94984"));
-        dataSet.setCircleColor(Color.parseColor("#e94984"));
-        dataSet.setValueTextColor(Color.parseColor("#000000"));
-        dataSet.setLineWidth(2);
-        dataSet.setValueTextSize(12);
-        dataSet.setDrawFilled(true);
-
-        dataSet.setCircleRadius(5);
-        Drawable fill_color = ContextCompat.getDrawable(getContext(), R.drawable.chart_fill);
-        dataSet.setFillDrawable(fill_color);
-
-        LineData lineData = new LineData(dataSet);
-        chart.setData(lineData);
-
-        //Remove description label
-        chart.getDescription().setEnabled(false);
-        // chart size
-        chart.setMinimumHeight(1000);
-        // Animate x-axis
-        chart.animateX(500);
-        // chart legend
-        Legend l = chart.getLegend();
-        l.setFormSize(10f); // set the size of the legend forms/shapes
-        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        l.setTextSize(13f);
-        chart.invalidate();
+        return exercises;
     }
 }

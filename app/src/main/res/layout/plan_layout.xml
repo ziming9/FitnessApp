@@ -24,7 +24,8 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:text="@string/vertical_ellipsis"/>
+            android:text="@string/vertical_ellipsis"
+            android:textColor="@color/colorWhite"/>
         
         <TextView
             android:id="@+id/plan_name"
