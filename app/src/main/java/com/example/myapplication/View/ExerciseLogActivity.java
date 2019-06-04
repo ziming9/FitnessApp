@@ -72,6 +72,7 @@ public class ExerciseLogActivity extends AppCompatActivity implements AlertDialo
 
         tv.setText(exerciseName);
         setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         weight_np.setMinValue(0);
         weight_np.setMaxValue(995);
