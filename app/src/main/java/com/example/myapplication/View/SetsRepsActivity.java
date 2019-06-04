@@ -147,19 +147,27 @@ public class SetsRepsActivity extends AppCompatActivity {
         edit.putString("savedExercise", exerciseName);
         edit.apply();
         String plan = sh.getString("plan", null);
-        float repMax = ((float)weight * (1 + (float)reps / 30));
-        Exercise newExercise = new Exercise(exerciseName, reps, weight, repMax);
-        addProcess = db.addExercise(Integer.valueOf(plan), exerciseName, newExercise);
 
-        if (weight == 0 || reps == 0) {
-            Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (plan != null) {
+            float repMax = ((float)weight * (1 + (float)reps / 30));
+            Exercise newExercise = new Exercise(exerciseName, reps, weight, repMax);
+            addProcess = db.addExercise(Integer.valueOf(plan), exerciseName, newExercise);
 
-        if (addProcess != false) {
-            Intent intent = new Intent(this, PlanExercisesActivity.class);
-            intent.putExtra("plan", plan);
+            if (weight == 0 || reps == 0) {
+                Toast.makeText(this, "Please enter a value for this set", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (addProcess != false) {
+                Intent intent = new Intent(this, PlanExercisesActivity.class);
+                intent.putExtra("plan", plan);
+                startActivity(intent);
+            }
+        } else {
+            Toast.makeText(this, "Please add through plan in the home screen.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
     }

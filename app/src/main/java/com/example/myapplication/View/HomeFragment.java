@@ -1,17 +1,14 @@
 package com.example.myapplication.View;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +19,6 @@ import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
 import com.example.myapplication.R;
 import com.example.myapplication.Utilities.WorkoutPlanAdapter;
-import com.example.myapplication.View.NewWorkoutActivity;
-import com.example.myapplication.View.ProfileActivity;
 
 import java.util.ArrayList;
 
@@ -35,6 +30,7 @@ public class HomeFragment extends Fragment {
     Button createPlan;
     RecyclerView recList;
     WorkoutPlanDatabase db;
+    SharedPreferences presetPlan;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -56,11 +52,18 @@ public class HomeFragment extends Fragment {
         createPlan = view.findViewById(R.id.plan_button);
         recList = view.findViewById(R.id.planList);
         db = new WorkoutPlanDatabase(getContext(), 1);
+        presetPlan = this.getActivity().getSharedPreferences("workoutList", Context.MODE_PRIVATE);
+
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         llm.scrollToPositionWithOffset(0,0);
         recList.setLayoutManager(llm);
+
+        //resetting plan to null
+        final SharedPreferences.Editor edit = presetPlan.edit();
+        edit.putString("plan", null);
+        edit.apply();
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
