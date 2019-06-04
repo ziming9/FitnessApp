@@ -125,9 +125,9 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 cw.setName(cursor.getString(2));
                 cw.setTotal_workouts(getExerciseCount(Integer.parseInt(cursor.getString(0))));
                 Log.d("total workout", "" + cw.getTotal_workouts());
-                int count = getExerciseCount(Integer.parseInt(cursor.getString(0)));
+                /*int count = getExerciseCount(Integer.parseInt(cursor.getString(0)));
                 int id = Integer.parseInt(cursor.getString(0));
-                Log.d("count", "" + count);
+                Log.d("count", "" + count);*/
                 /*if (count != 0) {
                     db.execSQL("UPDATE " + DATABASE_TABLE + " SET " + COL_TOTAL_EX + " = " + count
                             + " WHERE " + COL_ID + " = " + id);
@@ -146,7 +146,6 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DATABASE_TABLE, COL_ID + " = " + id, null);
         db.delete(EXERCISE_TABLE, COL_ID + " = " + id, null);
-
         db.close();
     }
 
@@ -252,7 +251,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     }
 
     public long getExID(int plan, String exercise) {
-        long ex_id = 0;
+        long ex_id;
 
         SQLiteDatabase db = this.getWritableDatabase();
 

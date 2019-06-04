@@ -147,7 +147,7 @@ public class SetsRepsActivity extends AppCompatActivity {
         edit.putString("savedExercise", exerciseName);
         edit.apply();
         String plan = sh.getString("plan", null);
-        float repMax = (float) (weight * (1 + reps / 30));
+        float repMax = ((float)weight * (1 + (float)reps / 30));
         Exercise newExercise = new Exercise(exerciseName, reps, weight, repMax);
         addProcess = db.addExercise(Integer.valueOf(plan), exerciseName, newExercise);
 

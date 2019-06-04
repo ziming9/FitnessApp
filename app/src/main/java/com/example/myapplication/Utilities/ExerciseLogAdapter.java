@@ -42,7 +42,8 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
         myViewHolder.offset.setText(String.valueOf(i+1));  // offset
         myViewHolder.weight.setText(weight);          // weight
         myViewHolder.rep.setText(String.valueOf(exercise.getReps()));  // reps
-        myViewHolder.repMax.setText(String.valueOf(exercise.getMax()));          // 1RM
+        myViewHolder.repMax.setText(Float.toString(exercise.getMax()));          // 1RM
+        //myViewHolder.repMax.setText(exercise.getDate());
         myViewHolder.rb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

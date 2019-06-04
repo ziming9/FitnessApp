@@ -53,10 +53,16 @@
 
     </RelativeLayout>
 
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1.0px"
+        android:background="@color/colorGrey"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/exercise_log_list"
         android:layout_width="match_parent"
-        android:layout_height="316dp">
+        android:layout_height="436dp">
 
     </android.support.v7.widget.RecyclerView>
 
