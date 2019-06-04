@@ -327,10 +327,12 @@ public class ProgressFragment extends Fragment {
     public void updateChartData(ArrayList<Exercise> data) {
         ArrayList<Integer> maxList = new ArrayList<>();
         int min_rm = 0;
+        int max_rm = 0;
         for(Exercise e : data) {
             maxList.add(Math.round(e.getMax()));
         }
         min_rm = Collections.min(maxList);
+        max_rm = Collections.max(maxList);
 
         int count = 0;
         List<Entry> new_entries = new ArrayList<Entry>();
@@ -371,9 +373,10 @@ public class ProgressFragment extends Fragment {
         YAxis leftYAxis = chart.getAxisLeft();
         leftYAxis.setTextSize(13);
         leftYAxis.setAxisMinimum(min_rm);
+        leftYAxis.setAxisMaximum(max_rm + 10);
         rightYAxis.setEnabled(false);
-        leftYAxis.setSpaceTop(10);
-        leftYAxis.setSpaceBottom(5);
+        leftYAxis.setSpaceTop(15);
+        leftYAxis.setSpaceBottom(10);
 
 
         dataSet.setValueFormatter(new MyValueFormatter());
