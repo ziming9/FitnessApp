@@ -86,7 +86,6 @@ public class HomeFragment extends Fragment {
             WorkoutPlanAdapter wp = new WorkoutPlanAdapter(cwList, getContext());
             recList.setAdapter(wp);
             Log.d("Size:", ""+ wp.getItemCount());
-
         }
 
     }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.Controller.WorkoutPlanDatabase;
 import com.example.myapplication.Model.CreatedWorkout;
+import com.example.myapplication.Model.Exercise;
 import com.example.myapplication.R;
 import com.example.myapplication.View.PlanExercisesActivity;
 import com.example.myapplication.View.ProgressFragment;
@@ -88,6 +89,19 @@ public class WorkoutPlanAdapter extends RecyclerView.Adapter<WorkoutPlanAdapter.
                 Intent intent = new Intent(mContext, PlanExercisesActivity.class);
                 intent.putExtra("plan", String.valueOf(cw.getID()));
                 intent.putExtra("plan_selected", true);
+                /*SharedPreferences sh = mContext.getSharedPreferences("workoutList", Context.MODE_PRIVATE);
+                int weight = (int) sh.getInt("savedWeight", 0);
+                int reps = sh.getInt("savedReps", 0);
+                String exerciseName = sh.getString("savedExercise", null);
+                if (weight != 0 || reps != 0 || exerciseName != null) {
+                    Exercise newEx = new Exercise();
+                    newEx.setEx_name(exerciseName);
+                    newEx.setWeight(weight);
+                    newEx.setReps(reps);
+                    //long ex_id = db.getExID(cw.getID(), exerciseName);
+                    db.addExercise(cw.getID(), exerciseName, newEx);
+                    //db.addExerciseLog(newEx, ex_id);
+                }*/
                 mContext.startActivity(intent);
             }
         });

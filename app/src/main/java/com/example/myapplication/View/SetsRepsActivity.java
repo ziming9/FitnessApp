@@ -166,6 +166,10 @@ public class SetsRepsActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Please add through plan in the home screen.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
+            /*edit.putString("savedExercise", exerciseName);
+            edit.putInt("savedWeight", (int)weight);
+            edit.putInt("savedReps", reps);
+            edit.apply();*/
             startActivity(intent);
             finish();
         }

@@ -178,7 +178,7 @@ public class ProgressFragment extends Fragment {
 
                        if(chart != null && exSpinner.getSelectedItemPosition() != 0 && planSpinner.getSelectedItemPosition() != 0) {
                            ArrayList<Exercise> exercises = db.showExerciseLog(wList.get(planSpinner.getSelectedItemPosition()-1).getID() ,exSpinner.getSelectedItem().toString());
-                           if(exercises.get(0) != null) {
+                           if(exercises != null) {
                                for(Exercise e: exercises) {
                                    Log.d("Chart","UPDATED E_name" + e.getEx_name());
                                    Log.d("Chart","UPDATED E_date" + e.getDate(getContext()));
@@ -346,11 +346,13 @@ public class ProgressFragment extends Fragment {
             Log.d("MAX","E_name:" + e.getEx_name());
             Log.d("MAX","Max value:" + e.getMax());
         }
-        min_rm = Collections.min(maxList);
-        max_rm = Collections.max(maxList);
-        Log.d("Max", "Min max:" + min_rm);
-        Log.d("Max", "Max max:" + max_rm);
 
+        if (maxList.size() != 0) {
+            min_rm = Collections.min(maxList);
+            max_rm = Collections.max(maxList);
+            Log.d("Max", "Min max:" + min_rm);
+            Log.d("Max", "Max max:" + max_rm);
+        }
 
         int count = 0;
         List<Entry> new_entries = new ArrayList<Entry>();
@@ -392,7 +394,7 @@ public class ProgressFragment extends Fragment {
         YAxis rightYAxis = chart.getAxisRight();
         YAxis leftYAxis = chart.getAxisLeft();
         leftYAxis.setTextSize(13);
-        leftYAxis.setAxisMinimum(min_rm);
+        leftYAxis.setAxisMinimum(min_rm - 10);
         leftYAxis.setAxisMaximum(max_rm + 10);
         rightYAxis.setEnabled(false);
         leftYAxis.setSpaceTop(15);
@@ -563,7 +565,7 @@ public class ProgressFragment extends Fragment {
             legend.setTextSize(15);
             legend.setEnabled(true);
             legend.setForm(Legend.LegendForm.CIRCLE);
-            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
             legend.setYEntrySpace(5);
             legend.setWordWrapEnabled(true);
 
