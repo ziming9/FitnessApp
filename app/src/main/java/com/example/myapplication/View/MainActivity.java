@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,12 +19,13 @@ import com.example.myapplication.R;
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;
     private ViewPager viewPager;
+    FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        fm = getSupportFragmentManager();
         // ViewPager
         viewPager = findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);

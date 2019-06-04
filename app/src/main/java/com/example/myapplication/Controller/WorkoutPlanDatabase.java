@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.LocaleDisplayNames;
 import android.util.Log;
 
 import com.example.myapplication.Model.CreatedWorkout;
@@ -13,6 +14,7 @@ import com.example.myapplication.Model.Exercise;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -128,12 +130,6 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 int count = getExerciseCount(Integer.parseInt(cursor.getString(0)));
                 int id = Integer.parseInt(cursor.getString(0));
                 Log.d("count", "" + count);
-                /*if (count != 0) {
-                    db.execSQL("UPDATE " + DATABASE_TABLE + " SET " + COL_TOTAL_EX + " = " + count
-                            + " WHERE " + COL_ID + " = " + id);
-                }*/
-                /*db.execSQL("UPDATE " + DATABASE_TABLE + " SET " + COL_TOTAL_EX + " = " + count
-                        + " WHERE " + COL_ID + " = " + id);*/
                 cwList.add(cw);
             } while (cursor.moveToNext());
         }
@@ -208,10 +204,11 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     }
 
     public ArrayList<Exercise> showExerciseLog(int plan, String exercise) {
+        Log.d("CHART", "Calling showExerciseLog with plan int: " + plan + "exercise name: " +exercise);
         ArrayList<Exercise> exLogList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + ", elt." + COL_REPS + ", elt." + COL_REPMAX
+        Cursor cursor = db.rawQuery("SELECT elt." + COL_WEIGHT + ", elt." + COL_REPS + ", elt." + COL_REPMAX+ ", elt." + COL_DATE
                 + " FROM " + DATABASE_TABLE + " wt, "
                 + EXERCISE_TABLE + " et, " + EXERCISE_LOG_TABLE + " elt "
                 + "WHERE wt." + COL_ID + " = et." + COL_ID
@@ -225,6 +222,8 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
                 ex.setWeight((int) cursor.getFloat(0));
                 ex.setReps(cursor.getInt(1));
                 ex.setMax(cursor.getFloat(2));
+                ex.setDate(cursor.getString(3));;
+                Log.d("Date","CURSOR: adding exercise with max " + cursor.getFloat(2) + "Date of " + cursor.getString(3));
                 exLogList.add(ex);
             } while (cursor.moveToNext());
         }
@@ -251,7 +250,7 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
     }
 
     public long getExID(int plan, String exercise) {
-        long ex_id = 0;
+        long ex_id;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -270,4 +269,54 @@ public class WorkoutPlanDatabase extends SQLiteOpenHelper {
 
         return ex_id;
     }
+
+//    // Return Exercises for given workout plan
+//    public ArrayList<Exercise> planExercises(int plan) {
+//        ArrayList<Exercise> exList = new ArrayList<>();
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        Cursor cursor = db.rawQuery("SELECT elt." + COL_EX_NAME
+//                + " FROM " + DATABASE_TABLE + " wt, "
+//                + EXERCISE_TABLE + " et, "
+//                + "WHERE wt." + COL_ID + " = et." + COL_ID
+//                + " AND et." + COL_EX_ID + " = elt." + COL_EX_ID
+//                + " AND wt." + COL_ID + " = " + plan
+//                + " AND et." + COL_EX_NAME + " LIKE '" + exercise + "'", null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                Exercise ex = new Exercise();
+//                ex.setWeight((int) cursor.getFloat(0));
+//                ex.setReps(cursor.getInt(1));
+//                ex.setMax(cursor.getFloat(2));
+//                exLogList.add(ex);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//        return exLogList;
+//    }
+
+    // Return user created plan names
+    public ArrayList<CreatedWorkout> getPlans() {
+        ArrayList<CreatedWorkout> wList= new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CreatedWorkout cw = new CreatedWorkout();
+                String name =  cursor.getString(2);
+                int id = cursor.getInt(0);
+                cw.setID(id);
+                cw.setName(name);
+                wList.add(cw);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return wList;
+    }
+
 }

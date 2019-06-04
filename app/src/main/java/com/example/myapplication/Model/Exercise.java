@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Exercise {
@@ -87,14 +88,27 @@ public class Exercise {
         this.max = max;
     }
     // Returns date as String "dd/mm/yy"
+
+
     public String getDate(Context context) {
         DateFormat df = android.text.format.DateFormat.getDateFormat(context);
         Log.d("DATE","date is:" + this.date.getTime().toString());
         return df.format(this.date.getTime());
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setDate(String  strDate) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+
+        try {
+
+            c.setTime(sdf.parse(strDate));
+            this.date = c;
+            Log.d("Date","setTime() worked");
+        }
+        catch(Exception e) {
+            Log.d("Date","Date exception caught:" + e);
+        }
     }
 
 
