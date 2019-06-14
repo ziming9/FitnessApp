@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.fitnesstracking.fitnessapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -16,21 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".View.ExerciseLogActivity"
+            android:name="com.fitnesstracking.fitnessapp.View.ExerciseLogActivity"
             android:label="@string/title_activity_exercise_log"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".View.PlanExercisesActivity" />
-        <activity android:name=".View.ProfileActivity" />
-        <activity android:name=".View.MainActivity">
+        <activity android:name="com.fitnesstracking.fitnessapp.View.PlanExercisesActivity" />
+        <activity android:name="com.fitnesstracking.fitnessapp.View.ProfileActivity" />
+        <activity android:name="com.fitnesstracking.fitnessapp.View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.WorkoutList_Fragment" />
-        <activity android:name=".View.SetsRepsActivity" />
-        <activity android:name=".View.NewWorkoutActivity" />
+        <activity android:name="com.fitnesstracking.fitnessapp.View.WorkoutList_Fragment" />
+        <activity android:name="com.fitnesstracking.fitnessapp.View.SetsRepsActivity" />
+        <activity android:name="com.fitnesstracking.fitnessapp.View.NewWorkoutActivity" />
     </application>
 
 </manifest>
